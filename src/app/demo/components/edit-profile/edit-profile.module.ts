@@ -13,6 +13,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { EditProfileRoutingModule } from './edit-profile-routing.module';
 import { RegisterModule } from '../auth/register/register.module';
 
+
 @NgModule({
     declarations: [EditProfileComponent],
     imports: [

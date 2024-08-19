@@ -1,6 +1,5 @@
 {
   "global": {
-    "select" : "Seleziona",
     "view": "Dettagli",
     "qr": "Codice Qr",
     "add": "Crea una nuova E-Label",
@@ -44,120 +43,121 @@
     "labels": {
       "main_ingredient": {
         "main_ingredient": "Ingrediente principale",
-        "concentrated_grape_must": "Mosto d'Uva Concentrato",
+        "concentrated_grape_must": "Mosto di uve concentrato",
         "distillate_of_agricultural_origin": "Distillato di origine agricola",
         "dosage_syrup": "Sciroppo di dosaggio",
-        "dried_grape_alcohol": "Alcool d'uva secca",
-        "dried_grape_distillate": "Distillato di uva secca",
-        "ethyl_alcohol": "Alcool etilico di origine agricola",
-        "grape_marc_spirit": "Grape marc spirit",
-        "grape_must": "Mosto d'uva",
-        "grapes": "Uva",
-        "partially_fermented": "Mosto d'uva parzialmente fermentato",
-        "rectified_concentrated": "Mosto d'Uva Concentrato Rettificato",
+        "dried_grape_alcohol": "Alcol di uve essiccate",
+        "dried_grape_distillate": "Distillato di uve essiccate",
+        "ethyl_alcohol": "Alcol etilico di origine agricola",
+        "grape_marc_spirit": "Acquavite di vinaccie",
+        "grape_must": "Mosto di uve",
+        "grapes": "Uve",
+        "partially_fermented": "Mosto di uve parzialmente fermentato",
+        "rectified_concentrated": "Mosto di uve concentrato rettificato",
         "spirit_drinks_distilled": "Bevande spiritose distillate da uve secche distillate",
         "sucrose": "Saccarosio",
         "water": "Acqua",
         "wine_alcohol": "Alcool del vino",
-        "wine_distillate": "Alcool distillato",
-        "wine_spirit": "Spirito del vino"
+        "wine_distillate": "Distillato di vino",
+        "wine_spirit": "Spirito ddi vino"
       },
+     
       "acidity_regulator": {
         "acidity_regulator": "Correttore di acidità",
-        "calcium_sulfate": "Calcio solfato",
+        "calcium_sulfate": "Solfato di calcio",
         "citric_acid": "Acido citrico",
         "lactic_acid": "Acido lattico",
         "malic_acid": "Acido malico",
         "tartaric_acid": "Acido tartarico"
       },
       "clarifying_agent": {
-        "clarifying_agent": "Agente chiarificante",
+        "clarifying_agent": "Agenti chiarificanti",
         "casein": "Caseina del latte",
-        "egg": "Uova",
-        "egg_albumin": "Albume",
+        "egg": "Uovo",
+        "egg_albumin": "Albumina dell'uovo",
         "egg_lysozyme": "Lisozima dell'uovo",
         "egg_product": "Derivati dell'uovo",
-        "egg_protein": "Proteine ​​dell'uovo",
-        "gelatin": "Gelatina",
+        "egg_protein": "Proteina ​​dell'uovo",
+        "gelatin": "Gelatina alimentare",
         "milk": "Latte",
-        "milk_products": "Latticini",
-        "milk_protein": "Proteine ​​del latte",
-        "pea_protein": "Proteine ​​del pisello",
+        "milk_products": "Derivati del latte",
+        "milk_protein": "Proteina ​​del latte",
+        "pea_protein": "Proteina ​​di piselli",
         "potassium_caseinate": "Caseinato di potassio",
-        "potato_protein": "Proteine ​​della patata",
-        "wheat_protein": "Proteine ​​del grano"
+        "potato_protein": "Proteina ​​di patate",
+        "wheat_protein": "Proteina di frumento"
       },
       "expedition_liqueur": {
-        "expedition_liqueur": "liquore da spedizione",
-        "concentrated": "Mosto d'Uva Concentrato",
-        "grape": "Mosto d'uva",
-        "partially": "Mosto d'uva parzialmente fermentato",
+        "expedition_liqueur": "Liquore di spedizione",
+        "concentrated": "Mosto di uve concentrato",
+        "grape": "Mosto di uve",
+        "partially": "Mosto di uve parzialmente fermentato",
         "sucrose": "Saccarosio",
         "wine": "Vino",
-        "rectified": "Mosto d'Uva Concentrato Rettificato"
+        "rectified": "Mosto di uve concentrato rettificato"
       },
       "preservatives_and_antioxidant": {
-        "preservatives_and_antioxidant": "conservanti e antiossidanti",
+        "preservatives_and_antioxidant": "Conservanti e antiossidanti",
         "lascorbic": "Acido L-ascorbico",
         "dimethyldicarbonate": "Dimetildicarbonato (DMDC)",
         "lysozyme": "Lisozima",
-        "potassium_hydrogen": "Solfito di idrogeno di potassio",
+        "potassium_hydrogen": "Idrogenosolfito di potassio",
         "potassium_metabisulphite": "Metabisolfito di potassio",
         "potassium_sorbate": "Sorbato di potassio",
-        "sulphur_dioxide": "Solfiti/anidride solforosa",
+        "sulphur_dioxide": "Anidride solforosa",
         "sulphites": "Solfiti",
         "bisulphite": "Bisolfito di potassio"
       },
       "stabilising_agent": {
-        "stabilising_agent": "agente stabilizzante",
-        "carboxymethylcellulose": "carbossimetilcellulosa",
-        "citric_acid": "acido citrico",
-        "fumaric_acid": "acido fumarico",
-        "gum_arabic": "gomma arabica",
-        "metatartaric_acid": "acido metatartarico",
-        "potassium_polyaspartate": "poliaspartato di potassio",
-        "potassium_sorbate": "sorbato di potassio",
-        "yeast_mannoproteins": "mannoproteine ​​del lievito"
+        "stabilising_agent": "Agenti stabilizzanti",
+        "carboxymethylcellulose": "Carbossimetilcellulosa",
+        "citric_acid": "Acido citrico",
+        "fumaric_acid": "Acido fumarico",
+        "gum_arabic": "Gomma arabica",
+        "metatartaric_acid": "Acido metatartarico",
+        "potassium_polyaspartate": "Poliaspartato di potassio",
+        "potassium_sorbate": "Sorbato di potassio",
+        "yeast_mannoproteins": "Mannoproteine ​​di lieviti"
       },
       "sweetener": {
         "sweetener": "Dolcificante",
         "burned": "Zucchero bruciato",
         "syrup": "Sciroppo di carruba",
-        "concentrated": "Mosto d'Uva Concentrato",
+        "concentrated": "Mosto di uve concentrato",
         "dextrose": "Destrosio",
         "extrawhite": "Zucchero Extra-Bianco",
         "fructose": "Fruttosio",
         "glucose": "Sciroppo di glucosio",
-        "must": "Mosto d'uva",
+        "must": "Mosto di uve",
         "honey": "Miele",
         "invertsugar": "Soluzione di zucchero invertito",
         "invertsugarsyrup": "Sciroppo di zucchero invertito",
-        "rectified": "Mosto d'Uva Concentrato Rettificato",
+        "rectified": "Mosto di uve concentrato rettificato",
         "semiwhite": "Zucchero semibianco",
         "sugar": "Zucchero",
         "sugarsolution": "Soluzione di zucchero",
         "whitesugar": "Zucchero bianco"
       },
       "tirage_liqueur": {
-        "tirage_liqueur": "liquore al tiraggio",
-        "concentrated": "Mosto d'Uva Concentrato",
-        "grape": "Mosto d'uva",
-        "partially": "Mosto d'uva parzialmente fermentato",
-        "rectified": "Mosto d'Uva Concentrato Rettificato",
+        "tirage_liqueur": "liquore di spedizione",
+        "concentrated": "Mosto di uve concentrato",
+        "grape": "Mosto di uve",
+        "partially": "Mosto di uve parzialmente fermentato",
+        "rectified": "Mosto di uve concentrato rettificato",
         "sucrose": "Saccarosio",
         "wine": "Vino"
       },
       "packaging_gases": {
-        "packaging_gases": "",
+        "packaging_gases": "Gas di imballaggio",
         "argon": "Argon",
-        "carbon": "Diossido di carbonio",
-        "nitrogen": "Nitrogeno"
+        "carbon": "Anidride carbonica",
+        "nitrogen": "Azoto"
       },
       "allergienies": {
         "milk": "Latte",
         "egg":"Uovo",
         "sulphites":"Solfiti"
-      }      
+      }
     },
     "acidity_regulator": "Calcola di acidità",
     "anti_caking_agent": "Agente antiagglomerante",
@@ -217,9 +217,9 @@
       "subscription": {
         "title": "Abbonamento",
         "subtitle": "Gestisci il tuo abbonamento",
-        "freeplan":{
-          "title":"Piano Gratuito",
-          "subtitle":"Attualmente sei su un piano gratuito. Esegui l'upgrade per pubblicare e-Label e accedere a tutte le funzionalità."
+        "freeplan": {
+          "title": "Piano Gratuito",
+          "subtitle": "Attualmente sei su un piano gratuito. Esegui l'upgrade per pubblicare e-Label e accedere a tutte le funzionalità."
         }
       }
     },
@@ -258,16 +258,6 @@
         "tab2": "Impostazioni"
       },
       "form": {
-        "container" : {
-          "error" : "Lo stesso contenitore non può essere specificato 2 volte"
-        },
-        "material" : {
-          "error" : "Lo stesso materiale non può essere specificato 2 volte"
-        },
-        "brand": {
-          "label": "Marchio",
-          "helper": ""
-        },
         "id": "Identificativo",
         "productName": "Nome del prodotto",
         "upload": {
@@ -287,7 +277,7 @@
           "helper": ""
         },
         "type": {
-          "label": "Tipo di alcolico",
+          "label": "Tipo di vino",
           "helper": ""
         },
         "vintage_year": {
@@ -534,7 +524,19 @@
       "oil": "Olio",
       "spirits": "Spirito",
       "vinegard": "Aceto",
-      "wine": "Vino"
+      "wine": "Vino",
+      "wine_red": "Vino Rosso",
+      "wine_white": "Vino Bianco",
+      "wine_rose": "Vino Rosè",
+      "semi_sparkling": "Vino Frizzante",
+      "fully_sparkling": "Vino Spumante",
+      "dessert": "Vino da Dessert",
+      "fortified": "Vino Liquoroso",
+      "sparkling_red_wine": "Vino Rosso Frizzante",
+      "sparkling_rose_wine": "Vino Rosè Frizzante",
+      "sparkling_white_wine": "Vino Bianco Frizzante",
+      "de_alcolized_wine":"Vino Dealcolizzato"
+
     },
     "type": {
       "dessert_wine": "Vino da dessert",
