@@ -1,0 +1,646 @@
+<p-toast key="tst"></p-toast>
+<!--BREAD CRUMBS-->
+<div class="grid p-fluid">
+    <div class="flex flex-column gap-2 align-items-center justify-content-between w-full">
+        <div class="flex flex-wrap md:flex-row gap-3 align-items-center justify-content-between col-12">
+            <div class="flex align-items-left justify-content-center">
+                <p-breadcrumb [model]="breadcrumbItems" [home]="{icon: 'pi pi-home'}"></p-breadcrumb>
+            </div>
+
+            <div class="flex align-items-right ">
+                <p-tag styleClass="p-mr-2" con="pi pi-exclamation-triangle" severity="warning" [value]="form.get('status').value == 0 ? 'Bozza' : 'Pubblicato'"></p-tag>
+            </div>
+
+            <div class="flex align-items-center md:align-items-right text-center">
+
+                <p-button [disabled]="form.get('status').value == 0" (click)="qrDialog = true" icon="pi pi-qrcode" label="Scarica il QrCode" pTooltip="Scarica il codice QR"
+                    styleClass="p-button-sm p-button-outlined p-button-secondary"
+                    class="mr-3"></p-button>
+                <ng-container *ngIf="form.get('status').value == 0">
+                    <p-button (click)="changeStatus()" icon="pi pi-clock" pTooltip="Pubblica E-Label" label="Pubblica E-Label"
+                    styleClass="p-button-sm p-button-outlined p-button-secondary"></p-button>
+                </ng-container>
+                <ng-container *ngIf="form.get('status').value == 1">
+                    <p-button (click)="changeStatus()" icon="pi pi-clock" pTooltip="Sposta in bozza" label="Sposta in bozza"
+                    styleClass="p-button-sm p-button-outlined p-button-secondary"></p-button>
+                </ng-container>
+                    
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<!--ELABEL FORM-->
+<div class="grid p-fluid mb-2">
+    <!--PROFILO AZIENDALE-->
+    <div class="col-12 lg:col-8 xl:col-9">
+
+
+        <div class="card pb-0" style="border-radius: 0px;">
+
+            <p-tabView orientation="left">
+                <!--FORM-->
+                <p-tabPanel header="{{ 'pages.elabel.cards.tab1' | translate }}" class="line-height-3 m-0">
+                  <!--   <div style="height: calc(100vh - 29rem);;overflow: auto;"> -->
+                        <div class="grid">
+                            <div class="col-12 md:col-9">
+<!--                             <input pInputText id="user_id" [formControl]="form.get('user_id')" /> -->
+                        </div>
+                            <div class="col-12 md:col-9">
+                                <p class="mt-3">Compila tutte le informazioni che devono essere visualizzate sulla
+                                    e-label.
+                                    Le informazioni obbligatorie che devono essere legalmente visualizzate
+                                    sull'e-etichetta,
+                                    se non stampate
+                                    sull'etichetta fisica, sono contrassegnate con 🇪🇺 / 🇮🇹.</p>
+                                <p-divider></p-divider>
+                                <div class="grid">
+                                    <div class="col-12 md:col-8">
+                                        <label for="prodotto">{{ 'pages.elabel.form.product_name.label' | translate }}
+                                            <app-infobutton
+                                                [label]="'pages.elabel.form.product_name.helper'"></app-infobutton> 🇪🇺
+                                            /
+                                            🇮🇹</label>
+                                        <input pInputText id="prodotto" [formControl]="form.get('product_name')" />
+                                    </div>
+                                    <div class="col-12 md:col-4">
+                                        <label for="sku">{{ 'pages.elabel.form.sku.label' | translate }}
+                                            <app-infobutton
+                                                [label]="'pages.elabel.form.product_sku.helper'"></app-infobutton>
+                                            <span style="font-size:0.8rem;margin-left:5px;">(opzionale)</span></label>
+                                        <input pInputText id="prodotto" [formControl]="form.get('sku')" />
+                                    </div>
+
+                                    <div class="col-12 md:col-12">
+                                        <label for="country">{{ 'pages.elabel.form.country.label' | translate }}
+                                                <app-infobutton  *ngIf="false"
+                                                [label]="'pages.elabel.form.country.helper'"></app-infobutton>
+                                                🇪🇺</label>
+                                                <p-dropdown  *ngIf="false" [options]="brands" [formControl]="form.get('brand_id')"
+                                                [showClear]="true" placeholder="Seleziona">
+                                                <ng-template let-option pTemplate="selectedItem">
+                                                    <span>{{option.name | translate}}</span>
+                                                </ng-template>
+                                                <ng-template  let-option pTemplate="item">
+                                                    <span>{{option.name | translate}}</span>
+                                                </ng-template>                                                
+                                            </p-dropdown>
+
+                                        <p-dropdown [options]="states" [formControl]="form.get('country')"
+                                        [showClear]="true" [filter]="true" filterBy="nome_stati" placeholder="Seleziona">
+                                        <ng-template let-option pTemplate="selectedItem">
+                                            <span>{{option.nome_stati | translate}}</span>
+                                        </ng-template>
+                                        <ng-template let-option pTemplate="item">
+                                            <span>{{option.nome_stati | translate}}</span>
+                                        </ng-template>
+                                    </p-dropdown>
+                                    </div>
+
+                                    <div class="field col-12 md:col-6">
+                                        <label>{{ 'pages.elabel.form.type.label' | translate }} <app-infobutton
+                                                [label]="'pages.elabel.form.type.helper'"></app-infobutton> 🇪🇺</label>
+                                        <p-dropdown [options]="types" [formControl]="form.get('type')"
+                                            [showClear]="true" placeholder="Seleziona">
+                                            <ng-template let-option pTemplate="selectedItem">
+                                                <span>{{option.label | translate}}</span>
+                                            </ng-template>
+                                            <ng-template let-option pTemplate="item">
+                                                <span>{{option.label | translate}}</span>
+                                            </ng-template>
+                                        </p-dropdown>
+                                    </div>
+
+                                    <div class="field col-12 md:col-6">
+                                        <label>{{ 'pages.elabel.form.vintage_year.label' | translate }} <app-infobutton
+                                                [label]="'pages.elabel.form.vintage_year.helper'"></app-infobutton>
+                                            <span style="font-size:0.8rem;margin-left:5px;">(opzionale)</span></label>
+                                        <p-calendar dateFormat="yy" view="year" [formControl]="form.get('vintage_year')"
+                                            [showIcon]="true" inputId="icon"></p-calendar>
+                                    </div>
+
+                                    <div class="field col-12 md:col-6">
+                                        <label>{{ 'pages.elabel.form.product_varieties.label' | translate }}
+                                            <app-infobutton
+                                                [label]="'pages.elabel.form.product_varieties.helper'"></app-infobutton>
+                                            <span style="font-size:0.8rem;margin-left:5px;">(opzionale)</span></label>
+                                        <input class="w-full" pInputText [formControl]="form.get('product_varieties')"
+                                            type="text" />
+                                    </div>
+                                    <div class="field col-12 md:col-6">
+                                        <label>{{ 'pages.elabel.form.geographical_indication.label' | translate }}
+                                            <app-infobutton
+                                                [label]="'pages.elabel.form.geographical_indication.helper'"></app-infobutton>
+                                            <span style="font-size:0.8rem;margin-left:5px;">(opzionale)</span></label>
+
+                                        <p-dropdown [options]="geographical_indication"
+                                            [formControl]="form.get('geographical_indication')" [showClear]="true"
+                                            placeholder="Seleziona">
+                                            <ng-template let-option pTemplate="selectedItem">
+                                                <span>{{option.label | translate}}</span>
+                                            </ng-template>
+                                            <ng-template let-option pTemplate="item">
+                                                <span>{{option.label | translate}}</span>
+                                            </ng-template>
+                                        </p-dropdown>
+                                    </div>
+
+                                    <div class="field col-12 md:col-6">
+                                        <label>{{ 'pages.elabel.form.alcohol_content_percentage.label' | translate }}
+                                            <app-infobutton
+                                                [label]="'pages.elabel.form.alcohol_content_percentage.helper'"></app-infobutton>
+                                            <span style="font-size:0.8rem;margin-left:5px;">(opzionale)</span></label>
+                                        <span class="p-input-icon-right"><input
+                                                [formControl]="form.get('alcohol_content_percentage')" type="number"
+                                                min="0" max="100" pinputtext
+                                                class="p-inputtext p-component p-element"><i
+                                                class="pi pi-percentage"></i></span>
+                                    </div>
+
+                                    <div class="field col-12 md:col-6">
+                                        <label>{{ 'pages.elabel.form.net_content.label' | translate }} <app-infobutton
+                                                [label]="'pages.elabel.form.net_content.helper'"></app-infobutton> <span
+                                                style="font-size:0.8rem;margin-left:5px;">(opzionale)</span></label>
+                                        <span class="p-input-icon-right"><input [formControl]="form.get('net_content')"
+                                                type="number" min="0" max="1000" pinputtext
+                                                class="p-inputtext p-component p-element"><i class="pi">ml</i></span>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="col-12 md:col-3 mt-3">
+
+                                <label>{{ 'pages.elabel.form.upload.label' | translate }} <app-infobutton
+                                        [label]="'pages.elabel.form.upload.helper'"></app-infobutton> <span
+                                        style="font-size:0.8rem;margin-left:5px;">(opzionale)</span></label>
+
+
+
+                                <div class="card" style="border-radius: 0px;">
+                                    <img *ngIf="!sub_image" src="assets/product_image.svg" class="mb-3">
+                                    <img *ngIf="sub_image" src="//{{sub_image}}" class="mb-3">
+                                </div>
+                                <p-fileUpload mode="basic" name="image" chooseIcon="pi pi-upload"
+                                    url="https://app.eulabel.it/backend/upload-sub/{{id}}" accept="image/*"
+                                    maxFileSize="1000000" [auto]="true" (onUpload)="onBasicUpload()"
+                                    chooseLabel="Browse" />
+                                <!-- <div class="card" style="border-radius: 0px;">
+                                    <label>{{ 'global.qr' | translate }}</label>
+                                    <img *ngIf="!form.get('qr').value"
+                                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRixw6KcZuLECch8GPKfYHgUYXPJqXElFou1w&s">
+                                    <qrcode *ngIf="form.get('qr').value" [qrdata]="form.get('qr').value"
+                                        [errorCorrectionLevel]="'M'"></qrcode>
+                                </div> -->
+
+
+                            </div>
+                        </div>
+                        <div class="grid">
+                            <div class="col-12">
+                                <label>{{ 'pages.elabel.form.description.label' | translate }} <app-infobutton
+                                        [label]="'pages.elabel.form.description.helper'"></app-infobutton><span
+                                        style="font-size:0.8rem;margin-left:5px;">(opzionale)</span></label>
+
+                                <textarea id="description" pInputTextarea [formControl]="form.get('description')"
+                                    required rows="3" cols="20"></textarea>
+                            </div>
+                        </div>
+                        <p-divider></p-divider>
+                        <!--INGREDIENTI-->
+                        <div class="grid">
+                            <div class="col-12">
+
+                                <h4>{{ 'pages.ingredients.title' | translate }} 🇪🇺</h4>
+                                <p>{{ 'pages.ingredients.subtitle' | translate }}<br><b>{{ 'pages.ingredients.note' |
+                                        translate }}: </b>{{ 'pages.ingredients.info' | translate }}</p>
+
+                            </div>
+                            <div class="col-12">
+                                <p-dropdown [options]="ingredients" [filter]="true" filterBy="label" (onChange)="onChangeIngredient($event)"
+                                    [group]="true" [showClear]="true"  placeholder="Seleziona">
+                                    <ng-template let-option pTemplate="selectedItem">
+                                        <span>{{option.label | translate}}</span>
+                                    </ng-template>
+                                    <ng-template let-group pTemplate="group">
+                                        <div class="flex align-items-center">
+                                            <span>{{ group.label | translate }}</span>
+                                        </div>
+                                    </ng-template>
+                                    <ng-template let-option pTemplate="item">
+                                        <div  [ngClass]="isIngredientNotInUse(option) ? '' : 'optionDisabled'">
+                                            <span>{{option.label | translate}}</span> <p-tag *ngIf="option.allergenies!=null" severity="warning" class="ml-3" value="Allergene: {{option.allergenies | translate}}"/>
+                                        </div>
+                                    </ng-template>
+                                </p-dropdown>
+                            </div>
+                            <div class="col-12">
+                                    <div class="card" *ngFor="let e of ingredientPicked; let i = index">
+                                    <div class="grid">
+                                        <div class="col-9">
+                                            <b>{{e.label | translate}}</b>
+                                            <p>{{e.group | translate}}</p>
+                                        </div>
+                                        <div class="col-3 flex justify-content-end align-items-right">
+                                            <p-button icon="pi pi-trash" pTooltip="Rimuovi"
+                                                styleClass="p-button-sm p-button-outlined p-button-secondary"
+                                                (click)="onDeleteIngredient(i, e.id)"></p-button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <label>{{ 'pages.elabel.form.packages.label' | translate }} <app-infobutton
+                                        [label]="'pages.elabel.form.packages.helper'"></app-infobutton> <span
+                                        style="font-size:0.8rem;margin-left:5px;">(opzionale)</span></label>
+                                <p-dropdown [options]="packages" [formControl]="form.get('packages')" [showClear]="true"
+                                    placeholder="Seleziona">
+                                    <ng-template let-option pTemplate="selectedItem">
+                                        <span>{{option.label | translate}}</span>
+                                    </ng-template>
+                                    <ng-template let-option pTemplate="item">
+                                        <span>{{option.label | translate}}</span>
+                                    </ng-template>
+                                </p-dropdown>
+                            </div>
+                        </div>
+                        <p-divider></p-divider>
+                        <!--VALORI NUTRIZIONALI-->
+                        <div class="grid">
+                            <div class="col-12">
+                                <h4>{{ 'pages.nutritions.title' | translate }} 🇪🇺</h4>
+                                <p>{{ 'pages.nutritions.subtitle' | translate }}</p>
+                            </div>
+                            <div class="col-12">
+                                <button pButton pRipple type="button"
+                                    label="{{ 'pages.nutritions.button' | translate }}"
+                                    class="p-button-secondary"></button>
+                            </div>
+                            <div class="col-12">
+                                <div class="card">
+                                    <div
+                                        class="grid flex justify-content-center align-items-center vertical-align-middle">
+                                        <h5 class="text-center">{{ 'pages.nutritions.table' | translate }} per 100 ml
+                                        </h5>
+                                    </div>
+                                    <div class="grid flex justify-content-between vertical-align-middle">
+                                        <div class="col-6 md:col-2 flex justify-content-between vertical-align-middle">
+                                            <b>{{
+                                                'pages.nutritions.energy_kj' | translate }}</b>
+                                        </div>
+                                        <div class="col justify-content-between vertical-align-middle">
+                                            <hr>
+                                        </div>
+                                        <div class="col-4 md:col-2 flex justify-content-between vertical-align-middle">
+                                            <input class="nutrition-table-input" pInputText
+                                                [formControl]="form.get('energy_kj')" type="text" />
+                                        </div>
+                                    </div>
+                                    <div class="grid flex justify-content-between vertical-align-middle">
+                                        <div class="col-6 md:col-2 flex justify-content-between vertical-align-middle">
+                                            {{
+                                            'pages.nutritions.energy_kcal' | translate }}</div>
+                                        <div class="col justify-content-between vertical-align-middle">
+                                            <hr>
+                                        </div>
+                                        <div class="col-4 md:col-2 flex justify-content-between vertical-align-middle">
+                                            <input class="nutrition-table-input" pInputText
+                                                [formControl]="form.get('energy_kcal')" type="text" />
+                                        </div>
+                                    </div>
+                                    <p-divider></p-divider>
+                                    <div class="grid flex justify-content-between vertical-align-middle">
+                                        <div class="col-6 md:col-2 flex justify-content-between vertical-align-middle">
+                                            <b>{{
+                                                'pages.nutritions.fat' | translate }}</b>
+                                        </div>
+                                        <div class="col justify-content-between vertical-align-middle">
+                                            <hr>
+                                        </div>
+                                        <div class="col-4 md:col-2 flex justify-content-between vertical-align-middle">
+                                            <input class="nutrition-table-input" pInputText
+                                                [formControl]="form.get('fat')" type="text" />
+                                        </div>
+                                    </div>
+                                    <div class="grid flex justify-content-between vertical-align-middle">
+                                        <div class="col-6 md:col-2 flex justify-content-between vertical-align-middle">
+                                            {{
+                                            'pages.nutritions.fat_sat' | translate }}</div>
+                                        <div class="col justify-content-between vertical-align-middle">
+                                            <hr>
+                                        </div>
+                                        <div class="col-4 md:col-2 flex justify-content-between vertical-align-middle">
+                                            <input class="nutrition-table-input" pInputText
+                                                [formControl]="form.get('fat_sat')" type="text" />
+                                        </div>
+                                    </div>
+                                    <p-divider></p-divider>
+                                    <div class="grid flex justify-content-between vertical-align-middle">
+                                        <div class="col-6 md:col-2 flex justify-content-between vertical-align-middle">
+                                            <b>{{
+                                                'pages.nutritions.carb' | translate }}</b>
+                                        </div>
+                                        <div class="col justify-content-between vertical-align-middle">
+                                            <hr>
+                                        </div>
+                                        <div class="col-4 md:col-2 flex justify-content-between vertical-align-middle">
+                                            <input class="nutrition-table-input" pInputText
+                                                [formControl]="form.get('carb')" type="text" />
+                                        </div>
+                                    </div>
+                                    <div class="grid flex justify-content-between vertical-align-middle">
+                                        <div class="col-6 md:col-2 flex justify-content-between vertical-align-middle">
+                                            {{
+                                            'pages.nutritions.carb_sugar' | translate }}</div>
+                                        <div class="col justify-content-between vertical-align-middle">
+                                            <hr>
+                                        </div>
+                                        <div class="col-4 md:col-2 flex justify-content-between vertical-align-middle">
+                                            <input class="nutrition-table-input" pInputText
+                                                [formControl]="form.get('carb_sugar')" type="text" />
+                                        </div>
+                                    </div>
+                                    <p-divider></p-divider>
+                                    <div class="grid flex justify-content-between vertical-align-middle">
+                                        <div class="col-6 md:col-2 flex justify-content-between vertical-align-middle">
+                                            <b>{{
+                                                'pages.nutritions.protein' | translate }}</b>
+                                        </div>
+                                        <div class="col justify-content-between vertical-align-middle">
+                                            <hr>
+                                        </div>
+                                        <div class="col-4 md:col-2 flex justify-content-between vertical-align-middle">
+                                            <input class="nutrition-table-input" pInputText
+                                                [formControl]="form.get('protein')" type="text" />
+                                        </div>
+                                    </div>
+                                    <p-divider></p-divider>
+                                    <div class="grid flex justify-content-between vertical-align-middle">
+                                        <div class="col-6 md:col-2 flex justify-content-between vertical-align-middle">
+                                            <b>{{
+                                                'pages.nutritions.salt' | translate }}</b>
+                                        </div>
+                                        <div class="col justify-content-between vertical-align-middle">
+                                            <hr>
+                                        </div>
+                                        <div class="col-4 md:col-2 flex justify-content-between vertical-align-middle">
+                                            <input class="nutrition-table-input" pInputText
+                                                [formControl]="form.get('salt')" type="text" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                        <p-divider></p-divider>
+                        <!--ETICHETTA AMBIENTALE-->
+                        <div class="grid">
+                            <div class="col-12">
+                                <h4>{{ 'pages.recycling.title' | translate }} 🇮🇹</h4>
+                                <p>{{ 'pages.recycling.subtitle' | translate }} <a
+                                        href="https://www.gazzettaufficiale.it/eli/id/2020/09/11/20G00135/sg">{{
+                                        'pages.recycling.link' | translate }}</a>
+                            </div>
+                            <div class="col-12">
+
+                                <ng-container *ngFor="let rule of rules.controls; let i = index">
+                                    <div class="grid">
+                                        <div class="col-12 md:col-2">
+                                            <div class="border-1 flex flex-column">
+                                                <div class="flex flex-col items-center px-2 pb-1.5 pt-2">
+                                                    <div class="relative">
+                                                        <svg class="h-12 w-12" viewBox="0 0 41 38" fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <path
+                                                                d="M4.62404 24.5087C3.53751 26.4327 1.55175 29.9436 5.06625 32.2902C6.1708 33.0201 7.40764 33.5247 8.70626 33.7751C9.6956 33.9219 9.74452 35.4439 8.58235 35.4081C7.34359 35.346 1.31005 34.7857 0.341314 30.2603C-0.15947 27.617 0.406969 25.2489 1.96339 22.679L4.2079 18.7111L1.96097 17L11.2037 9.66093L10.0024 21.5L7.00083 20.3L4.62404 24.5087ZM18.2842 3.33355C22.0015 1.3124 24.1514 4.71747 25.3357 6.57448L27.9295 10.6396L26.0024 12L35.3418 19.2711L33.0024 8L30.64 8.90976L28.1937 5.08436C26.5143 2.68376 25.2842 0.910742 22.2879 0.111935C17.0194 -0.894459 13.7807 5.21761 13.8139 5.1777C13.2864 6.1017 14.5078 6.91531 15.2654 5.85356C16.0964 4.82335 17.1224 3.96726 18.2842 3.33355ZM39.5064 23.2458C39.2241 22.6353 37.7404 22.791 38.1579 24.1051C38.5801 25.3577 38.7516 26.6808 38.6631 27.9994C38.3638 32.2219 34.3247 32.1897 32.1234 32.1897H27.2957L27.2571 29.5L16.0313 33.7989L27.2571 38L27.2719 35.4081H32.1234C34.9897 35.4574 37.2725 34.842 39.2038 33.1134C43.0659 29.6987 39.5064 23.2458 39.5064 23.2458Z"
+                                                                fill="currentColor"></path>
+                                                        </svg>
+                                                        <div
+                                                            class="absolute inset-0 flex h-full w-full items-center justify-center">
+                                                            <div class="flex text-center text-base font-bold">{{getMaterialNumberPart(getMaterialLabel(i) | translate)}}</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="whitespace-nowrap -mt-1.5 text-base font-bold">{{getMaterialLabelPart(getMaterialLabel(i) | translate)}}</div>
+                                                </div>
+                                                <div class="bg-slate-500 text-white"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 md:col-10">
+                                            <div class="grid">
+                                                <div class="col-12 md:col-5">
+                                                    <label>{{ 'pages.recycling.field.container' | translate }}</label>
+                                                    <p-dropdown
+                                                        [formControl]="rules.at(i).get('recycling_rule_containers_id')"
+                                                        [options]="containers" [group]="true" [showClear]="true"
+                                                        placeholder="Seleziona">
+                                                        <ng-template let-option pTemplate="selectedItem">
+                                                            <span>{{option.label | translate}}</span>
+                                                        </ng-template>
+                                                        <ng-template let-group pTemplate="group">
+                                                            <div class="flex align-items-center">
+                                                                <span>{{ group.label | translate }}</span>
+                                                            </div>
+                                                        </ng-template>
+                                                        <ng-template let-option pTemplate="item">
+                                                            <div [ngClass]="isContainerNotInUse(option) ? '' : 'optionDisabled'">
+                                                                <span>{{option.label | translate}}</span>
+                                                            </div>
+                                                        </ng-template>
+                                                    </p-dropdown>
+                                                </div>
+                                                <div class="col-12 md:col-5">
+                                                    <label>{{ 'pages.recycling.field.material' | translate }}
+                                                        <app-infobutton
+                                                            [label]="'pages.elabel.form.material.helper'"></app-infobutton></label>
+                                                    <p-dropdown [options]="materials" [group]="true"
+                                                        [formControl]="rules.at(i).get('recycling_rule_materials_id')"
+                                                        [showClear]="true" placeholder="Seleziona">
+                                                        <ng-template let-option pTemplate="selectedItem">
+                                                            <span>{{option.label | translate}}</span>
+                                                        </ng-template>
+                                                        <ng-template let-group pTemplate="group">
+                                                            <div class="flex align-items-center">
+                                                                <span>{{ group.label | translate }}</span>
+                                                            </div>
+                                                        </ng-template>
+                                                        <ng-template let-option pTemplate="item">
+                                                            <div [ngClass]="isMaterialNotInUse(option) ? '' : 'optionDisabled'">
+                                                                <span>{{option.label | translate}}</span>
+                                                            </div>
+                                                        </ng-template>
+                                                    </p-dropdown>
+                                                </div>
+                                                <div class="col-12 md:col-2 text-right" style="margin-top:23px">
+                                                    <p-button icon="pi pi-trash"
+                                                        pTooltip="{{ 'pages.recycling.field.removerule' | translate }}"
+                                                        styleClass="p-button-sm p-button-outlined p-button-secondary "
+                                                        (click)="removeRule(i)"></p-button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ng-container>
+                                <button (click)="addRule()" pButton pRipple type="button"
+                                    label="{{ 'pages.recycling.field.addrule' | translate }}"
+                                    class="pi-trash w-full"></button>
+                            </div>
+                        </div>
+                        <p-divider></p-divider>
+                        <!--CONSUMO RESPONSABILE-->
+                        <div class="grid">
+                            <div class="col-12">
+                                <div class="col-12">
+                                    <h4>{{ 'pages.recycling.sub.title' | translate }}</h4>
+                                    <p>{{ 'pages.recycling.sub.subtitle' | translate }} </p>
+                                </div>
+                                <div class="grid">
+                                    <div class="col-12">
+                                        <div class="flex justify-content-start flex-wrap">
+                                            <div
+                                                class="flex align-items-center justify-content-center w-4rem h-4rem  m-2">
+                                                <div ngClass="{{form.get('drive').value ? '' : 'opacity-40'}}"
+                                                    class="flex align-items-center justify-content-center w-4rem h-4rem  m-2">
+                                                    <img (click)="form.get('drive').setValue(!form.get('drive').value)"
+                                                        src="https://firebasestorage.googleapis.com/v0/b/label-scan-1c165.appspot.com/o/public%2FresponsibleConsumption%2Fdriving.svg?alt=media&amp;token=9190dac0-4b69-4535-bb4e-c893665a8467"
+                                                        alt="Don't Drink and Drive">
+                                                </div>
+                                            </div>
+
+                                            <div
+                                                class="flex align-items-center justify-content-center w-4rem h-4rem  m-2">
+                                                <div ngClass="{{form.get('pregnant').value ? '' : 'opacity-40'}}"
+                                                    class="flex align-items-center justify-content-center w-4rem h-4rem  m-2">
+                                                    <img (click)="form.get('pregnant').setValue(!form.get('pregnant').value)"
+                                                        src="https://firebasestorage.googleapis.com/v0/b/label-scan-1c165.appspot.com/o/public%2FresponsibleConsumption%2Fpregnant.svg?alt=media&amp;token=bae940be-54fd-4437-93f4-4ed6e8fc0644"
+                                                        alt="Pregnancy">
+                                                </div>
+                                            </div>
+                                            <div
+                                            class="flex align-items-center justify-content-center w-4rem h-4rem  m-2">
+                                            <div ngClass="{{form.get('age').value ? '' : 'opacity-40'}}"
+                                                class="flex align-items-center justify-content-center w-4rem h-4rem  m-2">
+                                                <img (click)="form.get('age').setValue(!form.get('age').value)"
+                                                src="https://firebasestorage.googleapis.com/v0/b/label-scan-1c165.appspot.com/o/public%2FresponsibleConsumption%2Funderage.svg?alt=media&amp;token=ff71068d-93fc-42ec-9fd5-0c0a5cb799d0"
+                                                alt="Underaged Consumption">
+                                            </div>
+                                        </div>
+                                        
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <p-divider></p-divider>
+                        <!--SOSTENIBILTà-->
+                        <div class="grid">
+                            <div class="col-12">
+                                <h4>{{ 'pages.sustainability.title' | translate }}</h4>
+                                <p>{{ 'pages.sustainability.subtitle' | translate }} </p>
+                            </div>
+                            <div class="col-12">
+                                <label>{{ 'pages.sustainability.form.field1.label' | translate }} <app-infobutton
+                                        [label]="'pages.sustainability.form.field1.helper'"></app-infobutton><span
+                                        style="font-size:0.8rem;margin-left:5px;">(opzionale)</span></label>
+                                <textarea id="description" pInputTextarea [formControl]="form.get('sustainibility_bio')"
+                                    required rows="3" cols="20"></textarea>
+                            </div>
+                            <div class="col-12">
+                                <label>{{ 'pages.sustainability.form.field2.label' | translate }} <app-infobutton
+                                        [label]="'pages.sustainability.form.field2.helper'"></app-infobutton><span
+                                        style="font-size:0.8rem;margin-left:5px;">(opzionale)</span></label>
+                                <textarea id="description" pInputTextarea
+                                    [formControl]="form.get('sustainibility_message')" required rows="3"
+                                    cols="20"></textarea>
+                            </div>
+                            <div class="col-12 mt-3">
+                                <label>{{ 'pages.sustainability.form.field3.label' | translate }} <app-infobutton
+                                        [label]="'pages.sustainability.form.field3.helper'"></app-infobutton><span
+                                        style="font-size:0.8rem;margin-left:5px;">(opzionale)</span></label>
+                                <img *ngIf="preview_image" src="//{{preview_image}}" style="width:150px;height:auto">
+                                <p-fileUpload mode="basic" name="image" chooseIcon="pi pi-upload"
+                                    url="https://app.eulabel.it/backend/upload-preview/{{id}}" accept="image/*"
+                                    maxFileSize="1000000" [auto]="true" (onUpload)="onBasicUpload()"
+                                    chooseLabel="Browse" />
+                            </div>
+
+                        </div>
+                   <!--  </div> -->
+                </p-tabPanel>
+
+                <!--IMPOSTAZIONI-->
+                <p-tabPanel *ngIf="false" header="{{ 'pages.elabel.cards.tab2' | translate }}" class="line-height-3 m-0">
+                    settings
+                </p-tabPanel>
+
+            </p-tabView>
+            <p-divider></p-divider>
+            <div class="grid">
+                <div class="col-12">
+                    <div class="flex align-items-center justify.content-center gap-1 col-12">
+                        <div class="m-auto flex gap-1">
+                            <p-button *ngIf="id" label="Elimina" (click)="deleteRecord($event)" icon="pi pi-trash"
+                                styleClass="p-button-sm p-button-danger"></p-button>
+                            <p-button label="Indietro" (click)="back()" icon="pi pi-trash"
+                                styleClass="p-button-sm p-button-secondary"></p-button>
+                            <p-button [disabled]="!form.valid"  label="Salva" (click)="save()" icon="pi pi-trash"
+                                styleClass="p-button-sm p-button-success"></p-button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+        <app-preview 
+        [materials]="materials" 
+        [containers]="containers" 
+        [packages]="packages" 
+        [ingredients]="ingredients" 
+        [types]="types" 
+        [geoGraphicalIndication]="geographical_indication"
+        [preview_image]="preview_image" 
+        [preview]="false"
+        [sub_image]="sub_image" 
+        [form]="form" class="col-12 lg:col-4 xl:col-3 hidden lg:block"></app-preview>
+
+</div>
+
+<p-sidebar [(visible)]="sidebarVisible" [fullScreen]="true">
+    <app-preview 
+    [materials]="materials" 
+    [containers]="containers" 
+    [packages]="packages" 
+    [ingredients]="ingredients" 
+    [types]="types" 
+    [geoGraphicalIndication]="geographical_indication"
+    [preview_image]="preview_image" 
+    [sub_image]="sub_image" 
+    [preview]="true"
+    [form]="form" class="col-12 lg:col-4 xl:col-3 block lg:hidden flex flex-column justify-content-center align-items-center"></app-preview>
+</p-sidebar>
+<div class="fixed bottom-2 right-2 block lg:hidden">
+<p-button (onClick)="sidebarVisible = true && preview=true" icon="pi pi-eye" pTooltip="Live preview" />
+</div>
+
+<p-dialog header="Codice qr" 
+    [(visible)]="qrDialog" 
+    [modal]="true" 
+    showEffect="fade" [style]="{width: '30vw'}" [breakpoints]="{'960px': '75vw'}">
+    <div #qrcodewrapper>
+        <qrcode *ngIf="form.get('qr').value" [qrdata]="form.get('qr').value" [errorCorrectionLevel]="'M'"></qrcode>
+        <button pButton icon="pi pi-download" (click)="downloadCanvas()" label="Scarica" class="p-button-outlined"></button>
+
+    </div>
+    <ng-template pTemplate="footer">
+            <button pButton icon="pi pi-check" (click)="display=false" label="Ok" class="p-button-outlined"></button>
+    </ng-template>
+</p-dialog>

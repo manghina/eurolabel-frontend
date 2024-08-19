@@ -1,0 +1,567 @@
+{
+  "global": {
+    "select" : "Seleziona",
+    "view": "Dettagli",
+    "qr": "Codice Qr",
+    "add": "Crea una nuova E-Label",
+    "new_brand": "Crea nuovo Brand",
+    "edit": "Modifica",
+    "demo-message": "1 demo product left",
+    "save": "Salva",
+    "send": "Invia",
+    "register": {
+      "title": "Registrazione",
+      "subtitle": "Crea il tuo profilo aziendale per proseguire",
+      "username": "Username",
+      "password": "Password",
+      "company": "Azienda",
+      "address": "Indirizzo",
+      "cap": "CAP",
+      "location": "Località",
+      "pr": "Provincia",
+      "state": "Stato",
+      "phone": "Telefono",
+      "email": "Email",
+      "website": "Sito Web",
+      "piva": "Partita iva",
+      "sdi": "Codice SDI",
+      "submit": "Prosegui",
+      "text": "Per registrarti premi qui: ",
+      "button": "Registrati"
+    },
+    "forgot": {
+      "title": "Reimposta la password",
+      "subtitle": "Inserisci nei campi qui sotto la nuova password",
+      "username": "Username",
+      "password": "Nuova Password",
+      "password_check": "Conferma Password",
+      "submit": "Prosegui",
+      "text": "Password dimenticata? clicca qui ",
+      "button": "Reimposta password"
+    }
+  },
+  "categories": {
+    "labels": {
+      "main_ingredient": {
+        "main_ingredient": "Ingrediente principale",
+        "concentrated_grape_must": "Mosto d'Uva Concentrato",
+        "distillate_of_agricultural_origin": "Distillato di origine agricola",
+        "dosage_syrup": "Sciroppo di dosaggio",
+        "dried_grape_alcohol": "Alcool d'uva secca",
+        "dried_grape_distillate": "Distillato di uva secca",
+        "ethyl_alcohol": "Alcool etilico di origine agricola",
+        "grape_marc_spirit": "Grape marc spirit",
+        "grape_must": "Mosto d'uva",
+        "grapes": "Uva",
+        "partially_fermented": "Mosto d'uva parzialmente fermentato",
+        "rectified_concentrated": "Mosto d'Uva Concentrato Rettificato",
+        "spirit_drinks_distilled": "Bevande spiritose distillate da uve secche distillate",
+        "sucrose": "Saccarosio",
+        "water": "Acqua",
+        "wine_alcohol": "Alcool del vino",
+        "wine_distillate": "Alcool distillato",
+        "wine_spirit": "Spirito del vino"
+      },
+      "acidity_regulator": {
+        "acidity_regulator": "Correttore di acidità",
+        "calcium_sulfate": "Calcio solfato",
+        "citric_acid": "Acido citrico",
+        "lactic_acid": "Acido lattico",
+        "malic_acid": "Acido malico",
+        "tartaric_acid": "Acido tartarico"
+      },
+      "clarifying_agent": {
+        "clarifying_agent": "Agente chiarificante",
+        "casein": "Caseina del latte",
+        "egg": "Uova",
+        "egg_albumin": "Albume",
+        "egg_lysozyme": "Lisozima dell'uovo",
+        "egg_product": "Derivati dell'uovo",
+        "egg_protein": "Proteine ​​dell'uovo",
+        "gelatin": "Gelatina",
+        "milk": "Latte",
+        "milk_products": "Latticini",
+        "milk_protein": "Proteine ​​del latte",
+        "pea_protein": "Proteine ​​del pisello",
+        "potassium_caseinate": "Caseinato di potassio",
+        "potato_protein": "Proteine ​​della patata",
+        "wheat_protein": "Proteine ​​del grano"
+      },
+      "expedition_liqueur": {
+        "expedition_liqueur": "liquore da spedizione",
+        "concentrated": "Mosto d'Uva Concentrato",
+        "grape": "Mosto d'uva",
+        "partially": "Mosto d'uva parzialmente fermentato",
+        "sucrose": "Saccarosio",
+        "wine": "Vino",
+        "rectified": "Mosto d'Uva Concentrato Rettificato"
+      },
+      "preservatives_and_antioxidant": {
+        "preservatives_and_antioxidant": "conservanti e antiossidanti",
+        "lascorbic": "Acido L-ascorbico",
+        "dimethyldicarbonate": "Dimetildicarbonato (DMDC)",
+        "lysozyme": "Lisozima",
+        "potassium_hydrogen": "Solfito di idrogeno di potassio",
+        "potassium_metabisulphite": "Metabisolfito di potassio",
+        "potassium_sorbate": "Sorbato di potassio",
+        "sulphur_dioxide": "Solfiti/anidride solforosa",
+        "sulphites": "Solfiti",
+        "bisulphite": "Bisolfito di potassio"
+      },
+      "stabilising_agent": {
+        "stabilising_agent": "agente stabilizzante",
+        "carboxymethylcellulose": "carbossimetilcellulosa",
+        "citric_acid": "acido citrico",
+        "fumaric_acid": "acido fumarico",
+        "gum_arabic": "gomma arabica",
+        "metatartaric_acid": "acido metatartarico",
+        "potassium_polyaspartate": "poliaspartato di potassio",
+        "potassium_sorbate": "sorbato di potassio",
+        "yeast_mannoproteins": "mannoproteine ​​del lievito"
+      },
+      "sweetener": {
+        "sweetener": "Dolcificante",
+        "burned": "Zucchero bruciato",
+        "syrup": "Sciroppo di carruba",
+        "concentrated": "Mosto d'Uva Concentrato",
+        "dextrose": "Destrosio",
+        "extrawhite": "Zucchero Extra-Bianco",
+        "fructose": "Fruttosio",
+        "glucose": "Sciroppo di glucosio",
+        "must": "Mosto d'uva",
+        "honey": "Miele",
+        "invertsugar": "Soluzione di zucchero invertito",
+        "invertsugarsyrup": "Sciroppo di zucchero invertito",
+        "rectified": "Mosto d'Uva Concentrato Rettificato",
+        "semiwhite": "Zucchero semibianco",
+        "sugar": "Zucchero",
+        "sugarsolution": "Soluzione di zucchero",
+        "whitesugar": "Zucchero bianco"
+      },
+      "tirage_liqueur": {
+        "tirage_liqueur": "liquore al tiraggio",
+        "concentrated": "Mosto d'Uva Concentrato",
+        "grape": "Mosto d'uva",
+        "partially": "Mosto d'uva parzialmente fermentato",
+        "rectified": "Mosto d'Uva Concentrato Rettificato",
+        "sucrose": "Saccarosio",
+        "wine": "Vino"
+      },
+      "packaging_gases": {
+        "packaging_gases": "",
+        "argon": "Argon",
+        "carbon": "Diossido di carbonio",
+        "nitrogen": "Nitrogeno"
+      },
+      "allergienies": {
+        "milk": "Latte",
+        "egg":"Uovo",
+        "sulphites":"Solfiti"
+      }      
+    },
+    "acidity_regulator": "Calcola di acidità",
+    "anti_caking_agent": "Agente antiagglomerante",
+    "anti_foaming_agent": "Agente antischiuma",
+    "antioxidant": "Antiossidante",
+    "bulking_agent": "Agente di carica",
+    "clarifying_agents": "Agenti chiarificanti",
+    "colour": "Colorante",
+    "emulsifier": "Emulsionatore",
+    "emulsifying_salts": "Sali emulsionanti",
+    "expedition_liqueur": "Liquore da spedizione",
+    "firming_agent": "Agente rassodante",
+    "flavour_enhancer": "Esaltatore di sapidità",
+    "flour_treatment_agent": "Agente di trattamento della farina",
+    "foaming_agent": "Agente schiumogeno",
+    "gelling_agent": "Agente gelificante",
+    "glazing_agent": "Agente di rivestimento",
+    "humectant": "Umettante",
+    "main_ingredient": "Ingrediente principale",
+    "modified_starch": "Amido modificato",
+    "other": "Altro",
+    "packaging_gases": "Gas di imballaggio",
+    "preservatives_and_antioxidants": "Conservanti e antiossidanti",
+    "propellent_gas": "Gas propellente",
+    "raising_agent": "Agente lievitante",
+    "sequestrant": "Sequestrante",
+    "stabilising_agents": "Agenti stabilizzanti",
+    "sweetener": "Dolcificante",
+    "thickener": "Addensante",
+    "tirage_liqueur": "Liquore al tiraggio"
+  },
+  "pages": {
+    "register": {
+      "title": "Registrazione",
+      "subtitle": "Crea il tuo profilo aziendale per proseguire",
+      "username": "Username",
+      "password": "Password",
+      "company": "Azienda",
+      "name": "Nome",
+      "surname": "Cognome",
+      "address": "Indirizzo",
+      "cap": "CAP",
+      "locality": "Località",
+      "pr": "Provincia",
+      "state": "Stato",
+      "phone": "Telefono",
+      "email": "Email",
+      "website": "Sito Web",
+      "piva": "Partita iva",
+      "sdi": "Codice SDI",
+      "submit": "Prosegui",
+      "save": "Salva",
+      "text": "Per registrarti premi qui: ",
+      "button": "Registrati"
+    },
+    "profile": {
+      "subscription": {
+        "title": "Abbonamento",
+        "subtitle": "Gestisci il tuo abbonamento",
+        "freeplan":{
+          "title":"Piano Gratuito",
+          "subtitle":"Attualmente sei su un piano gratuito. Esegui l'upgrade per pubblicare e-Label e accedere a tutte le funzionalità."
+        }
+      }
+    },
+    "brand": {
+      "form": {
+        "name": {
+          "label": "Nome del Brand"
+        },
+        "image": {
+          "label": "Logo del Brand"
+        }
+      }
+    },
+    "dashboard": {
+      "title": "Dashboard",
+      "cards": {
+        "label": "Nuova E-Label",
+        "published": "Pubblicate",
+        "draft": "Bozze",
+        "brand": "Brand",
+        "profile": "Profilo dell'azienda",
+        "elabel": "E-label",
+        "feedback": {
+          "tab1": "Generale",
+          "tab2": "Suggerimenti",
+          "tab3": "Segnalazioni",
+          "title": "Teniamo in considerazione il tuo feedback"
+        }
+      }
+    },
+    "elabel": {
+      "title": "Titolo",
+      "subtitle": "Sottotitolo",
+      "cards": {
+        "tab1": "Informazioni",
+        "tab2": "Impostazioni"
+      },
+      "form": {
+        "container" : {
+          "error" : "Lo stesso contenitore non può essere specificato 2 volte"
+        },
+        "material" : {
+          "error" : "Lo stesso materiale non può essere specificato 2 volte"
+        },
+        "brand": {
+          "label": "Marchio",
+          "helper": ""
+        },
+        "id": "Identificativo",
+        "productName": "Nome del prodotto",
+        "upload": {
+          "label": "Immagine del prodotto",
+          "helper": ""
+        },
+        "product_name": {
+          "label": "Nome del prodotto",
+          "helper": ""
+        },
+        "sku": {
+          "label": "Lotto",
+          "helper": ""
+        },
+        "country": {
+          "label": "Nazione di produzione",
+          "helper": ""
+        },
+        "type": {
+          "label": "Tipo di alcolico",
+          "helper": ""
+        },
+        "vintage_year": {
+          "label": "Annata",
+          "helper": ""
+        },
+        "product_varieties": {
+          "label": "Uvaggio",
+          "helper": ""
+        },
+        "geographical_indication": {
+          "label": "Indicazione geografica",
+          "helper": ""
+        },
+        "alcohol_content_percentage": {
+          "label": "Percentuale di contenuto alcolico",
+          "helper": ""
+        },
+        "net_content": {
+          "label": "Contenuto netto",
+          "helper": ""
+        },
+        "description": {
+          "label": "Descrizione",
+          "helper": ""
+        },
+        "packages": {
+          "label": "Gas di imbottigliamento",
+          "helper": ""
+        },
+        "nutrition": {
+          "label": "Nutrienti dichiarati",
+          "helper": ""
+        }
+      }
+    },
+    "ingredients": {
+      "title": "Ingredienti",
+      "subtitle": "Aggiungi tutti gli ingredienti utilizzati nel prodotto selezionandoli nell'elenco.",
+      "info": "Aggiungere gli ingredienti nell'ordine della loro percentuale nel prodotto, iniziando dall'ingrediente con la percentuale più alta.",
+      "note": "Nota:"
+    },
+    "info_prodotto": {
+      "title": "Informazioni sul prodotto",
+      "subtitle": "",
+      "info": "",
+      "note": "Nota:"
+    },
+    "info_produttore": {
+      "title": "Informazioni sul produttore",
+      "subtitle": "",
+      "info": "",
+      "note": "Nota:"
+    },
+    "recycling": {
+      "sub": {
+        "title": "Consumo responsabile",
+        "subtitle": "Sensibilizza i consumatori con i simboli per il consumo responsabile"
+      },
+      "title": "Etichetta ambientale",
+      "title_preview": "Riciclo",
+      "description_preview": "Verifica le disposizioni del tuo Comune. Separa le componenti e conferiscile in modo corretto.",
+      "link": "D.lgs 116/2020)",
+      "subtitle": "Etichettatura ambientale per gli imballaggi (i prodotti venduti in Italia devono indicare i materiali di imballaggio e altri dettagli secondo la normativa italiana",
+      "field": {
+        "addrule": "Aggiungi regola di riciclaggio",
+        "removerule": "Rimuovi regola",
+        "container": "Contenitore",
+        "material": "Materiale"
+      }
+    },
+    "sustainability": {
+      "title": "Sostenibilità",
+      "subtitle": "Le informazioni sulla sostenibilità, così come altre informazioni fornite volontariamente, devono rispettare i seguenti principi: non dovrebbero fuorviare o confondere i consumatori, dovrebbero essere basate sui fatti e non dovrebbero fungere da marketing indiretto attraverso dichiarazioni accattivanti ma infondate",
+      "form": {
+        "field1": {
+          "label": "Messaggio Bio",
+          "helper": ""
+        },
+        "field2": {
+          "label": "Messaggio sulla sostenibilità",
+          "helper": ""
+        },
+        "field3": {
+          "label": "Etichette di sostenibilità",
+          "helper": ""
+        }
+      }
+    },
+    "nutritions": {
+      "title": "Dichiarazione nutrizionale",
+      "subtitle": "Inserisci i valori nutrizionali medi per 100 ml e osserva l'arrotondamento nell'anteprima a destra. Il calcolatore può aiutarti a calcolare il valore energetico in kJ e kcal. Per ulteriori informazioni, leggi la Guida alla dichiarazione degli ingredienti UE",
+      "button": "Calcola energia",
+      "info": "Guida sulla dichiarazione degli ingredienti UE",
+      "note": "",
+      "table": "Valori medi",
+      "energy_kj": "Energia (Kj)",
+      "energy_kcal": "Energia (Kcal)",
+      "fat": "Grassi",
+      "fat_sat": "Grassi saturi",
+      "carb": "Carboidrati",
+      "carb_sugar": "Zuccheri",
+      "protein": "Proteine",
+      "salt": "Sale"
+    }
+  },
+  "product": {
+    "container": {
+      "empty": "Contenitore",
+      "bottleTop": "Chiusura",
+      "packaging": "Imballaggio",
+      "bottle": "Bottiglia",
+      "can": "Lattina",
+      "tetraPak": "Tetra Pak",
+      "bagInBox": "Bag in Box",
+      "otherContainer": "Altro contenitore",
+      "label": "Etichetta",
+      "cork": "Tappo",
+      "screwCap": "Tappo a vite",
+      "crownCap": "Tappo a corodna",
+      "capsule": "Capsula",
+      "wireCage": "Gabbietta",
+      "otherClosure": "Altra chiusura",
+      "bag": "Sacchetto",
+      "case": "Astuccio",
+      "box": "Scatola",
+      "giftBox": "Scatola regalo",
+      "tray": "Vassoio",
+      "separator": "Separatore",
+      "wrapper": "Incarto",
+      "otherPackaging": "Altro imballaggio"
+    },
+    "materials": {
+      "plastic": "Raccolta plastica",
+      "separate": "Raccolta differenziata",
+      "paper": "Raccolta carta",
+      "metal": "Raccolta alluminio o metallo",
+      "organic": "Raccolta differenziata dedicata o raccolta differenziata per rifiuti organici",
+      "texttile": "Raccolta materiali in tessuto",
+      "glass": "Raccolta vetro",
+      "PET1": "Polietilentereftalato - PET 1",
+      "HDPE2": "Polietilene ad alta densità - HDPE 2",
+      "PVC3": "Policloruro di vinile - PVC 3",
+      "LDPE4": "Polietilene a bassa densità - LDPE 4",
+      "PP5": "Polipropilene - PP 5",
+      "PS6": "Polistirolo - PS 6",
+      "PETG7": "Versione modificata di PET - PETG 7",
+      "C_PET81": "Polietilentereftalato e Carta e cartone - C/PET 81",
+      "C_HDPE81": "Polietilene ad alta densità e Carta e cartone - C/HDPE 81",
+      "C_PVC81": "Policloruro di vinile e Carta e cartone - C/PVC 81",
+      "C_LDPE81": "Polietilene a bassa densità e Carta e cartone - C/LDPE 81",
+      "C_PP81": "Polipropilene e Carta e cartone - C/PP 81",
+      "C_PS81": "Polistirolo e Carta e cartone - C/PS 81",
+      "C_PETG81": "Versione modificata di PET e Carta e cartone - C/PETG 81",
+      "C_PET84": "Polietilentereftalato, Plastica e Alluminio - C/PET 84",
+      "C_HDPE84": "Polietilene ad alta densità, Plastica e Alluminio - C/HDPE 84",
+      "C_PVC84": "Policloruro di vinile, Plastica e Alluminio - C/PVC 84",
+      "C_LDPE84": "Polietilene a bassa densità, Plastica e Alluminio - C/LDPE 84",
+      "C_PP84": "Polipropilene, Plastica e Alluminio - C/PP 84",
+      "C_PS84": "Polistirolo, Plastica e Alluminio - C/PS 84",
+      "C_PETG84": "Versione modificata di PET, Plastica e Alluminio - C/PETG 84",
+      "C_PET85": "Polietilentereftalato, Carta e cartone, Alluminio e Acciaio - C/PET 85",
+      "C_HDPE85": "Polietilene ad alta densità, Carta e cartone, Alluminio e Acciaio - C/HDPE 85",
+      "C_PVC85": "Policloruro di vinile, Carta e cartone, Alluminio e Acciaio - C/PVC 85",
+      "C_LDPE85": "Polietilene a bassa densità, Carta e cartone, Alluminio e Acciaio - C/LDPE 85",
+      "C_PP85": "Polipropilene, Carta e cartone, Alluminio e Acciaio - C/PP 85",
+      "C_PS85": "Polistirolo, Carta e cartone, Alluminio e Acciaio - C/PS 85",
+      "C_PETG85": "Versione modificata di PET, Carta e cartone, Alluminio e Acciaio - C/PETG 85",
+      "C_PET90": "Polietilentereftalato e Alluminio - C/PET 90",
+      "C_HDPE90": "Polietilene ad alta densità e Alluminio - C/HDPE 90",
+      "C_PVC90": "Policloruro di vinile e Alluminio - C/PVC 90",
+      "C_LDPE90": "Polietilene a bassa densità e Alluminio - C/LDPE 90",
+      "C_PP90": "Polipropilene e Alluminio - C/PP 90",
+      "C_PS90": "Polistirolo e Alluminio - C/PS 90",
+      "C_PETG90": "Versione modificata di PET e Alluminio - C/PETG 90",
+      "C_PET91": "Polietilentereftalato e Acciaio - C/PET 91",
+      "C_HDPE91": "Polietilene ad alta densità e Alluminio - C/HDPE 91",
+      "C_PVC91": "Policloruro di vinile e Alluminio - C/PVC 91",
+      "C_LDPE91": "Polietilene a bassa densità e Alluminio - C/LDPE 91",
+      "C_PP91": "Polipropilene e Alluminio - C/PP 91",
+      "C_PS91": "Polistirolo e Alluminio - C/PS 91",
+      "C_PETG91": "Versione modificata di PET e Alluminio - C/PETG 91",
+      "C_PET92": "Polietilentereftalato e Metalli vari - C/PET 92",
+      "C_HDPE92": "Polietilene ad alta densità e Metalli vari - C/HDPE 92",
+      "C_PVC92": "Policloruro di vinile e Metalli vari - C/PVC 92",
+      "C_LDPE92": "Polietilene a bassa densità e Metalli vari - C/LDPE 92",
+      "C_PP92": "Polipropilene e Metalli vari - C/PP 92",
+      "C_PS92": "Polistirolo e Metalli vari - C/PS 92",
+      "C_PETG92": "Versione modificata di PET e Metalli vari - C/PETG 92",
+      "C_PET95": "Polietilentereftalato e Vetro - C/PET 95",
+      "C_HDPE95": "Polietilene ad alta densità e Vetro - C/HDPE 95",
+      "C_PVC95": "Policloruro di vinile e Vetro - C/PVC 95",
+      "C_LDPE95": "Polietilene a bassa densità e Vetro - C/LDPE 95",
+      "C_PP95": "Polipropilene e Vetro - C/PP 95",
+      "C_PS95": "Polistirolo e :etro - C/PS 95",
+      "C_PETG95": "Versione modificata di PET e Vetro - C/PETG 95",
+      "O7": "Altri plastici - O 7",
+      "FOR50": "Legno - FOR 50",
+      "PAP20": "Cartone ondulato - PAP 20",
+      "PAP21": "Cartone non ondulato - PAP 21",
+      "PAP22": "Carta - PAP 22",
+      "C_PAP80": "Cartone ondulato e Metalli vari - C/PAP 80",
+      "C_PAP81": "Cartone ondulato e Plastica - C/PAP 81",
+      "C_PAP82": "Carta e cartone e Alluminio - C/PAP 82",
+      "C_PAP83": "Carta e cartone e Alluminio - C/PAP 83",
+      "C_PAP84": "Carta e cartone, Plastica e Alluminio - C/PAP 84",
+      "C_PAP85": "Carta e cartone, Plastica, Alluminio e Acciaio - C/PAP 85",
+      "FE40": "Acciaio - FE 40",
+      "ALU41": "Alluminio - ALU 41",
+      "TIN42": "Stagno - TIN 42",
+      "C_ALU82": "Alluminio e Carta e cartone - C/ALU 82",
+      "C_ALU83": "Alluminio e Carta e cartone - C/ALU 83",
+      "C_FE83": "Acciaio e Carta e cartone - C/FE 83",
+      "C_ALU84": "Alluminio, Carta e cartone e Plastica - C/ALU 84",
+      "C_ALU85": "Alluminio, Carta e cartone, Plastica e Acciaio - C/ALU 85",
+      "C_FE85": "Acciaio, Carta e cartone, Plastica e Alluminio - C/FE 85",
+      "C_ALU90": "Alluminio e Plastica - C/ALU 90",
+      "C_FE91": "Acciaio e Plastica - C/FE 91",
+      "C_ALU96": "Alluminio e Vetro - C/ALU 96",
+      "C_FE97": "Acciaio e Vetro - C/FE 97",
+      "FOR51": "Sughero - FOR 51",
+      "TEX60": "Cotone - TEX 60",
+      "TEX61": "Juta - TEX 61",
+      "GL70": "Vetro incolore - GL 70",
+      "GL71": "Vetro Verde - GL 71",
+      "GL72": "Vetro marrone - GL 72",
+      "C_GL95": "Vetro e Plastica - C/GL 95",
+      "C_GL96": "Vetro e Alluminio - C/GL 96",
+      "C_GL97": "Vetro e Metalli vari - C/GL 97",
+      "C_GL98": "Vetro e Metalli vari - C/GL 98"
+    },
+    "material": {
+      "plastic": "Plastica",
+      "separate": "Separato",
+      "paper": "Carta",
+      "metal": "Metallo",
+      "organic": "Organico",
+      "textile": "Tessuto",
+      "glass": "Vetro"
+    },
+    "types": {
+      "beer": "Birra",
+      "marketing": "Marketing",
+      "oil": "Olio",
+      "spirits": "Spirito",
+      "vinegard": "Aceto",
+      "wine": "Vino"
+    },
+    "type": {
+      "dessert_wine": "Vino da dessert",
+      "fortified_wine": "Vino liquoroso",
+      "fully_sparkling_wine": "Vino completamente frizzante",
+      "red_wine": "Vino rosso",
+      "rosé_wine": "Vino rosè",
+      "semi_sparkling_wine": "Vino frizzante",
+      "sparkling_red_wine": "Vino rosso frizzante",
+      "sparkling_rosé_wine": "Vino rosè frizzante",
+      "sparkling_white_wine": "Vino bianco frizzante"
+    },
+    "bottling": {
+      "may": "L'imbottigliamento può avvenire in atmosfera protettiva",
+      "is": "Imbottigliato in atmosfera protettiva"
+    },
+    "geographicalIndication": {
+      "doc": "DOC",
+      "docg": "DOCG",
+      "dop": "DOP",
+      "doq": "DOQ",
+      "igp": "IGP",
+      "igt": "IGT",
+      "vdt": "VDT",
+      "vp": "VP"
+    }
+  },
+  "HELLO": "Ciao2",
+  "WELCOME": "Benvenuto nella nostra applicazione!"
+}

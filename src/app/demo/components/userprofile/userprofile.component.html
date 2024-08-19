@@ -1,0 +1,75 @@
+<p-toast key="tst"></p-toast>
+<!--BREAD CRUMBS-->
+<div class="grid p-fluid mb-2">
+    <div class="flex flex-wrap gap-2 align-items-center justify-content-between mb-3 w-full">
+        <p-card class="col-12 md:col-12 lg:col-12 ">
+
+            <div class="flex flex-column md:flex-row gap-3 align-items-center justify-content-between">
+                <div class="flex align-items-left justify-content-center">
+                    <p-breadcrumb [model]="breadcrumbItems" [home]="{icon: 'pi pi-home'}"></p-breadcrumb>
+                </div>
+                <div class="flex align-items-right ">
+
+                </div>
+                <div class="flex align-items-center md:align-items-right text-center">
+                    <button (click)="display=true" pButton pRipple type="button"
+                        class="p-button bg-primary p-component p-button-text text-white text-center align-items-center "><i
+                            class="pi pi-qrcode mr-2"></i>{{ 'global.add' | translate }}</button>
+                </div>
+            </div>
+
+
+        </p-card>
+
+
+    </div>
+</div>
+
+
+<div class="grid p-fluid mb-2">
+    <!--PROFILO AZIENDALE-->
+    <div class="col-12 md:col-9">
+
+
+        <div class="card" style="border-radius: 0px;">
+            <div class="grid p-fluid mb-2">
+                <div class="col-12">
+                    <i class="pi pi-id-card mr-2"></i> <b>{{
+                        'pages.dashboard.cards.profile' | translate }}</b>
+                </div>
+            </div>
+<p-divider></p-divider>
+<div class="grid">
+    <div class="col-12">
+        <app-register [edit]="true" [form]="form"></app-register>
+    </div>
+</div>
+        </div>
+    </div>
+    <div class="col-12 md:col-3">
+
+
+        <div class="card" style="border-radius: 0px;">
+            <div class="grid p-fluid mb-2">
+                <div class="col-12">
+                    <i class="pi pi-money-bill mr-2"></i> <b>{{
+                        'pages.profile.subscription.title' | translate }}</b><br>
+                        {{'pages.profile.subscription.subtitle' | translate }}
+                </div>
+            </div>
+<p-divider></p-divider>
+<div class="grid">
+    <div class="col-12">
+    <p><b>{{
+        'pages.profile.subscription.freeplan.title' | translate }}</b><br>
+        {{
+            'pages.profile.subscription.freeplan.subtitle' | translate }}</p>
+    </div>
+    <div class="col-12"><p-button label="Upgrade" /></div>
+</div>
+        </div>
+    </div>
+   
+
+</div>
+

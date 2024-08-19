@@ -1,0 +1,264 @@
+<div class="grid form-page">
+    <p-toast></p-toast>
+    <div class="progress-spinner" *ngIf="loading">
+        <p-progressSpinner styleClass="w-4rem h-4rem" strokeWidth="8" fill="var(--surface-ground)"
+            animationDuration=".5s"></p-progressSpinner>
+    </div>
+    <div class="col-12 md:col-12">
+        <div class="card p-fluid">
+            <h5>Riepilogo cliente</h5>
+
+            <div class="field grid col-12 md:col-12" [formGroup]="form">
+                <div class="field col-6 md:col-6">
+                    <label class="col-12 md:col-10" htmlFor="name3">ID</label>
+                    <div class="col-12 md:col-10">
+                        <input readonly formControlName="id" pInputText id="name3" type="text" />
+                    </div>
+                </div>
+
+                <div class="field col-6 md:col-6">
+                    <label class="col-12 md:col-10" htmlFor="name3">Anno d'iscrizione</label>
+                    <div class="col-12 md:col-10">
+                        <input formControlName="Anno_iscrizione" pInputText id="name3" type="text" />
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="field grid col-12 md:col-12">
+                <div class="field col-6 md:col-6">
+                    <label htmlFor="email3" class="col-12 md:col-10">Data ultimo pagamento</label>
+                    <div class="col-12 md:col-10">
+
+                        <p-calendar [(ngModel)]="startValue"></p-calendar>
+
+                    </div>
+                </div>
+                <div class="field col-6 md:col-6" [formGroup]="form">
+                    <label htmlFor="email3" class="col-12 md:col-10">Anno ultimo pagamento</label>
+                    <div class="col-12 md:col-10">
+                        <input pInputText formControlName="Anno_ultimo_pagamento" type="text" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card p-fluid" [formGroup]="form">
+            <h5>Dati Anagrafici</h5>
+            <div class="field grid col-12 md:col-12">
+                <div class="field col-6 md:col-6">
+                    <label htmlFor="email3" class="col-12 md:col-10">Nome</label>
+                    <div class="col-12 md:col-10">
+                        <input pInputText formControlName="Nominativo" type="text" />
+                    </div>
+                </div>
+
+                <div class="field col-6 md:col-6">
+                    <label htmlFor="email3" class="col-12 md:col-10">Cognome</label>
+                    <div class="col-12 md:col-10">
+                        <input pInputText formControlName="Cognome" type="text" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="field grid col-12 md:col-12">
+                <div class="field col-6 md:col-6">
+                    <label htmlFor="email3" class="col-12 md:col-10">Titolo</label>
+                    <div class="col-12 md:col-10">
+                        <p-dropdown inputId="dropdown" [autoDisplayFirst]="false" [options]="titolo"
+                            formControlName="Id_Titolo" optionLabel="name"></p-dropdown>
+                    </div>
+                </div>
+                <div class="field col-6 md:col-6">
+                    <label htmlFor="email3" class="col-12 md:col-10">Carica</label>
+                    <div class="col-12 md:col-10">
+                        <p-dropdown inputId="dropdown" [autoDisplayFirst]="false" [options]="carica"
+                            formControlName="id_Carica" optionLabel="name"></p-dropdown>
+                    </div>
+                </div>
+            </div>
+
+            <div class="field grid col-12 md:col-12">
+                <div class="field col-6 md:col-6">
+                    <label htmlFor="email3" class="col-12 md:col-10">Presso</label>
+                    <div class="col-12 md:col-10">
+                        <input pInputText formControlName="Presso" type="text" />
+                    </div>
+                </div>
+                <div class="field col-6 md:col-6">
+                    <label htmlFor="email3" class="col-12 md:col-10">Indirizzo</label>
+                    <div class="col-12 md:col-10">
+                        <input pInputText formControlName="Indirizzo" type="text" />
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="field grid col-12 md:col-12">
+                <div class="field col-6 md:col-3">
+                    <label htmlFor="email3" class="col-12 md:col-10">CAP</label>
+                    <div class="col-12 md:col-10">
+                        <input pInputText formControlName="CAP" type="text" />
+                    </div>
+                </div>
+                <div class="field col-6 md:col-3">
+                    <label htmlFor="email3" class="col-12 md:col-10">Città</label>
+                    <div class="col-12 md:col-10">
+                        <!-- nee to customize -->
+                        <input pInputText formControlName="Città" ype="text" />
+                    </div>
+                </div>
+                <div class="field col-6 md:col-6">
+                    <label htmlFor="email3" class="col-12 md:col-10">Provincia</label>
+                    <div class="col-12 md:col-10">
+                        <!-- nee to customize -->
+                        <input pInputText formControlName="PR" type="text" />
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="field grid col-12 md:col-12">
+
+                <div class="field col-6 md:col-6">
+                    <label htmlFor="email3" class="col-12 md:col-10">Telefono</label>
+                    <div class="col-12 md:col-10">
+                        <input pInputText formControlName="Telefono" type="text" />
+                    </div>
+                </div>
+
+                <div class="field col-6 md:col-6">
+                    <label htmlFor="email3" class="col-12 md:col-10">Cellulare</label>
+                    <div class="col-12 md:col-10">
+                        <input pInputText formControlName="Cellulare" type="text" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="field grid col-12 md:col-12">
+                <div class="field col-6 md:col-6">
+                    <label htmlFor="email3" class="col-12 md:col-10">Email</label>
+                    <div class="col-12 md:col-10">
+                        <input pInputText formControlName="Email" type="text" />
+                    </div>
+                </div>
+                <div class="field col-6 md:col-6">
+                    <label htmlFor="email3" class="col-12 md:col-10">Fax</label>
+                    <div class="col-12 md:col-10">
+                        <input pInputText formControlName="Fax" type="text" />
+                    </div>
+                </div>
+            </div>
+            <div class="field grid col-12 md:col-12">
+                <div class="field col-4 md:col-4">
+                    <label htmlFor="email3" class="col-12 md:col-10">Categoria</label>
+                    <div class="col-12 md:col-10">
+                        <p-dropdown inputId="dropdown" [autoDisplayFirst]="false" [options]="categoria"
+                            formControlName="id_categoria" optionLabel="name"></p-dropdown>
+                    </div>
+                </div>
+
+                <div class="field col-4 md:col-4">
+                    <label htmlFor="email3" class="col-12 md:col-10">Ambito professionale</label>
+                    <div class="col-12 md:col-10">
+                        <input pInputText formControlName="Ambito_professionale" type="text" />
+                    </div>
+                </div>
+                <div class="field col-4 md:col-4">
+                    <label htmlFor="email3" class="col-12 md:col-10">Sezioni territorio</label>
+                    <div class="col-12 md:col-10">
+                        <p-dropdown inputId="dropdown" [autoDisplayFirst]="false" [options]="sezione"
+                            formControlName="id_sezioni" optionLabel="name"></p-dropdown>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 md:col-12">
+        <div class="card p-fluid">
+            <h5>Note</h5>
+            <div class="field grid col-12 md:col-12">
+                <div class="field grid col-12 md:col-12">
+                    <label htmlFor="email3" class="col-12 md:col-10">Annotazioni varie</label>
+                    <div class="col-12 md:col-10" [formGroup]="form">
+                        <input pInputText formControlName="Annotazioni_varie" type="text" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card p-fluid">
+            <h5>Opzioni</h5>
+            <div class="field grid col-12 md:col-12">
+                <div class="col-2">
+                    <div class="field-checkbox">
+                        <p-checkbox [binary]="true" name="socio" [(ngModel)]="customerInfo.socio"></p-checkbox>
+                        <label for="ny">Socio</label>
+                    </div>
+                </div>
+                <div class="col-2">
+                    <div class="field-checkbox">
+                        <p-checkbox [binary]="true" name="Rivista" value="Rivista"
+                            [(ngModel)]="customerInfo.Rivista"></p-checkbox>
+                        <label for="ny">Rivista</label>
+                    </div>
+                </div>
+                <div class="col-2">
+                    <div class="field-checkbox">
+                        <p-checkbox [binary]="true" name="Stampa" value="Stampa"
+                            [(ngModel)]="customerInfo.Stampa"></p-checkbox>
+                        <label for="ny">Stampa</label>
+                    </div>
+                </div>
+                <div class="col-2">
+                    <div class="field-checkbox">
+                        <p-checkbox [binary]="true" name="NewsLetter" value="NewsLetter"
+                            [(ngModel)]="customerInfo.NewsLetter"></p-checkbox>
+                        <label for="ny">Newsletter</label>
+                    </div>
+                </div>
+                <div class="col-2">
+                    <div class="field-checkbox">
+                        <p-checkbox [binary]="true" name="Ordini" value="Ordini"
+                            [(ngModel)]="customerInfo.Ordini"></p-checkbox>
+                        <label for="ny">Ordini / Preludi</label>
+                    </div>
+                </div>
+                <div class="col-2" *ngIf="false">
+                    <div class="field-checkbox">
+                        <p-checkbox [binary]="true" name="LD" value="LD" [(ngModel)]="customerInfo.LD"></p-checkbox>
+                        <label for="ny">LD</label>
+                    </div>
+                </div>
+
+                <div class="field col-6 md:col-6" *ngIf="false">
+                    <!-- Radio Buttons -->
+                    <div class="field-radiobutton">
+                        <p-radioButton [(ngModel)]="customerInfo.Nuovo" name="Nuovo" value="Nuovo"></p-radioButton>
+                        <label for="city1">Nuovo</label>
+                    </div>
+                    <div class="field-radiobutton">
+                        <p-radioButton [(ngModel)]="customerInfo.Esportare" name="Esportare"
+                            value="Esportare"></p-radioButton>
+                        <label for="city1">Da esportare</label>
+                    </div>
+                    <div class="field-radiobutton">
+                        <p-radioButton [(ngModel)]="customerInfo.Esportato" name="Esportato"
+                            value="Esportato"></p-radioButton>
+                        <label for="city1">Esportato</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+<div style="display: flex;flex-direction: row;justify-content: center;">
+    <div>
+        <button class="p-button-secondary" pButton pRipple label="Indietro" (click)="back()"></button>
+    </div>
+    <div class="ml-2">
+        <button *ngIf="sharedService.shareValue" pButton pRipple label="Salva" (click)="updateCustomerInfo()"></button>
+        <button *ngIf="!sharedService.shareValue" pButton pRipple label="Salva" (click)="saveCustomerInfo()"></button>
+    </div>
+</div>

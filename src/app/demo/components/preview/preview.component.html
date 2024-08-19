@@ -1,0 +1,841 @@
+<div class="relative lg:fixed preview" *ngIf="!preview">
+    <div class="outside-border">
+        <div class="silencer"></div>
+        <div class="volume-up"></div>
+        <div class="volume-down"></div>
+        <div class="button-on"></div>
+        <div class="inside-border">
+
+            <!-- Camera -->
+
+            <div class="camera">
+                <div class="camera-dot">
+                    <div class="camera-dot-2"></div>
+                    <div class="camera-dot-3"></div>
+                </div>
+                <div class="camera-speaker">
+                </div>
+            </div>
+
+            <!-- Lock -->
+
+            <div class="lock">
+                <div class="grid p-2">
+                    <div class="col-12">
+                        <div *ngIf="form.get('product_name').value">
+                            <span class="head_title">{{form.get('product_name').value}}</span>
+                        </div>
+                    </div>
+                    <!--IMMAGINE PRODOTTO -->
+                    <div class="col-12"
+                        [ngStyle]="{'background-color':(primary_color!=null) ? primary_color : 'black' }"
+                        style="margin-bottom:-15px;z-index: 1;" *ngIf="sub_image">
+                        <div class="grid">
+                            <div class="col"></div>
+                            <div class="col-5 text-center" style="background-color: white">
+                                <img src="https://{{sub_image}}" class="image-fluid">
+                            </div>
+                            <div class="col"></div>
+                        </div>
+                    </div>
+                    <!--BANDA COLORATA-->
+
+                    <div class="col-12 pt-3"
+                        [ngStyle]="{'background-color':(primary_color!=null) ? primary_color : 'black' }">
+
+
+
+                        <div class="grid">
+
+                            <div class="col-12  align-items-center justify-content-between text-center text-white">
+                                <p class="mb-0 info mt-2">{{companyName}}</p>
+                                <b>{{form.get('product_name').value}}</b><br>
+                                <b *ngIf="form.get('vintage_year').value">{{form.get('vintage_year').value | date :
+                                    'Y'}}</b>
+                            </div>
+
+                            <div class="col-11 mx-auto text-center" style="background-color: white">
+                                <span *ngIf="form.get('type').value" class="info">
+                                    {{getType(form.get('type').value) | translate}}
+                                </span>
+                                <span *ngIf="form.get('net_content').value" class="info">
+                                    • {{form.get('net_content').value}} ml
+                                </span>
+                                <span *ngIf="form.get('alcohol_content_percentage').value" class="info">
+                                    • {{form.get('alcohol_content_percentage').value}} % vol.
+                                </span>
+
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <!--INGREDIENTI-->
+                <div class="grid p-2 mt-1">
+                    <div class="col-12 text-center py-0 my-0">
+                        <div class="grid">
+                            <div class="col-12">
+                                <p class="titolo mb-2"
+                                    [ngStyle]="{'color':(primary_color!=null) ? primary_color : 'black' }">{{
+                                    'pages.ingredients.title' |
+                                    translate }}</p>
+
+                                <ng-container *ngIf="form.get('ingredients').value" class="m0 p0">
+                                    <p class="info mb-0" *ngFor="let ingredient of xingredients">
+                                        {{ingredient.label | translate}}  <span *ngIf="ingredient.allergenies">(Allergene: {{ingredient.allergenies | translate}})</span>
+                                    </p>
+                                </ng-container>
+                                <p class="info mt-2" *ngIf="form.get('packages').value">
+                                    <i>{{getPackages(form.get('packages').value) | translate}}</i>
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <p-divider></p-divider>
+
+                <!--TABELLA NUTRIZIONALE-->
+                <div class="grid p-2 m-0 py-0">
+                    <div class="col-12">
+                        <div class="grid text-center">
+                            <div class="col-12 mt-0 py-0 mb-2">
+                                <p class="titolo mb-2"
+                                    [ngStyle]="{'color':(primary_color!=null) ? primary_color : 'black' }">{{
+                                    'pages.nutritions.title' | translate }}</p>
+                            </div>
+                        </div>
+                        <div style="background-color: rgb(0, 0, 0 , 0.05);" class="col-12 px-1 py-1">
+                            <table style="width: 100%;" border="1" class="info">
+                                <tbody>
+                                    <tr style="border-bottom:1px;border-style: dotted;"
+                                        [ngStyle]="{'border-color:':(primary_color!=null) ? primary_color : 'black' }">
+                                        <td class="pl-1">Valori medi</td>
+                                        <td class="text-right pr-1">per 100ml</td>
+                                        <td *ngIf="show_portion" class="text-right pr-1">per porzione <span
+                                                style="font-size:0.6rem">(500ml)</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="pl-1"><b>{{ 'pages.nutritions.energy_kj' | translate }}</b></td>
+                                        <td class="text-right pr-1">{{form.get('energy_kj').value}} Kj</td>
+                                        <td *ngIf="show_portion" class="text-right pr-1">25</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="pl-3">{{ 'pages.nutritions.energy_kcal' | translate }}</td>
+                                        <td class="text-right pr-1">{{form.get('energy_kcal').value}} Kcal</td>
+                                        <td *ngIf="show_portion" class="text-right pr-1">25</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="pl-1"><b>{{ 'pages.nutritions.fat' | translate }}</b></td>
+                                        <td class="text-right pr-1">{{form.get('fat').value}} g</td>
+                                        <td *ngIf="show_portion" class="text-right pr-1">25</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="pl-3">{{ 'pages.nutritions.fat_sat' | translate }}</td>
+                                        <td class="text-right pr-1">{{form.get('fat_sat').value}} g</td>
+                                        <td *ngIf="show_portion" class="text-right pr-1">25</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="pl-1"><b>{{ 'pages.nutritions.carb' | translate }}</b></td>
+                                        <td class="text-right pr-1">{{form.get('carb').value}} g</td>
+                                        <td *ngIf="show_portion" class="te xt-right pr-1">25</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="pl-3">{{ 'pages.nutritions.carb_sugar' | translate }}</td>
+                                        <td class="text-right pr-1">{{form.get('carb_sugar').value}} g</td>
+                                        <td *ngIf="show_portion" class="text-right pr-1">25</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="pl-1"><b>{{ 'pages.nutritions.protein' | translate }}</b></td>
+                                        <td class="text-right pr-1">{{form.get('protein').value}} g</td>
+                                        <td *ngIf="show_portion" class="text-right pr-1">25</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="pl-1"><b>{{ 'pages.nutritions.salt' | translate }}</b></td>
+                                        <td class="text-right pr-1">{{form.get('salt').value}} g</td>
+                                        <td *ngIf="show_portion" class="text-right pr-1">25</td>
+                                    </tr>
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- DivTable.com -->
+                        <!-- <div class="mt-3 mx-1 text-sm">Contiene quantità trascurabili di Sale, Acidi grassi saturi,
+                                Proteine, Grassi.
+                            </div> -->
+                    </div>
+                </div>
+                <p-divider></p-divider>
+                <!--RICICLO-->
+                <div class="grid p-2">
+                    <div class="col-12 text-center py-0 my-0">
+                        <div class="grid">
+                            <div class="col-12 flex-column flex">
+                                <p class="titolo mb-2"
+                                    [ngStyle]="{'color':(primary_color!=null) ? primary_color : 'black' }">{{
+                                    'pages.recycling.title_preview' |
+                                    translate }}</p>
+
+                                <div class="w-full flex justify-center mb-5 flex-col gap-2">
+                                    <div *ngFor="let rule of form.get('rules').value; let i = index" 
+                                        class="flex w-full mx-auto rounded border border-slate-100 shadow-sm py-2.5 px-2 gap-2 bg-white">
+                                        <div class="flex items-center mt-0.5 p-1">
+                                            <div
+                                                class="relative flex flex-col items-center overflow-hidden text-slate-800">
+                                                <div class="flex flex-col items-center px-2">
+                                                    <div class="relative"><svg class="h-11 w-11" viewBox="0 0 41 38"
+                                                            fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path
+                                                                d="M4.62404 24.5087C3.53751 26.4327 1.55175 29.9436 5.06625 32.2902C6.1708 33.0201 7.40764 33.5247 8.70626 33.7751C9.6956 33.9219 9.74452 35.4439 8.58235 35.4081C7.34359 35.346 1.31005 34.7857 0.341314 30.2603C-0.15947 27.617 0.406969 25.2489 1.96339 22.679L4.2079 18.7111L1.96097 17L11.2037 9.66093L10.0024 21.5L7.00083 20.3L4.62404 24.5087ZM18.2842 3.33355C22.0015 1.3124 24.1514 4.71747 25.3357 6.57448L27.9295 10.6396L26.0024 12L35.3418 19.2711L33.0024 8L30.64 8.90976L28.1937 5.08436C26.5143 2.68376 25.2842 0.910742 22.2879 0.111935C17.0194 -0.894459 13.7807 5.21761 13.8139 5.1777C13.2864 6.1017 14.5078 6.91531 15.2654 5.85356C16.0964 4.82335 17.1224 3.96726 18.2842 3.33355ZM39.5064 23.2458C39.2241 22.6353 37.7404 22.791 38.1579 24.1051C38.5801 25.3577 38.7516 26.6808 38.6631 27.9994C38.3638 32.2219 34.3247 32.1897 32.1234 32.1897H27.2957L27.2571 29.5L16.0313 33.7989L27.2571 38L27.2719 35.4081H32.1234C34.9897 35.4574 37.2725 34.842 39.2038 33.1134C43.0659 29.6987 39.5064 23.2458 39.5064 23.2458Z"
+                                                                fill="currentColor"></path>
+                                                        </svg>
+                                                        <div
+                                                            class="absolute inset-0 flex h-full w-full items-center justify-center">
+                                                            <div class="flex text-center mt-0.5 text-xs font-semibold">{{getMaterialNumberPart(getMaterialLabel(i) | translate)}}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="whitespace-nowrap text-sm font-semibold">{{getMaterialLabelPart(getMaterialLabel(i) | translate)}}</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="flex my-0.5 flex-grow flex-col gap-0.5 justify-between">
+                                            <div class="font-bold"> {{getContainer(rule.recycling_rule_containers_id).label | translate}}</div>
+                                            <div class="text-slate-700 text-sm leading-4">{{getMaterial(rule.recycling_rule_materials_id).label | translate}}</div>
+                                            <div class=" text-slate-700 text-sm">{{getMaterial(rule.recycling_rule_materials_id).group | translate}}</div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <ng-container *ngIf="false">
+                                    <div>
+                                        <p class="info"><i>{{ 'pages.recycling.description_preview' | translate }}</i></p>
+                                        CONTENITORI
+                                        <ng-container *ngIf="form.get('rules').value">
+                                            <span class="info" *ngFor="let rule of form.get('rules').value">
+                                                {{getContainer(rule.recycling_rule_containers_id).label | translate}}
+                                            </span><br>
+                                        </ng-container>
+                                    </div>
+                                    <div>
+                                        MATERIALI
+                                        <ng-container *ngIf="form.get('rules').value">
+                                            <span class="info" *ngFor="let rule of form.get('rules').value">
+                                                {{getMaterial(rule.recycling_rule_materials_id).label | translate}}
+                                            </span><br>
+                                        </ng-container>
+                                    </div>
+                                </ng-container>
+
+
+
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <p-divider
+                    *ngIf="form.get('drive').value || form.get('drive').value || form.get('pregnant').value"></p-divider>
+                <!--CONSUMO RESPONSABILE-->
+                <div class="grid p-2"
+                    *ngIf="form.get('drive').value || form.get('drive').value || form.get('pregnant').value">
+
+                    <div class="col-12 text-center py-0 my-0">
+                        <div class="grid">
+                            <div class="col-12 mb-0">
+                                <p class="titolo mb-2"
+                                    [ngStyle]="{'color':(primary_color!=null) ? primary_color : 'black' }">{{
+                                    'pages.recycling.sub.title' |
+                                    translate }}</p>
+                            </div>
+                            <div class="col-12 mt-0 pt-0">
+                                <div class="flex justify-content-center flex-wrap">
+                                    <div *ngIf="form.get('drive').value"
+                                        class="flex align-items-center justify-content-center w-4rem h-4rem  m-2"><img
+                                            src="https://firebasestorage.googleapis.com/v0/b/label-scan-1c165.appspot.com/o/public%2FresponsibleConsumption%2Fdriving.svg?alt=media&amp;token=9190dac0-4b69-4535-bb4e-c893665a8467"
+                                            alt="Don't Drink and Drive"></div>
+
+                                    <div *ngIf="form.get('pregnant').value"
+                                        class="flex align-items-center justify-content-center w-4rem h-4rem  m-2"><img
+                                            src="https://firebasestorage.googleapis.com/v0/b/label-scan-1c165.appspot.com/o/public%2FresponsibleConsumption%2Fpregnant.svg?alt=media&amp;token=bae940be-54fd-4437-93f4-4ed6e8fc0644"
+                                            alt="Pregnancy"></div>
+                                    <div *ngIf="form.get('age').value"
+                                        class="flex align-items-center justify-content-center w-4rem h-4rem  m-2"><img
+                                            src="https://firebasestorage.googleapis.com/v0/b/label-scan-1c165.appspot.com/o/public%2FresponsibleConsumption%2Funderage.svg?alt=media&amp;token=ff71068d-93fc-42ec-9fd5-0c0a5cb799d0"
+                                            alt="Underaged Consumption"></div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <p-divider
+                    *ngIf=" form.get('sustainibility_bio').value || form.get('sustainibility_message').value"></p-divider>
+                <!--INFO SOSTENIBILTà-->
+                <div class="grid p-2"
+                    *ngIf=" form.get('sustainibility_bio').value || form.get('sustainibility_message').value">
+
+                    <div class="col-12 text-center py-0 my-0">
+                        <div class="grid">
+                            <div class="col-12 mb-0">
+                                <p class="titolo mb-2"
+                                    [ngStyle]="{'color':(primary_color!=null) ? primary_color : 'black' }">{{
+                                    'pages.sustainability.title' |
+                                    translate }}</p>
+                            </div>
+                            <div class="col-12 mt-0 pt-0">
+                                <div class="grid">
+                                    <div class="col-12 text-center info">
+                                        {{form.get('sustainibility_bio').value}}
+                                    </div>
+                                    <div class="col-12 text-center info" *ngIf="form.get('type').value">
+                                        {{form.get('sustainibility_message').value}}
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <div class="col-12 mt-0 pt-0" *ngIf=" preview_image">
+                                <div class="grid">
+                                    <div class="col-4 text-center info">
+                                        <img src="https://{{preview_image}}" class="image-fluid">
+                                    </div>
+
+
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <p-divider></p-divider>
+                <!--INFO PRODOTTO-->
+                <div class="grid p-2">
+                    <div class="col-12 text-center py-0 my-0">
+                        <div class="grid">
+                            <div class="col-12 mb-0">
+                                <p class="titolo mb-2"
+                                    [ngStyle]="{'color':(primary_color!=null) ? primary_color : 'black' }">{{
+                                    'pages.info_prodotto.title' |
+                                    translate }}</p>
+                            </div>
+                            <div class="col-12 mt-0 pt-0">
+                                <div class="grid">
+                                    <div class="col-6 text-center info" *ngIf="form.get('country').value">
+                                        {{ 'pages.elabel.form.country.label' | translate }}<br>
+                                        <b>{{form.get('country').value}}</b>
+                                    </div>
+                                    <div class="col-6 text-center info" *ngIf="form.get('type').value">
+                                        {{ 'pages.elabel.form.type.label' | translate }}<br>
+                                        <b> {{getType(form.get('type').value) | translate}}</b>
+                                    </div>
+                                    <div class="col-6 text-center info"
+                                        *ngIf="form.get('geographical_indication').value">
+                                        {{ 'pages.elabel.form.geographical_indication.label' | translate }}<br>
+                                        <b>{{getGeographicalIndication(form.get('geographical_indication').value) |
+                                            translate}}</b>
+                                    </div>
+                                    <div class="col-6 text-center info" *ngIf="form.get('vintage_year').value">
+                                        {{ 'pages.elabel.form.vintage_year.label' | translate }}<br>
+                                        <b>{{form.get('vintage_year').value | date :
+                                            'Y'}}</b>
+                                    </div>
+                                    <div class="col-12 text-center info" *ngIf="form.get('product_varieties').value">
+                                        {{ 'pages.elabel.form.product_varieties.label' | translate }}<br>
+                                        <i>{{form.get('product_varieties').value}}</i>
+                                    </div>
+
+                                    <div class="col-12 text-center info" *ngIf="form.get('description').value">
+                                        <i>{{form.get('description').value}}</i>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <p-divider></p-divider>
+                <!--INFO PRODUTTORE-->
+                <div class="grid p-2">
+                    <div class="col-12 text-center py-0 my-0">
+                        <div class="grid">
+                            <div class="col-12 mb-0">
+                                <p class="titolo mb-2"
+                                    [ngStyle]="{'color':(primary_color!=null) ? primary_color : 'black' }">{{
+                                    'pages.info_produttore.title' |
+                                    translate }}</p>
+                            </div>
+                            <div class="col-12 mt-0 pt-0">
+                                <div class="grid">
+
+                                    <div class="col-6 mx-auto py-0 my-0"><img src="https://{{companyLogo}}"
+                                            width="100%"></div>
+                                    <div class="col-12  mx-auto py-0 my-0">
+                                        <p class="mb-0 info mt-2"><b>{{companyName}}</b></p>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <p-divider></p-divider>
+                <!--FOOTER-->
+                <div class="grid p-2">
+                    <div class="flex justify-content-center flex-wrap">
+                        <div class="flex align-items-center justify-content-center font-bold border-round m-2"><img
+                                src="assets/layout/images/{{layoutService.config.colorScheme === 'light' ? 'logo-dark' : 'logo-white'}}.svg"
+                                alt="logo" style="width:30%"></div>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+            <!-- Battery and Signal -->
+
+            <div class="t-r-info">
+                <div class="dots">...</div>
+                <div class="battery">
+                    <div class="bar"></div>
+                    <div class="dot"></div>
+                </div>
+            </div>
+
+
+
+            <!-- Bottom Line -->
+
+            <div class="bottom-line"></div>
+
+        </div>
+
+
+
+    </div>
+</div>
+
+
+
+<!--SIDEBAR PREVIEW-->
+<div class="container_preview" *ngIf="preview">
+    <div class="grid p-fluid p-2">
+        <div class="col-12">
+            <div *ngIf="form.get('product_name').value">
+                <span class="head_title">{{form.get('product_name').value}}</span>
+            </div>
+        </div>
+        <!--IMMAGINE PRODOTTO -->
+        <div class="col-12" [ngStyle]="{'background-color':(primary_color!=null) ? primary_color : 'black' }"
+            style="margin-bottom:-15px;z-index: 1;" *ngIf="sub_image">
+            <div class="grid">
+                <div class="col"></div>
+                <div class="col-5 text-center" style="background-color: white">
+                    <img src="https://{{sub_image}}" class="image-fluid">
+                </div>
+                <div class="col"></div>
+            </div>
+        </div>
+        <!--BANDA COLORATA-->
+
+        <div class="col-12 pt-3" [ngStyle]="{'background-color':(primary_color!=null) ? primary_color : 'black' }">
+
+
+
+            <div class="grid">
+
+                <div class="col-12  align-items-center justify-content-between text-center text-white">
+                    <p class="mb-0 info mt-2">{{companyName}}</p>
+                    <b>{{form.get('product_name').value}}</b><br>
+                    <b *ngIf="form.get('vintage_year').value">{{form.get('vintage_year').value | date :
+                        'Y'}}</b>
+                </div>
+
+                <div class="col-11 mx-auto text-center" style="background-color: white">
+                    <span *ngIf="form.get('type').value" class="info">
+                        {{getType(form.get('type').value) | translate}}
+                    </span>
+                    <span *ngIf="form.get('net_content').value" class="info">
+                        • {{form.get('net_content').value}} ml
+                    </span>
+                    <span *ngIf="form.get('alcohol_content_percentage').value" class="info">
+                        • {{form.get('alcohol_content_percentage').value}} % vol.
+                    </span>
+
+
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+
+    <!--INGREDIENTI-->
+    <div class="grid p-2 mt-1">
+        <div class="col-12 text-center py-0 my-0">
+            <div class="grid">
+                <div class="col-12">
+                    <p class="titolo mb-2" [ngStyle]="{'color':(primary_color!=null) ? primary_color : 'black' }">{{
+                        'pages.ingredients.title' |
+                        translate }}</p>
+                    <ng-container *ngIf="form.get('ingredients').value" class="m0 p0">
+                        <p class="info mb-0" *ngFor="let ingredient of form.get('ingredients').value">
+                            {{ingredient.label | translate}}
+                        </p>
+                    </ng-container>
+                    <p class="info mt-2" *ngIf="form.get('packages').value">
+                        <i>{{getPackages(form.get('packages').value) | translate}}</i>
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <p-divider></p-divider>
+
+    <!--TABELLA NUTRIZIONALE-->
+    <div class="grid p-2 m-0 py-0">
+        <div class="col-12">
+            <div class="grid text-center">
+                <div class="col-12 mt-0 py-0 mb-2">
+                    <p class="titolo mb-2" [ngStyle]="{'color':(primary_color!=null) ? primary_color : 'black' }">{{
+                        'pages.nutritions.title' | translate }}</p>
+                </div>
+            </div>
+            <div style="background-color: rgb(0, 0, 0 , 0.05);" class="col-12 px-1 py-1">
+                <table style="width: 100%;" border="1" class="info">
+                    <tbody>
+                        <tr style="border-bottom:1px;border-style: dotted;"
+                            [ngStyle]="{'border-color:':(primary_color!=null) ? primary_color : 'black' }">
+                            <td class="pl-1">Valori medi</td>
+                            <td class="text-right pr-1">per 100ml</td>
+                            <td *ngIf="show_portion" class="text-right pr-1">per porzione <span
+                                    style="font-size:0.6rem">(500ml)</span></td>
+                        </tr>
+                        <tr>
+                            <td class="pl-1"><b>{{ 'pages.nutritions.energy_kj' | translate }}</b></td>
+                            <td class="text-right pr-1">{{form.get('energy_kj').value}} Kj</td>
+                            <td *ngIf="show_portion" class="text-right pr-1">25</td>
+                        </tr>
+                        <tr>
+                            <td class="pl-3">{{ 'pages.nutritions.energy_kcal' | translate }}</td>
+                            <td class="text-right pr-1">{{form.get('energy_kcal').value}} Kcal</td>
+                            <td *ngIf="show_portion" class="text-right pr-1">25</td>
+                        </tr>
+                        <tr>
+                            <td class="pl-1"><b>{{ 'pages.nutritions.fat' | translate }}</b></td>
+                            <td class="text-right pr-1">{{form.get('fat').value}} g</td>
+                            <td *ngIf="show_portion" class="text-right pr-1">25</td>
+                        </tr>
+                        <tr>
+                            <td class="pl-3">{{ 'pages.nutritions.fat_sat' | translate }}</td>
+                            <td class="text-right pr-1">{{form.get('fat_sat').value}} g</td>
+                            <td *ngIf="show_portion" class="text-right pr-1">25</td>
+                        </tr>
+                        <tr>
+                            <td class="pl-1"><b>{{ 'pages.nutritions.carb' | translate }}</b></td>
+                            <td class="text-right pr-1">{{form.get('carb').value}} g</td>
+                            <td *ngIf="show_portion" class="te xt-right pr-1">25</td>
+                        </tr>
+                        <tr>
+                            <td class="pl-3">{{ 'pages.nutritions.carb_sugar' | translate }}</td>
+                            <td class="text-right pr-1">{{form.get('carb_sugar').value}} g</td>
+                            <td *ngIf="show_portion" class="text-right pr-1">25</td>
+                        </tr>
+                        <tr>
+                            <td class="pl-1"><b>{{ 'pages.nutritions.protein' | translate }}</b></td>
+                            <td class="text-right pr-1">{{form.get('protein').value}} g</td>
+                            <td *ngIf="show_portion" class="text-right pr-1">25</td>
+                        </tr>
+                        <tr>
+                            <td class="pl-1"><b>{{ 'pages.nutritions.salt' | translate }}</b></td>
+                            <td class="text-right pr-1">{{form.get('salt').value}} g</td>
+                            <td *ngIf="show_portion" class="text-right pr-1">25</td>
+                        </tr>
+
+
+                    </tbody>
+                </table>
+            </div>
+            <!-- DivTable.com -->
+            <!-- <div class="mt-3 mx-1 text-sm">Contiene quantità trascurabili di Sale, Acidi grassi saturi,
+                Proteine, Grassi.
+            </div> -->
+        </div>
+    </div>
+    <p-divider></p-divider>
+    <!--RICICLO-->
+    <div class="grid p-2">
+        <div class="col-12 text-center py-0 my-0">
+
+            <div class="grid">
+                <div class="col-12 flex-column flex">
+                    <p class="titolo mb-2" [ngStyle]="{'color':(primary_color!=null) ? primary_color : 'black' }">{{
+                        'pages.recycling.title_preview' |
+                        translate }}</p>
+                    <div>
+                        <p class="info"><i>{{ 'pages.recycling.description_preview' | translate }}</i></p>
+                        CONTENITORI
+                        <ng-container *ngIf="form.get('rules').value">
+                            <span class="info" *ngFor="let rule of form.get('rules').value">
+                                {{getContainer(rule.recycling_rule_containers_id).label | translate}}
+                            </span><br>
+                        </ng-container>
+                    </div>
+                    <div>
+                        MATERIALI
+                        <ng-container *ngIf="form.get('rules').value">
+                            <span class="info" *ngFor="let rule of form.get('rules').value">
+                                {{getMaterial(rule.recycling_rule_materials_id).label | translate}}
+                            </span><br>
+                        </ng-container>
+                    </div>
+
+
+
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <p-divider *ngIf="form.get('drive').value || form.get('drive').value || form.get('pregnant').value"></p-divider>
+    <!--CONSUMO RESPONSABILE-->
+    <div class="grid p-2" *ngIf="form.get('drive').value || form.get('drive').value || form.get('pregnant').value">
+
+        <div class="col-12 text-center py-0 my-0">
+            <div class="grid">
+                <div class="col-12 mb-0">
+                    <p class="titolo mb-2" [ngStyle]="{'color':(primary_color!=null) ? primary_color : 'black' }">{{
+                        'pages.recycling.sub.title' |
+                        translate }}</p>
+                </div>
+                <div class="col-12 mt-0 pt-0">
+                    <div class="flex justify-content-center flex-wrap">
+                        <div *ngIf="form.get('drive').value"
+                            class="flex align-items-center justify-content-center w-4rem h-4rem  m-2"><img
+                                src="https://firebasestorage.googleapis.com/v0/b/label-scan-1c165.appspot.com/o/public%2FresponsibleConsumption%2Fdriving.svg?alt=media&amp;token=9190dac0-4b69-4535-bb4e-c893665a8467"
+                                alt="Don't Drink and Drive"></div>
+
+                        <div *ngIf="form.get('pregnant').value"
+                            class="flex align-items-center justify-content-center w-4rem h-4rem  m-2"><img
+                                src="https://firebasestorage.googleapis.com/v0/b/label-scan-1c165.appspot.com/o/public%2FresponsibleConsumption%2Fpregnant.svg?alt=media&amp;token=bae940be-54fd-4437-93f4-4ed6e8fc0644"
+                                alt="Pregnancy"></div>
+                        <div *ngIf="form.get('age').value"
+                            class="flex align-items-center justify-content-center w-4rem h-4rem  m-2"><img
+                                src="https://firebasestorage.googleapis.com/v0/b/label-scan-1c165.appspot.com/o/public%2FresponsibleConsumption%2Funderage.svg?alt=media&amp;token=ff71068d-93fc-42ec-9fd5-0c0a5cb799d0"
+                                alt="Underaged Consumption"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <p-divider *ngIf=" form.get('sustainibility_bio').value || form.get('sustainibility_message').value"></p-divider>
+    <!--INFO SOSTENIBILTà-->
+    <div class="grid p-2" *ngIf=" form.get('sustainibility_bio').value || form.get('sustainibility_message').value">
+
+        <div class="col-12 text-center py-0 my-0">
+            <div class="grid">
+                <div class="col-12 mb-0">
+                    <p class="titolo mb-2" [ngStyle]="{'color':(primary_color!=null) ? primary_color : 'black' }">{{
+                        'pages.sustainability.title' |
+                        translate }}</p>
+                </div>
+                <div class="col-12 mt-0 pt-0">
+                    <div class="grid">
+                        <div class="col-12 text-center info">
+                            {{form.get('sustainibility_bio').value}}
+                        </div>
+                        <div class="col-12 text-center info" *ngIf="form.get('type').value">
+                            {{form.get('sustainibility_message').value}}
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="col-12 mt-0 pt-0" *ngIf=" preview_image">
+                    <div class="grid">
+                        <div class="col-4 text-center info">
+                            <img src="https://{{preview_image}}" class="image-fluid">
+                        </div>
+
+
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <p-divider></p-divider>
+    <!--INFO PRODOTTO-->
+    <div class="grid p-2">
+        <div class="col-12 text-center py-0 my-0">
+            <div class="grid">
+                <div class="col-12 mb-0">
+                    <p class="titolo mb-2" [ngStyle]="{'color':(primary_color!=null) ? primary_color : 'black' }">{{
+                        'pages.info_prodotto.title' |
+                        translate }}</p>
+                </div>
+                <div class="col-12 mt-0 pt-0">
+                    <div class="grid">
+                        <div class="col-6 text-center info" *ngIf="form.get('country').value">
+                            {{ 'pages.elabel.form.country.label' | translate }}<br>
+                            <b>{{form.get('country').value}}</b>
+                        </div>
+                        <div class="col-6 text-center info" *ngIf="form.get('type').value">
+                            {{ 'pages.elabel.form.type.label' | translate }}<br>
+                            <b> {{getType(form.get('type').value) | translate}}</b>
+                        </div>
+                        <div class="col-6 text-center info" *ngIf="form.get('geographical_indication').value">
+                            {{ 'pages.elabel.form.geographical_indication.label' | translate }}<br>
+                            <b>{{getGeographicalIndication(form.get('geographical_indication').value) | translate}}</b>
+                        </div>
+                        <div class="col-6 text-center info" *ngIf="form.get('vintage_year').value">
+                            {{ 'pages.elabel.form.vintage_year.label' | translate }}<br>
+                            <b>{{form.get('vintage_year').value | date :
+                                'Y'}}</b>
+                        </div>
+                        <div class="col-12 text-center info" *ngIf="form.get('product_varieties').value">
+                            {{ 'pages.elabel.form.product_varieties.label' | translate }}<br>
+                            <i>{{form.get('product_varieties').value}}</i>
+                        </div>
+
+                        <div class="col-12 text-center info" *ngIf="form.get('description').value">
+                            <i>{{form.get('description').value}}</i>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <p-divider></p-divider>
+    <!--INFO PRODUTTORE-->
+    <div class="grid p-2">
+        <div class="col-12 text-center py-0 my-0">
+            <div class="grid">
+                <div class="col-12 mb-0">
+                    <p class="titolo mb-2" [ngStyle]="{'color':(primary_color!=null) ? primary_color : 'black' }">{{
+                        'pages.info_produttore.title' |
+                        translate }}</p>
+                </div>
+                <div class="col-12 mt-0 pt-0">
+                    <div class="grid">
+
+                        <div class="col-6 mx-auto py-0 my-0"><img src="https://{{companyLogo}}" width="100%"></div>
+                        <div class="col-12  mx-auto py-0 my-0">
+                            <p class="mb-0 info mt-2"><b>{{companyName}}</b></p>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <p-divider></p-divider>
+    <!--FOOTER-->
+    <div class="grid p-2">
+        <div class="col-12 flex justify-content-center flex-wrap">
+            <div class="flex align-items-center justify-content-center font-bold border-round m-2"><img
+                    src="assets/layout/images/{{layoutService.config.colorScheme === 'light' ? 'logo-dark' : 'logo-white'}}.svg"
+                    alt="logo" style="width:30%"></div>
+        </div>
+    </div>
+</div>
+
+<!-- <div class="flex flex-column gap-2 p-4">
+    <div class="flex border-1 flex-column">
+        <div class="flex flex-column gap-2" *ngIf="form.get('product_name').value">
+            <div><b>{{ 'pages.elabel.form.product_name.label' | translate }}</b></div>
+            <div>{{form.get('product_name').value}}</div>
+        </div>
+        <div class="flex flex-column gap-2" *ngIf="form.get('type').value">
+            <div><b>{{ 'pages.elabel.form.type.label' | translate }}</b></div>
+            <div>{{form.get('type').value}}</div>
+        </div>
+        <div class="flex flex-column gap-2" *ngIf="form.get('vintage_year').value">
+            <div><b>{{ 'pages.elabel.form.vintage_year.label' | translate }}</b></div>
+            <div>{{form.get('vintage_year').value | date : 'Y'}}</div>
+        </div>
+        <div class="flex flex-column gap-2" *ngIf="form.get('product_varieties').value">
+            <div><b>{{ 'pages.elabel.form.product_varieties.label' | translate }}</b></div>
+            <div>{{form.get('product_varieties').value}}</div>
+        </div>
+        <div class="flex flex-column gap-2" *ngIf="form.get('geographical_indication').value">
+            <div><b>{{ 'pages.elabel.form.geographical_indication.label' | translate }}</b></div>
+            <div>{{form.get('geographical_indication').value}}</div>
+        </div>
+        <div class="flex flex-column gap-2" *ngIf="form.get('alcohol_content_percentage').value">
+            <div><b>{{ 'pages.elabel.form.alcohol_content_percentage.label' | translate }}</b></div>
+            <div>{{form.get('alcohol_content_percentage').value}}</div>
+        </div>
+        <div class="flex flex-column gap-2" *ngIf="form.get('net_content').value">
+            <div><b>{{ 'pages.elabel.form.net_content.label' | translate }}</b></div>
+            <div>{{form.get('net_content').value}}</div>
+        </div>
+        <div class="flex flex-column gap-2" *ngIf="form.get('description').value">
+            <div><b>{{ 'pages.elabel.form.description.label' | translate }}</b></div>
+            <div>{{form.get('description').value}}</div>
+        </div>
+
+        <h2>{{ 'pages.ingredients.title' | translate }}</h2>
+
+        <div class="flex flex-column gap-2" *ngIf="form.get('packages').value">
+            <div><b>{{ 'pages.elabel.form.packages.label' | translate }}</b></div>
+            <div>{{form.get('packages').value}}</div>
+        </div>
+
+
+        <div class="flex flex-column gap-2" *ngIf="form.get('packages').value">
+            <div><b>{{ 'pages.elabel.form.packages.label' | translate }}</b></div>
+            <div>{{form.get('packages').value}}</div>
+        </div>
+
+
+
+        <h2>{{ 'pages.recycling.title' | translate }}</h2>
+
+
+        <div class="w-full flex gap-2">
+            <img class="w-2" *ngIf="form.get('drive').value"
+                src="https://firebasestorage.googleapis.com/v0/b/label-scan-1c165.appspot.com/o/public%2FresponsibleConsumption%2Fdriving.svg?alt=media&amp;token=9190dac0-4b69-4535-bb4e-c893665a8467"
+                alt="Don't Drink and Drive">
+            <img class="w-2" *ngIf="form.get('pregnant').value"
+                src="https://firebasestorage.googleapis.com/v0/b/label-scan-1c165.appspot.com/o/public%2FresponsibleConsumption%2Fpregnant.svg?alt=media&amp;token=bae940be-54fd-4437-93f4-4ed6e8fc0644"
+                alt="Pregnancy">
+            <img class="w-2" *ngIf="form.get('age').value"
+                src="https://firebasestorage.googleapis.com/v0/b/label-scan-1c165.appspot.com/o/public%2FresponsibleConsumption%2Funderage.svg?alt=media&amp;token=ff71068d-93fc-42ec-9fd5-0c0a5cb799d0"
+                alt="Underaged Consumption">
+        </div>
+        <h2>{{ 'pages.sustainability.title' | translate }}</h2>
+        <div class="flex flex-column gap-2" *ngIf="form.get('sustainibility_bio').value">
+            <div><b>{{ 'pages.sustainability.form.field1.label' | translate }}</b></div>
+            <div>{{form.get('sustainibility_bio').value}}</div>
+        </div>
+        <div class="flex flex-column gap-2" *ngIf="form.get('sustainibility_message').value">
+            <div><b>{{ 'pages.sustainability.form.field2.label' | translate }}</b></div>
+            <div>{{form.get('sustainibility_message').value}}</div>
+        </div>
+
+    </div>
+</div> -->
