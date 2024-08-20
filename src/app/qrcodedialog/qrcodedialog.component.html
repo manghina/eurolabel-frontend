@@ -1,0 +1,65 @@
+<div class="grid">
+    <div class="col-12 md:col-6">
+        <div class="card">
+            <div class="qrcodeImage text-center">
+                <qrcode
+                  #parent
+                  [elementType]="elementType"
+                  [errorCorrectionLevel]="errorCorrectionLevel"
+                  [qrdata]="input"
+                  [scale]="scale"
+                  [width]="width"
+                  [allowEmptyString]="true"
+                  [className]="cssClass"
+                  [colorDark]="colorDark"
+                  [colorLight]="colorLight"
+                  [margin]="margin"
+                  [alt]="alt"
+                  [ariaLabel]="ariaLabel"
+                  [title]="title"
+                  [imageSrc]="imageSrc"
+                  [imageHeight]="imageHeight"
+                  [imageWidth]="imageWidth"
+                  (qrCodeURL)="onChangeURL($event)"
+                ></qrcode>
+              </div>
+            <div class="downloadButton text-center">
+                <button *ngIf="this.elementType !== 'svg'" mat-raised-button color="primary"
+                    (click)="saveAsImage(parent)">
+                    Download QR Code Image
+                </button>
+                <a *ngIf="this.elementType === 'svg'" mat-raised-button color="primary" [href]="qrCodeSrc"
+                    download="angularx-qrcode">Download QR Code Image</a>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-12 md:col-6">
+        <div class="card">
+            <form>
+                <div class="flex flex-wrap gap-3">
+                    <div class="flex align-items-center">
+                        <p-radioButton name="type" value="canvas" [(ngModel)]="elementType" (onChange)="setImageVisibility(elementType === 'canvas')" inputId="elementType1"></p-radioButton>
+                        <label for="elementType" class="ml-2">PNG</label>
+                    </div>
+                    
+                    <div class="flex align-items-center">
+                        <p-radioButton name="type" value="img" [(ngModel)]="elementType" inputId="elementType2"></p-radioButton>
+                        <label for="elementType2" class="ml-2">Img</label>
+                    </div>
+                    
+                    <div class="flex align-items-center">
+                        <p-radioButton name="type" value="url" [(ngModel)]="elementType" inputId="elementType3"></p-radioButton>
+                        <label for="elementType3" class="ml-2">Url</label>
+                    </div>
+                
+                    <div class="flex align-items-center">
+                        <p-radioButton name="type" value="svg" [(ngModel)]="elementType" inputId="elementType4"></p-radioButton>
+                        <label for="elementType4" class="ml-2">Svg</label>
+                    </div>
+                </div>
+               <!--  <p-toggleButton [(ngModel)]="qrdata" onLabel="Confirm" (onChange)="togglechange($event)"  offLabel="I reject" offIcon="pi pi-times"  [style]="{'width': '10em'}"></p-toggleButton>
+           -->  </form>
+        </div>
+    </div>
+</div>

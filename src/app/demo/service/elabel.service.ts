@@ -13,6 +13,10 @@ export class ElabelService {
     return this.http.get<any>(baseUrl + 'elabels/' + userid)
   }
 
+  changeStatus(data: any) {
+    return this.http.post<any>(baseUrl + 'elabel-status', data)
+  }
+
   get(id: string) {
     return this.http.get<any>(baseUrl + 'get-elabel/' + id)
   }

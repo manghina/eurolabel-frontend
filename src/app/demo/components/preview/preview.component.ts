@@ -76,7 +76,8 @@ export class PreviewComponent implements OnChanges, OnInit {
   getPackages(n:number) {
     if(this.packages.length>0) {
       const item = this.packages.filter((e)=>e.id==n)
-      return item[0].label
+      if(item.length)
+        return item[0].label
     }
     return ''
   }
@@ -84,6 +85,7 @@ export class PreviewComponent implements OnChanges, OnInit {
   getType(n:number) {
     if(this.types.length) {
       const item = this.types.filter((e)=>e.id==n)
+      if(item.length)
       return item[0].label
     }
     return ''
@@ -92,6 +94,7 @@ export class PreviewComponent implements OnChanges, OnInit {
   getGeographicalIndication(n:number) {
     if(this.geoGraphicalIndication.length) {
       const item = this.geoGraphicalIndication.filter((e)=>e.id==n)
+      if(item.length)
       return item[0].label
     }
     return ''
@@ -151,9 +154,5 @@ export class PreviewComponent implements OnChanges, OnInit {
     const group = label.split(" - ")[1]
     return group.split(" ")[1]
   
-  }
-  getMaterialTitle(string){
-    let newString = string?.substring(0, string.indexOf(" -")).trim();
-    return newString
   }
 }

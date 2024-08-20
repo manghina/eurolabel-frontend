@@ -8,7 +8,7 @@
             </div>
 
             <div class="flex align-items-right ">
-                <p-tag styleClass="p-mr-2" icon="pi pi-exclamation-triangle" [severity]="form.get('status').value == 0 ? 'warning' : 'success'" [value]="form.get('status').value == 0 ? 'Bozza' : 'Pubblicato'"></p-tag>
+                <p-tag styleClass="p-mr-2" con="pi pi-exclamation-triangle" severity="warning" [value]="form.get('status').value == 0 ? 'Bozza' : 'Pubblicato'"></p-tag>
             </div>
 
             <div class="flex align-items-center md:align-items-right text-center">
@@ -31,9 +31,11 @@
     </div>
 
 </div>
-
+<div *ngIf="loading" class="spinner-container">
+    <p-progressSpinner ariaLabel="loading" />
+</div>
 <!--ELABEL FORM-->
-<div class="grid p-fluid mb-2">
+<div *ngIf="!loading" class="grid p-fluid mb-2">
     <!--PROFILO AZIENDALE-->
     <div class="col-12 lg:col-8 xl:col-9">
 
@@ -74,11 +76,11 @@
                                     </div>
 
                                     <div class="col-12 md:col-12">
-                                        <label for="country">{{ 'pages.elabel.form.country.label' | translate }}
-                                                <app-infobutton  *ngIf="false"
-                                                [label]="'pages.elabel.form.country.helper'"></app-infobutton>
+                                        <label for="country">{{ 'pages.elabel.form.brand.label' | translate }}
+                                                <app-infobutton
+                                                [label]="'Brand'"></app-infobutton>
                                                 🇪🇺</label>
-                                                <p-dropdown  *ngIf="false" [options]="brands" [formControl]="form.get('brand_id')"
+                                                <p-dropdown [options]="brands" [formControl]="form.get('brand_id')"
                                                 [showClear]="true" placeholder="Seleziona">
                                                 <ng-template let-option pTemplate="selectedItem">
                                                     <span>{{option.name | translate}}</span>
@@ -87,7 +89,10 @@
                                                     <span>{{option.name | translate}}</span>
                                                 </ng-template>                                                
                                             </p-dropdown>
-
+                                            <label for="country">{{ 'pages.elabel.form.country.label' | translate }}
+                                                <app-infobutton
+                                                [label]="'pages.elabel.form.country.helper'"></app-infobutton>
+                                                🇪🇺</label>
                                         <p-dropdown [options]="states" [formControl]="form.get('country')"
                                         [showClear]="true" [filter]="true" filterBy="nome_stati" placeholder="Seleziona">
                                         <ng-template let-option pTemplate="selectedItem">
@@ -222,7 +227,7 @@
                                 <p-dropdown [options]="ingredients" [filter]="true" filterBy="label" (onChange)="onChangeIngredient($event)"
                                     [group]="true" [showClear]="true"  placeholder="Seleziona">
                                     <ng-template let-option pTemplate="selectedItem">
-                                        <span>{{option.label | translate}}</span> 
+                                        <span>{{option.label | translate}}</span>
                                     </ng-template>
                                     <ng-template let-group pTemplate="group">
                                         <div class="flex align-items-center">
@@ -241,7 +246,6 @@
                                     <div class="grid">
                                         <div class="col-9">
                                             <b>{{e.label | translate}}</b>
-                                            <p-tag *ngIf="e.allergenies!=null" severity="warning" class="ml-3" value="Allergene: {{e.allergenies | translate}}"/>
                                             <p>{{e.group | translate}}</p>
                                         </div>
                                         <div class="col-3 flex justify-content-end align-items-right">
@@ -457,7 +461,8 @@
                                                     <label>{{ 'pages.recycling.field.material' | translate }}
                                                         <app-infobutton
                                                             [label]="'pages.elabel.form.material.helper'"></app-infobutton></label>
-                                                    <p-dropdown [options]="materials" [group]="true"
+                                                    {{rules.at(i).get('recycling_rule_materials_id').value}}
+                                                            <p-dropdown [options]="materials" [group]="true"
                                                         [formControl]="rules.at(i).get('recycling_rule_materials_id')"
                                                         [showClear]="true" placeholder="Seleziona">
                                                         <ng-template let-option pTemplate="selectedItem">
@@ -637,11 +642,8 @@
     [modal]="true" 
     showEffect="fade" [style]="{width: '30vw'}" [breakpoints]="{'960px': '75vw'}">
     <div #qrcodewrapper>
-        <qrcode *ngIf="form.get('qr').value" [qrdata]="form.get('qr').value" [errorCorrectionLevel]="'M'"></qrcode>
-        <button pButton icon="pi pi-download" (click)="downloadCanvas()" label="Scarica" class="p-button-outlined"></button>
-
+        <app-qrcodedialog [input]="form.get('qr').value"></app-qrcodedialog>
     </div>
-    
     <ng-template pTemplate="footer">
             <button pButton icon="pi pi-check" (click)="display=false" label="Ok" class="p-button-outlined"></button>
     </ng-template>

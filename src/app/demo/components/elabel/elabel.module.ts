@@ -29,14 +29,17 @@ import { TagModule } from 'primeng/tag';
 import { DividerModule } from 'primeng/divider';
 import { SidebarModule } from 'primeng/sidebar';
 import { DialogModule } from 'primeng/dialog';
+import { RadioButtonModule } from 'primeng/radiobutton';
+import { QrcodedialogComponent } from 'src/app/qrcodedialog/qrcodedialog.component';
 
 @NgModule({
-  declarations: [ElabelComponent, PreviewComponent],
+  declarations: [ElabelComponent, PreviewComponent, QrcodedialogComponent],
   imports: [
     CommonModule,
     PanelModule,
     DialogModule,
     QRCodeModule,
+    RadioButtonModule,
     BreadcrumbModule,
     DialogModule,
     TabViewModule,

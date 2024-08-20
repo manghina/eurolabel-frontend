@@ -49,12 +49,12 @@ export class ElabelComponent {
   msgs: Message[] = [];
   preview:boolean=false
   sidebarVisible: boolean = false;
-
+  loading: boolean = true; // Initialize loading state
 
   constructor(private fb: FormBuilder, private t: TranslateService, private brandService: BrandService, private service: ElabelService, private confirmationService: ConfirmationService, private messageService: MessageService, private _location: Location, private route: ActivatedRoute) {
     this. sidebarVisible = false;
     let request = JSON.parse(localStorage.getItem('user'))
-    const user_id = request.id
+    this.user_id = request.id
 
     this.form = this.fb.group({
       id: [null, Validators.required],
@@ -93,12 +93,13 @@ export class ElabelComponent {
     })
 
 
-
-
-
     this.breadcrumbItems = [];
     this.breadcrumbItems.push({ label: 'E-labels' });
 
+    
+  }
+
+  ngOnInit() {
     this.route.paramMap.subscribe((params: ParamMap) => {
       const id = params.get('id');
       const brand = params.get('brand');
@@ -118,59 +119,72 @@ export class ElabelComponent {
         this.fullIngredientList = data.ingredients
         let ingredients = data.ingredients.map(e => { e.value = e.id; return e })
 
-        containers = containers
-          .reduce((acc, obj) => {
-            const key = obj.group;
-            if (!acc[key]) {
-              acc[key] = [];
-            }
-            acc[key].push(obj);
-            return acc;
-          }, {});
-        for (let c in containers) {
-          const key = c;
-          const items = containers[c];
-          this.containers.push({
-            label: c,
-            items: items
-          })
-        }
+        // containers = containers
+        //   .reduce((acc, obj) => {
+        //     const key = obj.group;
+        //     if (!acc[key]) {
+        //       acc[key] = [];
+        //     }
+        //     acc[key].push(obj);
+        //     return acc;
+        //   }, {});
+        // for (let c in containers) {
+        //   const key = c;
+        //   const items = containers[c];
+        //   this.containers.push({
+        //     label: c,
+        //     items: items
+        //   })
+        // }
 
-        materials = materials
-          .reduce((acc, obj) => {
-            const key = obj.group;
-            if (!acc[key]) {
-              acc[key] = [];
-            }
-            acc[key].push(obj);
-            return acc;
-          }, {});
-        for (let c in materials) {
-          const key = c;
-          const items = materials[c];
-          this.materials.push({
-            label: c,
-            items: items
-          })
-        }
+        // materials = materials
+        //   .reduce((acc, obj) => {
+        //     const key = obj.group;
+        //     if (!acc[key]) {
+        //       acc[key] = [];
+        //     }
+        //     acc[key].push(obj);
+        //     return acc;
+        //   }, {});
+        // for (let c in materials) {
+        //   const key = c;
+        //   const items = materials[c];
+        //   this.materials.push({
+        //     label: c,
+        //     items: items
+        //   })
+        // }
 
-        ingredients = ingredients
-          .reduce((acc, obj) => {
-            const key = obj.group;
-            if (!acc[key]) {
-              acc[key] = [];
-            }
-            acc[key].push(obj);
-            return acc;
-          }, {});
-        for (let c in ingredients) {
-          const key = c;
-          const items = ingredients[c];
-          this.ingredients.push({
-            label: c,
-            items: items
-          })
-        }
+        // ingredients = ingredients
+        //   .reduce((acc, obj) => {
+        //     const key = obj.group;
+        //     if (!acc[key]) {
+        //       acc[key] = [];
+        //     }
+        //     acc[key].push(obj);
+        //     return acc;
+        //   }, {});
+        // for (let c in ingredients) {
+        //   const key = c;
+        //   const items = ingredients[c];
+        //   this.ingredients.push({
+        //     label: c,
+        //     items: items
+        //   })
+        // }
+
+        // Group containers, materials, and ingredients by their respective groups
+        containers = this.groupBy(containers, 'group');
+        materials = this.groupBy(materials, 'group');
+        ingredients = this.groupBy(ingredients, 'group');
+
+        // Populate dropdowns
+        this.populateDropdown(this.containers, containers);
+        this.populateDropdown(this.materials, materials);
+        this.populateDropdown(this.ingredients, ingredients);
+
+        // Data has been fully loaded, so we can hide the spinner and show the dropdowns
+        this.loading = false;
       })
       this.brandService.all(parseInt(this.user_id)).subscribe((response)=>{
         this.brands = response.data
@@ -180,6 +194,27 @@ export class ElabelComponent {
         this.get()
       }
     });
+  }
+  // Utility function to group items by a specific key
+  groupBy(array, key) {
+    return array.reduce((acc, obj) => {
+      const groupKey = obj[key];
+      if (!acc[groupKey]) {
+        acc[groupKey] = [];
+      }
+      acc[groupKey].push(obj);
+      return acc;
+    }, {});
+  }
+
+  // Utility function to populate dropdowns
+  populateDropdown(dropdownArray, groupedData) {
+    for (let groupKey in groupedData) {
+      dropdownArray.push({
+        label: groupKey,
+        items: groupedData[groupKey]
+      });
+    }
   }
 
   save() {
@@ -203,7 +238,7 @@ export class ElabelComponent {
     const option = this.fullIngredientList.filter((e) => e.id == id)
     if(!this.isIngredientPresent(id)) {
       this.ingredientPicked.push(option[0])
-      this.formIngredients.push(this.fb.group(option))
+      this.formIngredients.push(this.fb.group(option[0]))
     }
     this.ingredientPicked = [...this.ingredientPicked]
     
@@ -363,6 +398,10 @@ export class ElabelComponent {
   changeStatus() {
     const v = this.form.get('status').value
     v == 0 ? this.form.get('status').setValue(1) : this.form.get('status').setValue(0)
+    this.service.changeStatus({
+      id: this.id,
+      status : v == 0 ? 1 : 0
+    }).subscribe(()=>{})
   }
 
   downloadCanvas() {
