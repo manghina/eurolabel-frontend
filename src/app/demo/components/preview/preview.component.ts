@@ -155,4 +155,8 @@ export class PreviewComponent implements OnChanges, OnInit {
     return group.split(" ")[1]
   
   }
+  getMaterialTitle(string){
+    let newString = string?.substring(0, string.indexOf(" -")).trim();
+    return newString
+  }
 }
