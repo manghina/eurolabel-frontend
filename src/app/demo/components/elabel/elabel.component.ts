@@ -188,11 +188,11 @@ export class ElabelComponent {
       })
       this.brandService.all(parseInt(this.user_id)).subscribe((response)=>{
         this.brands = response.data
+        if (id) {
+          this.id = id
+          this.get()
+        }
       })   
-      if (id) {
-        this.id = id
-        this.get()
-      }
     });
   }
   // Utility function to group items by a specific key
@@ -342,6 +342,10 @@ export class ElabelComponent {
 
       if (response.data.vintage_year) {
         this.form.get('vintage_year').setValue(new Date(response.data.vintage_year))
+      }
+      debugger
+      if (response.data.brand) {
+        this.form.get('brand_id').setValue(response.data.brand)
       }
 
       if (response.data.geographical_indication.length) {
