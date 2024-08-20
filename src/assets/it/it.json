@@ -190,6 +190,7 @@
     "tirage_liqueur": "Liquore al tiraggio"
   },
   "pages": {
+    "download_qr":"Download QR Code",
     "register": {
       "title": "Registrazione",
       "subtitle": "Crea il tuo profilo aziendale per proseguire",
@@ -310,6 +311,10 @@
         },
         "nutrition": {
           "label": "Nutrienti dichiarati",
+          "helper": ""
+        },
+        "brand": {
+          "label": "Seleziona il Brand",
           "helper": ""
         }
       }

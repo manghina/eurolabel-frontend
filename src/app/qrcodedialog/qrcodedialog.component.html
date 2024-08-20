@@ -1,65 +1,67 @@
-<div class="grid">
-    <div class="col-12 md:col-6">
-        <div class="card">
-            <div class="qrcodeImage text-center">
-                <qrcode
-                  #parent
-                  [elementType]="elementType"
-                  [errorCorrectionLevel]="errorCorrectionLevel"
-                  [qrdata]="input"
-                  [scale]="scale"
-                  [width]="width"
-                  [allowEmptyString]="true"
-                  [className]="cssClass"
-                  [colorDark]="colorDark"
-                  [colorLight]="colorLight"
-                  [margin]="margin"
-                  [alt]="alt"
-                  [ariaLabel]="ariaLabel"
-                  [title]="title"
-                  [imageSrc]="imageSrc"
-                  [imageHeight]="imageHeight"
-                  [imageWidth]="imageWidth"
-                  (qrCodeURL)="onChangeURL($event)"
-                ></qrcode>
-              </div>
-            <div class="downloadButton text-center">
-                <button *ngIf="this.elementType !== 'svg'" mat-raised-button color="primary"
-                    (click)="saveAsImage(parent)">
-                    Download QR Code Image
-                </button>
-                <a *ngIf="this.elementType === 'svg'" mat-raised-button color="primary" [href]="qrCodeSrc"
-                    download="angularx-qrcode">Download QR Code Image</a>
+<div class="grid" >
+    <div class="col-12 flex justify-content-center">
+        <div class="grid">
+            <div class="qrcodeImage flex text-center col-12 mx-auto justify-content-center align-items-center align-content-center">
+                <qrcode #parent [elementType]="elementType" [errorCorrectionLevel]="errorCorrectionLevel"
+                    [qrdata]="input" [scale]="scale" [width]="width" [allowEmptyString]="true" [className]="cssClass"
+                    [colorDark]="colorDark" [colorLight]="colorLight" [margin]="margin" [alt]="alt"
+                    [ariaLabel]="ariaLabel" [title]="title" [imageSrc]="imageSrc" [imageHeight]="imageHeight"
+                    [imageWidth]="imageWidth" (qrCodeURL)="onChangeURL($event)"></qrcode>
             </div>
-
         </div>
     </div>
-    <div class="col-12 md:col-6">
-        <div class="card">
+    <div class="col-12 md:col-12">
+        <div class="card text-white"  [ngStyle]="{'background-color':(primary_color!=null) ? primary_color : 'black' }">
+            <h6 class="text-white">Seleziona il tipo di file che vuoi scaricare</h6>
             <form>
                 <div class="flex flex-wrap gap-3">
                     <div class="flex align-items-center">
-                        <p-radioButton name="type" value="canvas" [(ngModel)]="elementType" (onChange)="setImageVisibility(elementType === 'canvas')" inputId="elementType1"></p-radioButton>
-                        <label for="elementType" class="ml-2">PNG</label>
+                        <p-radioButton name="type" value="canvas" [(ngModel)]="elementType"
+                            (onChange)="setImageVisibility(elementType === 'canvas')"
+                            inputId="elementType1"></p-radioButton>
+                        <label for="elementType" class="ml-2">Immagine</label>
                     </div>
-                    
-                    <div class="flex align-items-center">
-                        <p-radioButton name="type" value="img" [(ngModel)]="elementType" inputId="elementType2"></p-radioButton>
+
+                   <!--  <div class="flex align-items-center">
+                        <p-radioButton name="type" value="img" [(ngModel)]="elementType"
+                            inputId="elementType2"></p-radioButton>
                         <label for="elementType2" class="ml-2">Img</label>
                     </div>
-                    
+
                     <div class="flex align-items-center">
-                        <p-radioButton name="type" value="url" [(ngModel)]="elementType" inputId="elementType3"></p-radioButton>
+                        <p-radioButton name="type" value="url" [(ngModel)]="elementType"
+                            inputId="elementType3"></p-radioButton>
                         <label for="elementType3" class="ml-2">Url</label>
-                    </div>
-                
+                    </div> -->
+
                     <div class="flex align-items-center">
-                        <p-radioButton name="type" value="svg" [(ngModel)]="elementType" inputId="elementType4"></p-radioButton>
-                        <label for="elementType4" class="ml-2">Svg</label>
+                        <p-radioButton name="type" value="svg" [(ngModel)]="elementType"
+                            inputId="elementType4"></p-radioButton>
+                        <label for="elementType4" class="ml-2">Formato vettoriale</label>
                     </div>
                 </div>
-               <!--  <p-toggleButton [(ngModel)]="qrdata" onLabel="Confirm" (onChange)="togglechange($event)"  offLabel="I reject" offIcon="pi pi-times"  [style]="{'width': '10em'}"></p-toggleButton>
-           -->  </form>
+                <!--  <p-toggleButton [(ngModel)]="qrdata" onLabel="Confirm" (onChange)="togglechange($event)"  offLabel="I reject" offIcon="pi pi-times"  [style]="{'width': '10em'}"></p-toggleButton>
+           -->
+            </form>
+        </div>
+    </div>
+    <div class="col-12">
+        <div class="downloadButton text-center">
+            <button *ngIf="this.elementType !== 'svg'" pButton pRipple type="button"
+            label="{{ 'pages.download_qr' | translate }}"
+            class="p-button-prymary"  (click)="saveAsImage(parent)"></button>
+
+            <a *ngIf="this.elementType === 'svg'" pButton pRipple type="button"
+            label="{{ 'pages.download_qr' | translate }}"
+            class="p-button-prymary"  [href]="qrCodeSrc"
+            download="{{trimWhiteSpace(name)}}"></a>
+
+            <!-- <button *ngIf="this.elementType !== 'svg'" mat-raised-button color="primary"
+                (click)="saveAsImage(parent)">
+                Download QR Code
+            </button> 
+            <a *ngIf="this.elementType === 'svg'" mat-raised-button color="primary" [href]="qrCodeSrc"
+                download="angularx-qrcode">Download QR Code</a>-->
         </div>
     </div>
 </div>

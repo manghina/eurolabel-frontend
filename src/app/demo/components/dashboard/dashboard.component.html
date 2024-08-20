@@ -412,9 +412,12 @@
                         url="https://app.eulabel.it/backend/brand-image/{{form.get('id').value}}" accept="image/*"
                         maxFileSize="1000000" [auto]="true" (onUpload)="onBasicUploadBrand()" chooseLabel="Browse" />
                 </div>
-                <div class="col-12">
-                    <span><b>Colore primario</b><ngx-colors ngx-colors-trigger style="display: inline-block; margin:5px;" [formControl]="form.get('color')"></ngx-colors></span>
-                </div>                
+                <div class="col-12  shadow-1 pb-0">
+                    <div class="grid flex p-fluid">
+                        <div class="col flex align-content-center align-items-center"><b>Colore primario</b></div>
+                        <div class="col-4 flex align-content-center align-items-center justify-content-end"><ngx-colors ngx-colors-trigger [formControl]="form.get('color')"></ngx-colors></div>
+                    </div>
+                </div>               
             </div>
         </div>
     </div>

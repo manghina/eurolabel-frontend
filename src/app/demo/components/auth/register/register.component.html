@@ -71,9 +71,14 @@
                 <p-fileUpload mode="basic" name="image" chooseIcon="pi pi-upload"
                 url="https://app.eulabel.it/backend/profile/{{user.id}}" accept="image/*" maxFileSize="1000000"
                 [auto]="true" (onUpload)="onBasicUpload()" chooseLabel="Browse" />
+                <p-divider></p-divider>
             </div>
-            <div class="col-12">
-                <span><b>Colore primario</b><ngx-colors ngx-colors-trigger style="display: inline-block; margin:5px;" [formControl]="form.get('primary_color')"></ngx-colors></span>
+            
+            <div class="col-12  shadow-1 pb-0">
+                <div class="grid flex p-fluid">
+                    <div class="col flex align-content-center align-items-center"><b>Colore primario</b></div>
+                    <div class="col-4 flex align-content-center align-items-center justify-content-end"><ngx-colors ngx-colors-trigger [formControl]="form.get('primary_color')"></ngx-colors></div>
+                </div>
             </div>
         </div>
 

@@ -8,7 +8,7 @@
             </div>
 
             <div class="flex align-items-right ">
-                <p-tag styleClass="p-mr-2" con="pi pi-exclamation-triangle" severity="warning" [value]="form.get('status').value == 0 ? 'Bozza' : 'Pubblicato'"></p-tag>
+                <p-tag styleClass="p-mr-2" con="pi pi-exclamation-triangle" [severity]="form.get('status').value == 0 ? 'warning' : 'success'" [value]="form.get('status').value == 0 ? 'Bozza' : 'Pubblicato'"></p-tag>
             </div>
 
             <div class="flex align-items-center md:align-items-right text-center">
@@ -59,6 +59,24 @@
                                     sull'etichetta fisica, sono contrassegnate con 🇪🇺 / 🇮🇹.</p>
                                 <p-divider></p-divider>
                                 <div class="grid">
+                                    <div class="col-12 md:col-12">
+                                        <label for="brand">{{ 'pages.elabel.form.brand.label' | translate }}
+                                                <app-infobutton
+                                                [label]="'Brand'"></app-infobutton>
+                                                🇪🇺</label>
+                                                
+                                                <p-dropdown [options]="brands" [formControl]="form.get('brand_id')"
+                                                [showClear]="true" placeholder="Seleziona">
+                                                <ng-template let-option pTemplate="selectedItem">
+                                                    <span>{{option.name | translate}}</span>
+                                                </ng-template>
+                                                <ng-template  let-option pTemplate="item">
+                                                    <span>{{option.name | translate}}</span>
+                                                </ng-template>                                                
+                                            </p-dropdown>
+                                            
+                                    </div>
+
                                     <div class="col-12 md:col-8">
                                         <label for="prodotto">{{ 'pages.elabel.form.product_name.label' | translate }}
                                             <app-infobutton
@@ -75,34 +93,21 @@
                                         <input pInputText id="prodotto" [formControl]="form.get('sku')" />
                                     </div>
 
-                                    <div class="col-12 md:col-12">
-                                        <label for="country">{{ 'pages.elabel.form.brand.label' | translate }}
-                                                <app-infobutton
-                                                [label]="'Brand'"></app-infobutton>
-                                                🇪🇺</label>
-                                                <p-dropdown [options]="brands" [formControl]="form.get('brand_id')"
-                                                [showClear]="true" placeholder="Seleziona">
-                                                <ng-template let-option pTemplate="selectedItem">
-                                                    <span>{{option.name | translate}}</span>
-                                                </ng-template>
-                                                <ng-template  let-option pTemplate="item">
-                                                    <span>{{option.name | translate}}</span>
-                                                </ng-template>                                                
-                                            </p-dropdown>
-                                            <label for="country">{{ 'pages.elabel.form.country.label' | translate }}
-                                                <app-infobutton
-                                                [label]="'pages.elabel.form.country.helper'"></app-infobutton>
-                                                🇪🇺</label>
-                                        <p-dropdown [options]="states" [formControl]="form.get('country')"
-                                        [showClear]="true" [filter]="true" filterBy="nome_stati" placeholder="Seleziona">
-                                        <ng-template let-option pTemplate="selectedItem">
-                                            <span>{{option.nome_stati | translate}}</span>
-                                        </ng-template>
-                                        <ng-template let-option pTemplate="item">
-                                            <span>{{option.nome_stati | translate}}</span>
-                                        </ng-template>
-                                    </p-dropdown>
-                                    </div>
+                              <div class="col-12">
+                                <label for="country">{{ 'pages.elabel.form.country.label' | translate }}
+                                    <app-infobutton
+                                    [label]="'pages.elabel.form.country.helper'"></app-infobutton>
+                                    🇪🇺</label>
+                            <p-dropdown [options]="states" [formControl]="form.get('country')"
+                            [showClear]="true" [filter]="true" filterBy="nome_stati" placeholder="Seleziona">
+                            <ng-template let-option pTemplate="selectedItem">
+                                <span>{{option.nome_stati | translate}}</span>
+                            </ng-template>
+                            <ng-template let-option pTemplate="item">
+                                <span>{{option.nome_stati | translate}}</span>
+                            </ng-template>
+                        </p-dropdown>
+                              </div>
 
                                     <div class="field col-12 md:col-6">
                                         <label>{{ 'pages.elabel.form.type.label' | translate }} <app-infobutton
@@ -246,6 +251,7 @@
                                     <div class="grid">
                                         <div class="col-9">
                                             <b>{{e.label | translate}}</b>
+                                            <p-tag *ngIf="e.allergenies!=null" severity="warning" class="ml-3" value="Allergene: {{e.allergenies | translate}}"/>
                                             <p>{{e.group | translate}}</p>
                                         </div>
                                         <div class="col-3 flex justify-content-end align-items-right">
@@ -642,7 +648,7 @@
     [modal]="true" 
     showEffect="fade" [style]="{width: '30vw'}" [breakpoints]="{'960px': '75vw'}">
     <div #qrcodewrapper>
-        <app-qrcodedialog [input]="form.get('qr').value"></app-qrcodedialog>
+        <app-qrcodedialog [input]="form.get('qr').value" [name]="form.get('product_name').value"></app-qrcodedialog>
     </div>
     <ng-template pTemplate="footer">
             <button pButton icon="pi pi-check" (click)="display=false" label="Ok" class="p-button-outlined"></button>

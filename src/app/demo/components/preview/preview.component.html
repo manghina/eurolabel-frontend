@@ -21,18 +21,17 @@
 
             <div class="lock">
                 <div class="grid p-2">
-                    <div class="col-12">
+                    <div class="col-12" [ngStyle]="{'background-color':(primary_color!=null) ? primary_color : 'black' }">
                         <div *ngIf="form.get('product_name').value">
-                            <span class="head_title">{{form.get('product_name').value}}</span>
+                            <span class="head_title" style="color:white">{{form.get('product_name').value}}</span>
                         </div>
                     </div>
                     <!--IMMAGINE PRODOTTO -->
-                    <div class="col-12"
-                        [ngStyle]="{'background-color':(primary_color!=null) ? primary_color : 'black' }"
+                    <div class="col-12 mt-2"
                         style="margin-bottom:-15px;z-index: 1;" *ngIf="sub_image">
                         <div class="grid">
                             <div class="col"></div>
-                            <div class="col-5 text-center" style="background-color: white">
+                            <div class="col-6 text-center shadow-1" style="background-color: white">
                                 <img src="https://{{sub_image}}" class="image-fluid">
                             </div>
                             <div class="col"></div>
@@ -40,21 +39,20 @@
                     </div>
                     <!--BANDA COLORATA-->
 
-                    <div class="col-12 pt-3"
-                        [ngStyle]="{'background-color':(primary_color!=null) ? primary_color : 'black' }">
+                    <div class="col-12 pt-3">
 
 
 
                         <div class="grid">
 
                             <div class="col-12  align-items-center justify-content-between text-center text-white">
-                                <p class="mb-0 info mt-2">{{companyName}}</p>
-                                <b>{{form.get('product_name').value}}</b><br>
-                                <b *ngIf="form.get('vintage_year').value">{{form.get('vintage_year').value | date :
+                                <p class="mb-0 info mt-2" style="color:black">{{companyName}}</p>
+                                <b [ngStyle]="{'color':(primary_color!=null) ? primary_color : 'black' }">{{form.get('product_name').value}}</b><br>
+                                <b *ngIf="form.get('vintage_year').value" style="color:black">{{form.get('vintage_year').value | date :
                                     'Y'}}</b>
                             </div>
 
-                            <div class="col-11 mx-auto text-center" style="background-color: white">
+                            <div class="col-11 mx-auto text-center text-white"  [ngStyle]="{'background-color':(primary_color!=null) ? primary_color : 'black' }">
                                 <span *ngIf="form.get('type').value" class="info">
                                     {{getType(form.get('type').value) | translate}}
                                 </span>
@@ -181,7 +179,7 @@
                                     'pages.recycling.title_preview' |
                                     translate }}</p>
 
-                                <div class="w-full flex justify-center mb-5 flex-col gap-2">
+                                <div class="w-full flex justify-center mb-0 flex-col gap-2">
                                     <div *ngFor="let rule of form.get('rules').value; let i = index" 
                                         class="flex w-full mx-auto rounded border border-slate-100 shadow-sm py-2.5 px-2 gap-2 bg-white">
                                         <div class="flex items-center mt-0.5 p-1">
@@ -205,9 +203,9 @@
                                             </div>
                                         </div>
                                         <div class="flex my-0.5 flex-grow flex-col gap-0.5 justify-between">
-                                            <div class="font-bold"> {{getContainer(rule.recycling_rule_containers_id).label | translate}}</div>
-                                            <div class="text-slate-700 text-sm leading-4">{{getMaterial(rule.recycling_rule_materials_id).label | translate}}</div>
-                                            <div class=" text-slate-700 text-sm">{{getMaterial(rule.recycling_rule_materials_id).group | translate}}</div>
+                                            <div class="font-bold text-left"> {{getContainer(rule.recycling_rule_containers_id).label | translate}}</div>
+                                            <div class="text-slate-700 text-sm leading-4 text-left">{{getMaterialTitle(getMaterial(rule.recycling_rule_materials_id).label | translate)}}</div>
+                                            <div class=" text-slate-700 text-sm text-left">{{getMaterial(rule.recycling_rule_materials_id).group | translate}}</div>
 
                                         </div>
                                     </div>
@@ -281,42 +279,43 @@
                     *ngIf=" form.get('sustainibility_bio').value || form.get('sustainibility_message').value"></p-divider>
                 <!--INFO SOSTENIBILTà-->
                 <div class="grid p-2"
-                    *ngIf=" form.get('sustainibility_bio').value || form.get('sustainibility_message').value">
+                *ngIf=" form.get('sustainibility_bio').value || form.get('sustainibility_message').value">
 
-                    <div class="col-12 text-center py-0 my-0">
-                        <div class="grid">
-                            <div class="col-12 mb-0">
-                                <p class="titolo mb-2"
-                                    [ngStyle]="{'color':(primary_color!=null) ? primary_color : 'black' }">{{
-                                    'pages.sustainability.title' |
-                                    translate }}</p>
-                            </div>
-                            <div class="col-12 mt-0 pt-0">
-                                <div class="grid">
-                                    <div class="col-12 text-center info">
-                                        {{form.get('sustainibility_bio').value}}
-                                    </div>
-                                    <div class="col-12 text-center info" *ngIf="form.get('type').value">
-                                        {{form.get('sustainibility_message').value}}
-                                    </div>
-
-
-                                </div>
-                            </div>
-                            <div class="col-12 mt-0 pt-0" *ngIf=" preview_image">
-                                <div class="grid">
-                                    <div class="col-4 text-center info">
-                                        <img src="https://{{preview_image}}" class="image-fluid">
-                                    </div>
-
-
-
-                                </div>
-                            </div>
-
+                <div class="col-12 text-center py-0 my-0">
+                    <div class="grid">
+                        <div class="col-12 mb-0">
+                            <p class="titolo mb-2"
+                                [ngStyle]="{'color':(primary_color!=null) ? primary_color : 'black' }">{{
+                                'pages.sustainability.title' |
+                                translate }}</p>
                         </div>
+                        <div class="col-12 mt-0 pt-0">
+                            <div class="grid">
+                                <div class="col-12 text-center info">
+                                    {{form.get('sustainibility_bio').value}}
+                                </div>
+                                <div class="col-12 text-center info" *ngIf="form.get('type').value">
+                                    {{form.get('sustainibility_message').value}}
+                                </div>
+
+
+                            </div>
+                        </div>
+                        <div class="col-12 mt-0 pt-0 flex align-items-center" *ngIf=" preview_image">
+                            <div class="grid flex">
+
+                                <div class="col-4 mx-auto  text-center info">
+                                    <img src="https://{{preview_image}}" class="image-fluid">
+                                </div>
+
+
+
+                            </div>
+                        </div>
+
                     </div>
                 </div>
+            </div>
                 <p-divider></p-divider>
                 <!--INFO PRODOTTO-->
                 <div class="grid p-2">
@@ -378,7 +377,7 @@
                             <div class="col-12 mt-0 pt-0">
                                 <div class="grid">
 
-                                    <div class="col-6 mx-auto py-0 my-0"><img src="https://{{companyLogo}}"
+                                    <div class="col-6 shadow-1 mx-auto py-0 my-0"><img src="https://{{companyLogo}}"
                                             width="100%"></div>
                                     <div class="col-12  mx-auto py-0 my-0">
                                         <p class="mb-0 info mt-2"><b>{{companyName}}</b></p>
@@ -433,17 +432,17 @@
 <!--SIDEBAR PREVIEW-->
 <div class="container_preview" *ngIf="preview">
     <div class="grid p-fluid p-2">
-        <div class="col-12">
+        <div class="col-12" [ngStyle]="{'background-color':(primary_color!=null) ? primary_color : 'black' }">
             <div *ngIf="form.get('product_name').value">
-                <span class="head_title">{{form.get('product_name').value}}</span>
+                <span class="head_title" style="color:white">{{form.get('product_name').value}}</span>
             </div>
         </div>
         <!--IMMAGINE PRODOTTO -->
-        <div class="col-12" [ngStyle]="{'background-color':(primary_color!=null) ? primary_color : 'black' }"
+        <div class="col-12 mt-2"
             style="margin-bottom:-15px;z-index: 1;" *ngIf="sub_image">
             <div class="grid">
                 <div class="col"></div>
-                <div class="col-5 text-center" style="background-color: white">
+                <div class="col-6 text-center shadow-1" style="background-color: white">
                     <img src="https://{{sub_image}}" class="image-fluid">
                 </div>
                 <div class="col"></div>
@@ -451,20 +450,20 @@
         </div>
         <!--BANDA COLORATA-->
 
-        <div class="col-12 pt-3" [ngStyle]="{'background-color':(primary_color!=null) ? primary_color : 'black' }">
+        <div class="col-12 pt-3">
 
 
 
             <div class="grid">
 
                 <div class="col-12  align-items-center justify-content-between text-center text-white">
-                    <p class="mb-0 info mt-2">{{companyName}}</p>
-                    <b>{{form.get('product_name').value}}</b><br>
-                    <b *ngIf="form.get('vintage_year').value">{{form.get('vintage_year').value | date :
+                    <p class="mb-0 info mt-2" style="color:black">{{companyName}}</p>
+                    <b [ngStyle]="{'color':(primary_color!=null) ? primary_color : 'black' }">{{form.get('product_name').value}}</b><br>
+                    <b *ngIf="form.get('vintage_year').value" style="color:black">{{form.get('vintage_year').value | date :
                         'Y'}}</b>
                 </div>
 
-                <div class="col-11 mx-auto text-center" style="background-color: white">
+                <div class="col-11 mx-auto text-center text-white"  [ngStyle]="{'background-color':(primary_color!=null) ? primary_color : 'black' }">
                     <span *ngIf="form.get('type').value" class="info">
                         {{getType(form.get('type').value) | translate}}
                     </span>
@@ -489,12 +488,14 @@
         <div class="col-12 text-center py-0 my-0">
             <div class="grid">
                 <div class="col-12">
-                    <p class="titolo mb-2" [ngStyle]="{'color':(primary_color!=null) ? primary_color : 'black' }">{{
+                    <p class="titolo mb-2"
+                        [ngStyle]="{'color':(primary_color!=null) ? primary_color : 'black' }">{{
                         'pages.ingredients.title' |
                         translate }}</p>
+
                     <ng-container *ngIf="form.get('ingredients').value" class="m0 p0">
-                        <p class="info mb-0" *ngFor="let ingredient of form.get('ingredients').value">
-                            {{ingredient.label | translate}}
+                        <p class="info mb-0" *ngFor="let ingredient of xingredients">
+                            {{ingredient.label | translate}}  <span *ngIf="ingredient.allergenies">(Allergene: {{ingredient.allergenies | translate}})</span>
                         </p>
                     </ng-container>
                     <p class="info mt-2" *ngIf="form.get('packages').value">
@@ -512,7 +513,8 @@
         <div class="col-12">
             <div class="grid text-center">
                 <div class="col-12 mt-0 py-0 mb-2">
-                    <p class="titolo mb-2" [ngStyle]="{'color':(primary_color!=null) ? primary_color : 'black' }">{{
+                    <p class="titolo mb-2"
+                        [ngStyle]="{'color':(primary_color!=null) ? primary_color : 'black' }">{{
                         'pages.nutritions.title' | translate }}</p>
                 </div>
             </div>
@@ -573,37 +575,72 @@
             </div>
             <!-- DivTable.com -->
             <!-- <div class="mt-3 mx-1 text-sm">Contiene quantità trascurabili di Sale, Acidi grassi saturi,
-                Proteine, Grassi.
-            </div> -->
+                    Proteine, Grassi.
+                </div> -->
         </div>
     </div>
     <p-divider></p-divider>
     <!--RICICLO-->
     <div class="grid p-2">
         <div class="col-12 text-center py-0 my-0">
-
             <div class="grid">
                 <div class="col-12 flex-column flex">
-                    <p class="titolo mb-2" [ngStyle]="{'color':(primary_color!=null) ? primary_color : 'black' }">{{
+                    <p class="titolo mb-2"
+                        [ngStyle]="{'color':(primary_color!=null) ? primary_color : 'black' }">{{
                         'pages.recycling.title_preview' |
                         translate }}</p>
-                    <div>
-                        <p class="info"><i>{{ 'pages.recycling.description_preview' | translate }}</i></p>
-                        CONTENITORI
-                        <ng-container *ngIf="form.get('rules').value">
-                            <span class="info" *ngFor="let rule of form.get('rules').value">
-                                {{getContainer(rule.recycling_rule_containers_id).label | translate}}
-                            </span><br>
-                        </ng-container>
+
+                    <div class="w-full flex justify-center mb-0 flex-col gap-2">
+                        <div *ngFor="let rule of form.get('rules').value; let i = index" 
+                            class="flex w-full mx-auto rounded border border-slate-100 shadow-sm py-2.5 px-2 gap-2 bg-white">
+                            <div class="flex items-center mt-0.5 p-1">
+                                <div
+                                    class="relative flex flex-col items-center overflow-hidden text-slate-800">
+                                    <div class="flex flex-col items-center px-2">
+                                        <div class="relative"><svg class="h-11 w-11" viewBox="0 0 41 38"
+                                                fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M4.62404 24.5087C3.53751 26.4327 1.55175 29.9436 5.06625 32.2902C6.1708 33.0201 7.40764 33.5247 8.70626 33.7751C9.6956 33.9219 9.74452 35.4439 8.58235 35.4081C7.34359 35.346 1.31005 34.7857 0.341314 30.2603C-0.15947 27.617 0.406969 25.2489 1.96339 22.679L4.2079 18.7111L1.96097 17L11.2037 9.66093L10.0024 21.5L7.00083 20.3L4.62404 24.5087ZM18.2842 3.33355C22.0015 1.3124 24.1514 4.71747 25.3357 6.57448L27.9295 10.6396L26.0024 12L35.3418 19.2711L33.0024 8L30.64 8.90976L28.1937 5.08436C26.5143 2.68376 25.2842 0.910742 22.2879 0.111935C17.0194 -0.894459 13.7807 5.21761 13.8139 5.1777C13.2864 6.1017 14.5078 6.91531 15.2654 5.85356C16.0964 4.82335 17.1224 3.96726 18.2842 3.33355ZM39.5064 23.2458C39.2241 22.6353 37.7404 22.791 38.1579 24.1051C38.5801 25.3577 38.7516 26.6808 38.6631 27.9994C38.3638 32.2219 34.3247 32.1897 32.1234 32.1897H27.2957L27.2571 29.5L16.0313 33.7989L27.2571 38L27.2719 35.4081H32.1234C34.9897 35.4574 37.2725 34.842 39.2038 33.1134C43.0659 29.6987 39.5064 23.2458 39.5064 23.2458Z"
+                                                    fill="currentColor"></path>
+                                            </svg>
+                                            <div
+                                                class="absolute inset-0 flex h-full w-full items-center justify-center">
+                                                <div class="flex text-center mt-0.5 text-xs font-semibold">{{getMaterialNumberPart(getMaterialLabel(i) | translate)}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="whitespace-nowrap text-sm font-semibold">{{getMaterialLabelPart(getMaterialLabel(i) | translate)}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex my-0.5 flex-grow flex-col gap-0.5 justify-between">
+                                <div class="font-bold text-left"> {{getContainer(rule.recycling_rule_containers_id).label | translate}}</div>
+                                <div class="text-slate-700 text-sm leading-4 text-left">{{getMaterialTitle(getMaterial(rule.recycling_rule_materials_id).label | translate)}}</div>
+                                <div class=" text-slate-700 text-sm text-left">{{getMaterial(rule.recycling_rule_materials_id).group | translate}}</div>
+
+                            </div>
+                        </div>
                     </div>
-                    <div>
-                        MATERIALI
-                        <ng-container *ngIf="form.get('rules').value">
-                            <span class="info" *ngFor="let rule of form.get('rules').value">
-                                {{getMaterial(rule.recycling_rule_materials_id).label | translate}}
-                            </span><br>
-                        </ng-container>
-                    </div>
+
+                    <ng-container *ngIf="false">
+                        <div>
+                            <p class="info"><i>{{ 'pages.recycling.description_preview' | translate }}</i></p>
+                            CONTENITORI
+                            <ng-container *ngIf="form.get('rules').value">
+                                <span class="info" *ngFor="let rule of form.get('rules').value">
+                                    {{getContainer(rule.recycling_rule_containers_id).label | translate}}
+                                </span><br>
+                            </ng-container>
+                        </div>
+                        <div>
+                            MATERIALI
+                            <ng-container *ngIf="form.get('rules').value">
+                                <span class="info" *ngFor="let rule of form.get('rules').value">
+                                    {{getMaterial(rule.recycling_rule_materials_id).label | translate}}
+                                </span><br>
+                            </ng-container>
+                        </div>
+                    </ng-container>
 
 
 
@@ -614,14 +651,17 @@
             </div>
         </div>
     </div>
-    <p-divider *ngIf="form.get('drive').value || form.get('drive').value || form.get('pregnant').value"></p-divider>
+    <p-divider
+        *ngIf="form.get('drive').value || form.get('drive').value || form.get('pregnant').value"></p-divider>
     <!--CONSUMO RESPONSABILE-->
-    <div class="grid p-2" *ngIf="form.get('drive').value || form.get('drive').value || form.get('pregnant').value">
+    <div class="grid p-2"
+        *ngIf="form.get('drive').value || form.get('drive').value || form.get('pregnant').value">
 
         <div class="col-12 text-center py-0 my-0">
             <div class="grid">
                 <div class="col-12 mb-0">
-                    <p class="titolo mb-2" [ngStyle]="{'color':(primary_color!=null) ? primary_color : 'black' }">{{
+                    <p class="titolo mb-2"
+                        [ngStyle]="{'color':(primary_color!=null) ? primary_color : 'black' }">{{
                         'pages.recycling.sub.title' |
                         translate }}</p>
                 </div>
@@ -646,50 +686,55 @@
             </div>
         </div>
     </div>
-    <p-divider *ngIf=" form.get('sustainibility_bio').value || form.get('sustainibility_message').value"></p-divider>
+    <p-divider
+        *ngIf=" form.get('sustainibility_bio').value || form.get('sustainibility_message').value"></p-divider>
     <!--INFO SOSTENIBILTà-->
-    <div class="grid p-2" *ngIf=" form.get('sustainibility_bio').value || form.get('sustainibility_message').value">
+    <div class="grid p-2"
+    *ngIf=" form.get('sustainibility_bio').value || form.get('sustainibility_message').value">
 
-        <div class="col-12 text-center py-0 my-0">
-            <div class="grid">
-                <div class="col-12 mb-0">
-                    <p class="titolo mb-2" [ngStyle]="{'color':(primary_color!=null) ? primary_color : 'black' }">{{
-                        'pages.sustainability.title' |
-                        translate }}</p>
-                </div>
-                <div class="col-12 mt-0 pt-0">
-                    <div class="grid">
-                        <div class="col-12 text-center info">
-                            {{form.get('sustainibility_bio').value}}
-                        </div>
-                        <div class="col-12 text-center info" *ngIf="form.get('type').value">
-                            {{form.get('sustainibility_message').value}}
-                        </div>
-
-
-                    </div>
-                </div>
-                <div class="col-12 mt-0 pt-0" *ngIf=" preview_image">
-                    <div class="grid">
-                        <div class="col-4 text-center info">
-                            <img src="https://{{preview_image}}" class="image-fluid">
-                        </div>
-
-
-
-                    </div>
-                </div>
-
+    <div class="col-12 text-center py-0 my-0">
+        <div class="grid">
+            <div class="col-12 mb-0">
+                <p class="titolo mb-2"
+                    [ngStyle]="{'color':(primary_color!=null) ? primary_color : 'black' }">{{
+                    'pages.sustainability.title' |
+                    translate }}</p>
             </div>
+            <div class="col-12 mt-0 pt-0">
+                <div class="grid">
+                    <div class="col-12 text-center info">
+                        {{form.get('sustainibility_bio').value}}
+                    </div>
+                    <div class="col-12 text-center info" *ngIf="form.get('type').value">
+                        {{form.get('sustainibility_message').value}}
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="col-12 mt-0 pt-0 flex align-items-center" *ngIf=" preview_image">
+                <div class="grid flex">
+
+                    <div class="col-4 mx-auto  text-center info">
+                        <img src="https://{{preview_image}}" class="image-fluid">
+                    </div>
+
+
+
+                </div>
+            </div>
+
         </div>
     </div>
+</div>
     <p-divider></p-divider>
     <!--INFO PRODOTTO-->
     <div class="grid p-2">
         <div class="col-12 text-center py-0 my-0">
             <div class="grid">
                 <div class="col-12 mb-0">
-                    <p class="titolo mb-2" [ngStyle]="{'color':(primary_color!=null) ? primary_color : 'black' }">{{
+                    <p class="titolo mb-2"
+                        [ngStyle]="{'color':(primary_color!=null) ? primary_color : 'black' }">{{
                         'pages.info_prodotto.title' |
                         translate }}</p>
                 </div>
@@ -703,9 +748,11 @@
                             {{ 'pages.elabel.form.type.label' | translate }}<br>
                             <b> {{getType(form.get('type').value) | translate}}</b>
                         </div>
-                        <div class="col-6 text-center info" *ngIf="form.get('geographical_indication').value">
+                        <div class="col-6 text-center info"
+                            *ngIf="form.get('geographical_indication').value">
                             {{ 'pages.elabel.form.geographical_indication.label' | translate }}<br>
-                            <b>{{getGeographicalIndication(form.get('geographical_indication').value) | translate}}</b>
+                            <b>{{getGeographicalIndication(form.get('geographical_indication').value) |
+                                translate}}</b>
                         </div>
                         <div class="col-6 text-center info" *ngIf="form.get('vintage_year').value">
                             {{ 'pages.elabel.form.vintage_year.label' | translate }}<br>
@@ -733,14 +780,16 @@
         <div class="col-12 text-center py-0 my-0">
             <div class="grid">
                 <div class="col-12 mb-0">
-                    <p class="titolo mb-2" [ngStyle]="{'color':(primary_color!=null) ? primary_color : 'black' }">{{
+                    <p class="titolo mb-2"
+                        [ngStyle]="{'color':(primary_color!=null) ? primary_color : 'black' }">{{
                         'pages.info_produttore.title' |
                         translate }}</p>
                 </div>
                 <div class="col-12 mt-0 pt-0">
                     <div class="grid">
 
-                        <div class="col-6 mx-auto py-0 my-0"><img src="https://{{companyLogo}}" width="100%"></div>
+                        <div class="col-6 shadow-1 mx-auto py-0 my-0"><img src="https://{{companyLogo}}"
+                                width="100%"></div>
                         <div class="col-12  mx-auto py-0 my-0">
                             <p class="mb-0 info mt-2"><b>{{companyName}}</b></p>
                         </div>
@@ -755,13 +804,13 @@
     <p-divider></p-divider>
     <!--FOOTER-->
     <div class="grid p-2">
-        <div class="col-12 flex justify-content-center flex-wrap">
-            <div class="flex align-items-center justify-content-center font-bold border-round m-2"><img
+        <div class="flex justify-content-center flex-wrap">
+            <div class="col-12 flex align-items-center justify-content-center font-bold border-round m-2"><img
                     src="assets/layout/images/{{layoutService.config.colorScheme === 'light' ? 'logo-dark' : 'logo-white'}}.svg"
                     alt="logo" style="width:30%"></div>
         </div>
+
     </div>
-</div>
 
 <!-- <div class="flex flex-column gap-2 p-4">
     <div class="flex border-1 flex-column">
