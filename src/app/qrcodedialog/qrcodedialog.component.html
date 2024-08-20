@@ -11,11 +11,11 @@
         </div>
     </div>
     <div class="col-12 md:col-12">
-        <div class="card text-white"  [ngStyle]="{'background-color':(primary_color!=null) ? primary_color : 'black' }">
+        <div class="card text-white text-center"  [ngStyle]="{'background-color':(primary_color!=null) ? primary_color : 'black' }">
             <h6 class="text-white">Seleziona il tipo di file che vuoi scaricare</h6>
             <form>
-                <div class="flex flex-wrap gap-3">
-                    <div class="flex align-items-center">
+                <div class="flex flex-wrap gap-3 justify-content-center">
+                    <div class="flex align-items-center ">
                         <p-radioButton name="type" value="canvas" [(ngModel)]="elementType"
                             (onChange)="setImageVisibility(elementType === 'canvas')"
                             inputId="elementType1"></p-radioButton>
