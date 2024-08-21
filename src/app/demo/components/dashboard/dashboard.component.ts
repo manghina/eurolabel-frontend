@@ -162,7 +162,15 @@ export class DashboardComponent implements OnInit {
     }
 
     createElabelByBrand(el:any) {
-        this.router.navigate(['/elabel-brand', JSON.stringify(el)]);
+        this.service.create({
+            'public_id' : this.id.value,
+            'sku' : this.sku.value,
+            'brand_id' : el.id,
+            'product_name' : this.name.value,
+            'user_id': this.userid.toString()
+        }).subscribe((response) => {
+            this.router.navigate(['/elabel/' + response.id]);
+        })
     }
 
 

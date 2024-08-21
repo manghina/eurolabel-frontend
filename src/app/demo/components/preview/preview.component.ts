@@ -43,7 +43,7 @@ export class PreviewComponent implements OnChanges, OnInit {
 
   }
   ngOnChanges(changes: SimpleChanges): void {
-    debugger
+
   }
 
 

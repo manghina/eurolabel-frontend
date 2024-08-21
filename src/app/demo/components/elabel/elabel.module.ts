@@ -43,6 +43,7 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
     DialogModule,
     QRCodeModule,
     RadioButtonModule,
+    CheckboxModule ,
     BreadcrumbModule,
     DialogModule,
     TabViewModule,

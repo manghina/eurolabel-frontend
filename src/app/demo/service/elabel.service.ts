@@ -40,4 +40,8 @@ export class ElabelService {
   getOptions() {
     return this.http.get<any>(baseUrl + 'options')  
   }
+
+  deletePreviewImage(image:any) {
+    return this.http.post(baseUrl + 'del-preview', image)
+  }
 }

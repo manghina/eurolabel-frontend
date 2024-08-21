@@ -66,6 +66,17 @@
                                                 🇪🇺</label>
                                                 <p-dropdown [options]="brands" [formControl]="form.get('brand_id')"
                                                 [showClear]="true" placeholder="Seleziona">
+
+                                                <ng-template pTemplate="filter" let-options="brands">
+                                                    <div class="flex p-3">
+                                                        <div class="p-inputgroup" (click)="$event.stopPropagation()">
+                                                            <span class="p-inputgroup-addon"><i class="pi pi-search"></i></span>
+                                                            <input type="text" pInputText placeholder="Filter" [(ngModel)]="filterValue" (keyup)="options.filter($event)">
+                                                        </div>
+                                                        <button pButton icon="pi pi-times" class="ml-3" ></button>
+                                                    </div>
+                                                </ng-template>
+
                                                 <ng-template let-option pTemplate="selectedItem">
                                                     <span>{{option.name | translate}}</span>
                                                 </ng-template>
@@ -573,20 +584,46 @@
                                 <label>{{ 'pages.sustainability.form.field3.label' | translate }} <app-infobutton
                                         [label]="'pages.sustainability.form.field3.helper'"></app-infobutton><span
                                         style="font-size:0.8rem;margin-left:5px;">(opzionale)</span></label>
-                                <img *ngIf="preview_image" src="//{{preview_image}}" style="width:150px;height:auto">
-                                <p-fileUpload mode="basic" name="image" chooseIcon="pi pi-upload"
-                                    url="https://app.eulabel.it/backend/upload-preview/{{id}}" accept="image/*"
-                                    maxFileSize="1000000" [auto]="true" (onUpload)="onBasicUpload()"
-                                    chooseLabel="Browse" />
-                            </div>
+
+                                <div class="flex flex-row flex-wrap gap-2">
+                                    <div class="flex flex-col" *ngFor="let image of sustainibility_attachments">
+                                        <div class="flex">
+                                            <img src="http://app.eulabel.it/backend/storage/app/{{image.url}}" 
+                                            style="width:150px;height:auto">
+                                        </div>
+                                        <div class="flex"><b class="cursor-pointer" (click)="deletePreviewImage(image)">Rimuovi</b></div>
+                                    </div>
+                                </div>
+                                    <p-fileUpload 
+                                        #previewUpload
+                                        name="files[]"
+                                        url="https://app.eulabel.it/backend/upload-preview/{{id}}" 
+                                        multiple="multiple"
+                                        maxFileSize="1000000"
+                                        (onUpload)="onBasicUpload()"
+                                        (onError)="onError($event)">
+                                    </p-fileUpload>
+                                </div>
 
                         </div>
                    <!--  </div> -->
                 </p-tabPanel>
 
                 <!--IMPOSTAZIONI-->
-                <p-tabPanel *ngIf="false" header="{{ 'pages.elabel.cards.tab2' | translate }}" class="line-height-3 m-0">
-                    settings
+                <p-tabPanel header="{{ 'pages.elabel.cards.tab2' | translate }}" class="line-height-3 m-0">
+                   
+                    <div class="flex flex-col col-12">
+                        <div class="field-radiobutton col-6" *ngFor="let setting of settings.controls;let i = index">
+                            <p-checkbox value="setting.get('label').value | translate" [binary]="true"  [formControl]="setting.get('valueV')">
+
+                            </p-checkbox>
+                            <label for="category1">{{ setting.get('label').value | translate }}</label>
+                        </div>
+                    </div>
+
+                    <p-button [disabled]="!form.valid"  label="Applica" (click)="saveSetting()" icon="pi pi-trash"
+                    styleClass="p-button-sm p-button-success"></p-button>
+
                 </p-tabPanel>
 
             </p-tabView>
@@ -599,7 +636,7 @@
                                 styleClass="p-button-sm p-button-danger"></p-button>
                             <p-button label="Indietro" (click)="back()" icon="pi pi-trash"
                                 styleClass="p-button-sm p-button-secondary"></p-button>
-                            <p-button [disabled]="!form.valid"  label="Salva" (click)="save()" icon="pi pi-trash"
+                            <p-button [disabled]="!form.valid"  label="Salva" (click)="save()" icon="pi pi-save"
                                 styleClass="p-button-sm p-button-success"></p-button>
                         </div>
                     </div>

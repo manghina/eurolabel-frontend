@@ -569,6 +569,13 @@
       "vp": "VP"
     }
   },
+  "setting" : {
+    "preview" : {
+      "isOwnerInfoVisible" : "Mostra le informazioni del proprietario",
+      "isProfileColorActive" : "Usa il colore del profilo",
+      "isBrandColorActive" : "Usa il colore del brand"
+    }
+  },
   "HELLO": "Ciao2",
   "WELCOME": "Benvenuto nella nostra applicazione!"
 }
