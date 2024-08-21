@@ -306,12 +306,9 @@
                         <div class="col-12 mt-0 pt-0 flex align-items-center" *ngIf=" preview_image">
                             <div class="grid flex">
 
-                                <div class="col-4 mx-auto  text-center info">
-                                    <img src="https://{{preview_image}}" class="image-fluid">
+                                <div class="col-4 mx-auto  text-center info flex justify-content-center align-items-center align-content-center" *ngFor="let item of preview_image">
+                                    <img src="https://app.eulabel.it/backend/storage/app/{{item.url}}" class="image-fluid">
                                 </div>
-
-
-
                             </div>
                         </div>
 

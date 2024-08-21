@@ -386,13 +386,16 @@ export class ElabelComponent {
         this.form.get('packages').setValue(parseInt(response.data.packages[0].package_id))
       }
 
-      if (response.data.sub_image) {
+     if (response.data.sub_image) {
         this.sub_image = response.data.sub_image
+      } 
+      if (response.data.sustainibility_attachments) {
+        this.preview_image = response.data.sustainibility_attachments
       }
 
-      if (response.data.preview_image) {
+    /*   if (response.data.preview_image) {
         this.preview_image = response.data.preview_image
-      }
+      } */
       if (response.data.sustainibility_attachments) {
         this.sustainibility_attachments = response.data.sustainibility_attachments
       }
