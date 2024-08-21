@@ -64,7 +64,6 @@
                                                 <app-infobutton
                                                 [label]="'Brand'"></app-infobutton>
                                                 🇪🇺</label>
-                                                
                                                 <p-dropdown [options]="brands" [formControl]="form.get('brand_id')"
                                                 [showClear]="true" placeholder="Seleziona">
 
@@ -586,14 +585,17 @@
                                         [label]="'pages.sustainability.form.field3.helper'"></app-infobutton><span
                                         style="font-size:0.8rem;margin-left:5px;">(opzionale)</span></label>
 
-                                <div class="flex flex-row flex-wrap gap-2">
-                                    <div class="flex flex-col" *ngFor="let image of sustainibility_attachments">
-                                        <div class="flex">
+                                <div class="flex flex-row flex-wrap gap-2 mb-3">
+
+                                    <p-card *ngFor="let image of sustainibility_attachments" [style]="{height: '240px'}" class="relative">
                                             <img src="http://app.eulabel.it/backend/storage/app/{{image.url}}" 
                                             style="width:150px;height:auto">
-                                        </div>
-                                        <div class="flex"><b class="cursor-pointer" (click)="deletePreviewImage(image)">Rimuovi</b></div>
-                                    </div>
+                                        <ng-template pTemplate="footer" style="position: absolute;bottom:10px">
+                                            <div class="flex gap-3 mt-1">
+                                                <p-button label="Cancel" severity="secondary" class="w-full" styleClass="w-full" (click)="deletePreviewImage(image)"/>
+                                            </div>
+                                        </ng-template>
+                                    </p-card> 
                                 </div>
                                     <p-fileUpload 
                                         #previewUpload

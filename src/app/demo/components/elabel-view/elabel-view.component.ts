@@ -7,26 +7,21 @@ import { ElabelService } from '../../service/elabel.service';
 import { TranslateService } from '@ngx-translate/core';
 import { BrandService } from '../../service/brand.service';
 import { of } from 'rxjs';
-import { SettingService } from '../../service/setting.service';
-import { FileUpload } from 'primeng/fileupload';
-import { DropdownFilterOptions } from 'primeng/dropdown';
 
 @Component({
-  selector: 'app-elabel',
-  templateUrl: './elabel.component.html',
-  styleUrls: ['./elabel.component.scss']
+  selector: 'app-elabel-view',
+  templateUrl: './elabel-view.component.html',
+  styleUrls: ['./elabel-view.component.scss']
 })
-export class ElabelComponent {
+export class ElabelViewComponent {
+
   @ViewChild('qrcodewrapper', { static: false }) el: ElementRef<HTMLCanvasElement>;
-  @ViewChild('previewUpload') fileUpload: FileUpload;
   qrDialog = false
 
   form: FormGroup
-  settings: FormArray
   id = ''
   brand = ''
   preview_image = ''
-  sustainibility_attachments = []
   sub_image = ''
   user_id = ''
   breadcrumbItems: MenuItem[] = [];
@@ -55,18 +50,12 @@ export class ElabelComponent {
   msgs: Message[] = [];
   preview:boolean=false
   sidebarVisible: boolean = false;
-  loading: boolean = true;
-  companyName=''
-  primary_color=''
-  companyLogo=''
+  loading: boolean = true; // Initialize loading state
 
-  constructor(private fb: FormBuilder, private t: TranslateService, private brandService: BrandService, private settingService: SettingService, private service: ElabelService, private confirmationService: ConfirmationService, private messageService: MessageService, private _location: Location, private route: ActivatedRoute) {
+  constructor(private fb: FormBuilder, private t: TranslateService, private brandService: BrandService, private service: ElabelService, private confirmationService: ConfirmationService, private messageService: MessageService, private _location: Location, private route: ActivatedRoute) {
     this. sidebarVisible = false;
     let request = JSON.parse(localStorage.getItem('user'))
     this.user_id = request.id
-    this.companyName=request.company_name
-    this.primary_color=request.primary_color
-    this.companyLogo=request.image
 
     this.form = this.fb.group({
       id: [null, Validators.required],
@@ -104,32 +93,19 @@ export class ElabelComponent {
       type: [null, Validators.required]
     })
 
-    this.settingService.all(parseInt(this.user_id)).subscribe((response)=>{
-      this.settings = new FormArray([])
-      for(let setting of response.data) {
-        if(setting.valueV === null)
-          setting.valueV = setting.defaultV
-        if(setting.type == "radio" && (setting.valueV == "true" || setting.valueV == "false"))
-          setting.valueV = setting.valueV === "true"
-        if(setting.type == "radio" && (setting.valueV == "1" || setting.valueV == "0"))
-          setting.valueV = setting.valueV === "1"
-        this.settings.push(this.fb.group(setting))
-      }
-    })
 
+    this.breadcrumbItems = [];
+    this.breadcrumbItems.push({ label: 'E-labels' });
 
+    
   }
 
   ngOnInit() {
     this.route.paramMap.subscribe((params: ParamMap) => {
-      debugger
-      let id = params.get('id');
+      const id = params.get('id');
       const brand = params.get('brand');
       if(brand) {
-        const b = JSON.parse(brand)
-        if(b.elabelId)
-          id = b.elabelId
-        this.form.get('brand_id').setValue(b)
+        this.form.get('brand_id').setValue(JSON.parse(brand))
       }
       this.service.getOptions().subscribe((response) => {
         const data = response.data
@@ -306,6 +282,8 @@ export class ElabelComponent {
   isRulePresent(id:number) {
     return this.rules.controls.filter((e)=>e.get('id').value ==id).length != 0
   }
+  
+
 
   searchCountry(event: any) {
     const filtered: any[] = [];
@@ -362,10 +340,11 @@ export class ElabelComponent {
   get() {
     this.service.get(this.id).subscribe((response) => {
       this.form.patchValue(response.data)
+
       if (response.data.vintage_year) {
         this.form.get('vintage_year').setValue(new Date(response.data.vintage_year))
       }
-     
+      debugger
       if (response.data.brand) {
         this.form.get('brand_id').setValue(response.data.brand)
       }
@@ -391,32 +370,17 @@ export class ElabelComponent {
         this.form.get('packages').setValue(parseInt(response.data.packages[0].package_id))
       }
 
-     if (response.data.sub_image) {
+      if (response.data.sub_image) {
         this.sub_image = response.data.sub_image
-      } 
-      if (response.data.sustainibility_attachments) {
-        this.preview_image = response.data.sustainibility_attachments
       }
 
-    /*   if (response.data.preview_image) {
+      if (response.data.preview_image) {
         this.preview_image = response.data.preview_image
-      } */
-      if (response.data.sustainibility_attachments) {
-        this.sustainibility_attachments = response.data.sustainibility_attachments
       }
 
-      
 
-      this.breadcrumbItems = [];
-      this.breadcrumbItems.push({ label: 'E-labels', routerLink : "/dashboard" });
       this.breadcrumbItems.push({ label: this.form.get('product_name').value });
       this.breadcrumbItems = [...this.breadcrumbItems]
-    })
-  }
-
-  deletePreviewImage(image) {
-    this.service.deletePreviewImage(image).subscribe(()=>{
-      this.get()
     })
   }
 
@@ -488,18 +452,5 @@ getMaterialNumberPart(label:string) {
   return group.split(" ")[1]
 
 }
-
-saveSetting() {
-  this.settingService.save({data : this.settings.value}).subscribe(
-    (response) => {
-      this.showBottomCenter()
-      this.messageService.add({ key: 'tst', severity: 'success', summary: 'Success Message', detail: 'Message sent' });
-    },
-    error => {
-      this.messageService.add({ key: 'tst', severity: 'error', summary: 'Error Message', detail: 'Validation failed' });
-    }
-  )
-}
-
 
 }

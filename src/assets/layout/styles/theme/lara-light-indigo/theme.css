@@ -4163,6 +4163,8 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
 }
 .p-card .p-card-footer {
   padding: 1.25rem 0 0 0;
+  position:absolute;
+  bottom:10px;
 }
 
 .p-divider .p-divider-content {

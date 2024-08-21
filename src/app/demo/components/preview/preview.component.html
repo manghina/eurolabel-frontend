@@ -1,3 +1,5 @@
+
+
 <div class="relative lg:fixed preview" *ngIf="!preview">
     <div class="outside-border">
         <div class="silencer"></div>
@@ -304,12 +306,9 @@
                         <div class="col-12 mt-0 pt-0 flex align-items-center" *ngIf=" preview_image">
                             <div class="grid flex">
 
-                                <div class="col-4 mx-auto  text-center info">
-                                    <img src="https://{{preview_image}}" class="image-fluid">
+                                <div class="col-4 mx-auto  text-center info flex justify-content-center align-items-center align-content-center" *ngFor="let item of preview_image">
+                                    <img src="https://app.eulabel.it/backend/storage/app/{{item.url}}" class="image-fluid">
                                 </div>
-
-
-
                             </div>
                         </div>
 
@@ -430,7 +429,7 @@
 
 
 <!--SIDEBAR PREVIEW-->
-<div class="container_preview" *ngIf="preview">
+<div class="container_preview" *ngIf="preview || urlPath=='viewelabel'">
     <div class="grid p-fluid p-2">
         <div class="col-12" [ngStyle]="{'background-color':(primary_color!=null) ? primary_color : 'black' }">
             <div *ngIf="form.get('product_name').value">
@@ -442,7 +441,7 @@
             style="margin-bottom:-15px;z-index: 1;" *ngIf="sub_image">
             <div class="grid">
                 <div class="col"></div>
-                <div class="col-6 text-center shadow-1" style="background-color: white">
+                <div class="col-6 flex justify-content-center text-center shadow-1" style="background-color: white">
                     <img src="https://{{sub_image}}" class="image-fluid">
                 </div>
                 <div class="col"></div>

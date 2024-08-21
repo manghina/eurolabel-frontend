@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { PreviewComponent } from './preview.component';
+import { ElabelViewComponent } from './elabel-view.component';
 
 @NgModule({
     imports: [RouterModule.forChild([
-        { path: '', component: PreviewComponent }
+        { path: '', component: ElabelViewComponent }
     ])],
     exports: [RouterModule]
 })
-export class PreviewRoutingModule { }
-
+export class ElabelViewRoutingModule { }
