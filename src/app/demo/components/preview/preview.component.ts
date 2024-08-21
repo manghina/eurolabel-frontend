@@ -18,7 +18,7 @@ export class PreviewComponent implements OnChanges, OnInit {
   @Input() sub_image = ''
   @Input() preview_image = ''
   @Input() preview = ''
-  show_portion:boolean=false
+  show_portion: boolean = false
   @Input() types = []
   @Input() packages = []
   @Input() ingredients = []
@@ -32,7 +32,7 @@ export class PreviewComponent implements OnChanges, OnInit {
   urlPath = ''
 
   constructor(private fb: FormBuilder, public layoutService: LayoutService, private t: TranslateService, private service: ElabelService, private confirmationService: ConfirmationService, private messageService: MessageService, private _location: Location, private route: ActivatedRoute, private router: Router) {
-   this.urlPath = this.router.url.split('/')[1];
+    this.urlPath = this.router.url.split('/')[1];
   }
   ngOnChanges(changes: SimpleChanges): void {
 
@@ -40,7 +40,7 @@ export class PreviewComponent implements OnChanges, OnInit {
 
 
   ngOnInit(): void {
-    
+    console.log(this.brand)
   }
 
   save() {
@@ -67,37 +67,37 @@ export class PreviewComponent implements OnChanges, OnInit {
 
 
 
-  getPackages(n:number) {
-    if(this.packages.length>0) {
-      const item = this.packages.filter((e)=>e.id==n)
-      if(item.length)
+  getPackages(n: number) {
+    if (this.packages.length > 0) {
+      const item = this.packages.filter((e) => e.id == n)
+      if (item.length)
         return item[0].label
     }
     return ''
   }
 
-  getType(n:number) {
-    if(this.types.length) {
-      const item = this.types.filter((e)=>e.id==n)
-      if(item.length)
-      return item[0].label
+  getType(n: number) {
+    if (this.types.length) {
+      const item = this.types.filter((e) => e.id == n)
+      if (item.length)
+        return item[0].label
     }
     return ''
   }
 
-  getGeographicalIndication(n:number) {
-    if(this.geoGraphicalIndication.length) {
-      const item = this.geoGraphicalIndication.filter((e)=>e.id==n)
-      if(item.length)
-      return item[0].label
+  getGeographicalIndication(n: number) {
+    if (this.geoGraphicalIndication.length) {
+      const item = this.geoGraphicalIndication.filter((e) => e.id == n)
+      if (item.length)
+        return item[0].label
     }
     return ''
   }
 
-  getContainer(n:number) {
-    for(let k in this.containers) {
-      for(let c of this.containers[k].items) {
-        if(c.id == n) {
+  getContainer(n: number) {
+    for (let k in this.containers) {
+      for (let c of this.containers[k].items) {
+        if (c.id == n) {
           return c
         }
       }
@@ -105,10 +105,10 @@ export class PreviewComponent implements OnChanges, OnInit {
     return ''
   }
 
-  getMaterial(n:number) {
-    for(let k in this.materials) {
-      for(let c of this.materials[k].items) {
-        if(c.id == n) {
+  getMaterial(n: number) {
+    for (let k in this.materials) {
+      for (let c of this.materials[k].items) {
+        if (c.id == n) {
           return c
         }
       }
@@ -116,40 +116,40 @@ export class PreviewComponent implements OnChanges, OnInit {
     return ''
   }
 
-  getIngredient(o:any) {
-    if(o.length > 0)
+  getIngredient(o: any) {
+    if (o.length > 0)
       return o[0].label
   }
 
-  getMaterialLabel(i:number) {
-    if(!this.rules.length)
+  getMaterialLabel(i: number) {
+    if (!this.rules.length)
       return ''
     const drule = this.rules.at(i).get('recycling_rule_materials_id').value
-    for(let r of this.materials) {
-      const rule = r.items.filter((e)=>e.id==drule)
-      if(!rule.length)
+    for (let r of this.materials) {
+      const rule = r.items.filter((e) => e.id == drule)
+      if (!rule.length)
         continue
-      
+
       return rule[0].label
     }
     return ''
   }
-  
-  getMaterialLabelPart(label:string) {
-    if(!label)
+
+  getMaterialLabelPart(label: string) {
+    if (!label)
       return ''
     const group = label.split(" - ")[1]
     return group.split(" ")[0]
   }
-  
-  getMaterialNumberPart(label:string) {
-    if(!label)
+
+  getMaterialNumberPart(label: string) {
+    if (!label)
       return ''
     const group = label.split(" - ")[1]
     return group.split(" ")[1]
-  
+
   }
-  getMaterialTitle(string){
+  getMaterialTitle(string) {
     let newString = string?.substring(0, string.indexOf(" -")).trim();
     return newString
   }

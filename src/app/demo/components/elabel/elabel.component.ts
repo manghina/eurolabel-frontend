@@ -24,7 +24,7 @@ export class ElabelComponent {
   form: FormGroup
   settings: FormArray
   id = ''
-  brand = ''
+  brand = {}
   preview_image = ''
   sustainibility_attachments = []
   sub_image = ''
@@ -73,7 +73,7 @@ export class ElabelComponent {
       qr: ['barbino', Validators.required],
       public_id: [null, Validators.required],
       user_id: [''],
-      brand_id: [null, Validators.required],
+      brand_id: [null],
       status: [0],
       name: [null, Validators.required],
       alcohol_content_percentage: [null],
