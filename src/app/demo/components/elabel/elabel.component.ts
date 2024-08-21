@@ -70,7 +70,7 @@ export class ElabelComponent {
 
     this.form = this.fb.group({
       id: [null, Validators.required],
-      qr: [null, Validators.required],
+      qr: ['barbino', Validators.required],
       public_id: [null, Validators.required],
       user_id: [''],
       brand_id: [null, Validators.required],
