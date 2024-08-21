@@ -24,19 +24,12 @@ export class PreviewComponent implements OnChanges, OnInit {
   @Input() containers = []
   @Input() materials = []
   xingredients = []
-  companyName
-  companyLogo
-  primary_color
+  @Input() companyName = ''
+  @Input() companyLogo = ''
+  @Input() primary_color = ''
   @Input() geoGraphicalIndication = []
 
   constructor(private fb: FormBuilder, public layoutService: LayoutService, private t: TranslateService, private service: ElabelService, private confirmationService: ConfirmationService, private messageService: MessageService, private _location: Location, private route: ActivatedRoute) {
-
-    let request = JSON.parse(localStorage.getItem('user'))
-    console.log(request)
-    this.companyName=request.company_name
-    this.primary_color=request.primary_color
-    this.companyLogo=request.image
-    
 
 
   }

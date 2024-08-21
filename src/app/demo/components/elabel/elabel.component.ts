@@ -9,6 +9,7 @@ import { BrandService } from '../../service/brand.service';
 import { of } from 'rxjs';
 import { SettingService } from '../../service/setting.service';
 import { FileUpload } from 'primeng/fileupload';
+import { DropdownFilterOptions } from 'primeng/dropdown';
 
 @Component({
   selector: 'app-elabel',
@@ -55,11 +56,17 @@ export class ElabelComponent {
   preview:boolean=false
   sidebarVisible: boolean = false;
   loading: boolean = true;
+  companyName=''
+  primary_color=''
+  companyLogo=''
 
   constructor(private fb: FormBuilder, private t: TranslateService, private brandService: BrandService, private settingService: SettingService, private service: ElabelService, private confirmationService: ConfirmationService, private messageService: MessageService, private _location: Location, private route: ActivatedRoute) {
     this. sidebarVisible = false;
     let request = JSON.parse(localStorage.getItem('user'))
     this.user_id = request.id
+    this.companyName=request.company_name
+    this.primary_color=request.primary_color
+    this.companyLogo=request.image
 
     this.form = this.fb.group({
       id: [null, Validators.required],
@@ -110,8 +117,6 @@ export class ElabelComponent {
       }
     })
 
-    this.breadcrumbItems = [];
-    this.breadcrumbItems.push({ label: 'E-labels' });
 
   }
 
@@ -399,7 +404,8 @@ export class ElabelComponent {
 
       
 
-
+      this.breadcrumbItems = [];
+      this.breadcrumbItems.push({ label: 'E-labels', routerLink : "/dashboard" });
       this.breadcrumbItems.push({ label: this.form.get('product_name').value });
       this.breadcrumbItems = [...this.breadcrumbItems]
     })
@@ -491,5 +497,6 @@ saveSetting() {
     }
   )
 }
+
 
 }
