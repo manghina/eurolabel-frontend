@@ -652,6 +652,10 @@
 
 
         <app-preview 
+        [brand]="form.get('brand_id')" 
+        [companyName]="companyName" 
+        [companyLogo]="companyLogo" 
+        [primary_color]="primary_color" 
         [materials]="materials" 
         [containers]="containers" 
         [packages]="packages" 
@@ -667,6 +671,7 @@
 
 <p-sidebar [(visible)]="sidebarVisible" [fullScreen]="true">
     <app-preview 
+    [brand]="form.get('brand_id')" 
     [companyName]="companyName" 
     [companyLogo]="companyLogo" 
     [primary_color]="primary_color" 

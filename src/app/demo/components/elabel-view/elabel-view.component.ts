@@ -20,7 +20,7 @@ export class ElabelViewComponent {
 
   form: FormGroup
   id = ''
-  brand = ''
+  brand = {}
   preview_image = ''
   sub_image = ''
   user_id = ''
@@ -34,6 +34,10 @@ export class ElabelViewComponent {
   previewImage = new FormControl()
   ingredient = new FormControl()
   tmp = new FormControl()
+
+  companyName = ''
+  companyLogo = ''
+  primary_color = ''
 
   brands = []
   countries = [];
@@ -338,13 +342,22 @@ export class ElabelViewComponent {
     this.get()
   }
   get() {
-    this.service.get(this.id).subscribe((response) => {
+    this.service.getByToken(this.id).subscribe((response) => {
+      // data => elabel
+      // brand => brand
+      // user => user
+
+      this.brand = response.brand
+      this.companyName = response.user.company_name
+      this.companyLogo = response.user.company_logo
+      this.primary_color = response.user.primary_color
+
+
       this.form.patchValue(response.data)
 
       if (response.data.vintage_year) {
         this.form.get('vintage_year').setValue(new Date(response.data.vintage_year))
       }
-      debugger
       if (response.data.brand) {
         this.form.get('brand_id').setValue(response.data.brand)
       }

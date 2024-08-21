@@ -13,6 +13,7 @@ import { LayoutService } from 'src/app/layout/service/app.layout.service';
   styleUrls: ['./preview.component.scss']
 })
 export class PreviewComponent implements OnChanges, OnInit {
+  @Input() brand: any
   @Input() form: FormGroup
   @Input() sub_image = ''
   @Input() preview_image = ''
