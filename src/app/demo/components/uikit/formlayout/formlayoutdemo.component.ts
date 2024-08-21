@@ -108,7 +108,6 @@ export class FormLayoutDemoComponent {
 
     ngOnInit() {
         this.loading = true
-        debugger
         if (this.sharedService.shareValue) {
             this.http
                 .get(

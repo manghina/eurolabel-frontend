@@ -69,7 +69,6 @@ export class RegisterComponent implements OnInit{
     }
 
     save() {
-       // debugger
         this.edit ? this.editSubmit() : this.registerSubmit()
     }
 

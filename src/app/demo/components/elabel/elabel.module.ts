@@ -40,6 +40,7 @@ import { QrcodedialogComponent } from 'src/app/qrcodedialog/qrcodedialog.compone
     DialogModule,
     QRCodeModule,
     RadioButtonModule,
+    CheckboxModule ,
     BreadcrumbModule,
     DialogModule,
     TabViewModule,
