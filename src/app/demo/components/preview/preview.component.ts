@@ -13,7 +13,7 @@ import { LayoutService } from 'src/app/layout/service/app.layout.service';
   styleUrls: ['./preview.component.scss']
 })
 export class PreviewComponent implements OnChanges, OnInit {
-  @Input() brand: any
+  @Input() brand :any
   @Input() form: FormGroup
   @Input() sub_image = ''
   @Input() preview_image = ''
@@ -37,12 +37,15 @@ export class PreviewComponent implements OnChanges, OnInit {
   ngOnChanges(changes: SimpleChanges): void {
 
   }
-
-
   ngOnInit(): void {
-    console.log(this.brand)
+
   }
 
+getColor() {
+    console.log(this.brand.value)
+    this.primary_color='#00ff00'
+    
+  }
   save() {
     this.service.save(this.form.value).subscribe((response) => {
       this.showBottomCenter()
@@ -153,4 +156,17 @@ export class PreviewComponent implements OnChanges, OnInit {
     let newString = string?.substring(0, string.indexOf(" -")).trim();
     return newString
   }
+
+  getCurrentColor() {
+    
+    if(this.brand.value) {
+      return this.brand.value?.color
+    }
+    if(this.primary_color) {
+      return this.primary_color
+    }
+    return 'black'
+  }
+
+  
 }

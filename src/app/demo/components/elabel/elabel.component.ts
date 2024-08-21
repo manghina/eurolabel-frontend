@@ -122,7 +122,7 @@ export class ElabelComponent {
 
   ngOnInit() {
     this.route.paramMap.subscribe((params: ParamMap) => {
-      debugger
+      
       let id = params.get('id');
       const brand = params.get('brand');
       if(brand) {

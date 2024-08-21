@@ -107,6 +107,7 @@ export class ElabelViewComponent {
   ngOnInit() {
     this.route.paramMap.subscribe((params: ParamMap) => {
       const id = params.get('id');
+      console.log(id)
       const brand = params.get('brand');
       if(brand) {
         this.form.get('brand_id').setValue(JSON.parse(brand))
