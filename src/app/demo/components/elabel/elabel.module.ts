@@ -31,11 +31,14 @@ import { SidebarModule } from 'primeng/sidebar';
 import { DialogModule } from 'primeng/dialog';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { QrcodedialogComponent } from 'src/app/qrcodedialog/qrcodedialog.component';
+import { PreviewModule } from '../preview/preview.module';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 @NgModule({
-  declarations: [ElabelComponent, PreviewComponent, QrcodedialogComponent],
+  declarations: [ElabelComponent, QrcodedialogComponent],
   imports: [
     CommonModule,
+    PreviewModule,
     PanelModule,
     DialogModule,
     QRCodeModule,
@@ -65,7 +68,8 @@ import { QrcodedialogComponent } from 'src/app/qrcodedialog/qrcodedialog.compone
     ElabelRoutingModule,
     TagModule,
     DividerModule,
-    SidebarModule
+    SidebarModule,
+    ProgressSpinnerModule
   ]
 })
 export class ElabelModule { }

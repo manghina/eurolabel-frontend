@@ -16,25 +16,34 @@ import { PanelModule } from 'primeng/panel';
 import { TableModule } from 'primeng/table';
 import { TabViewModule } from 'primeng/tabview';
 import { ToastModule } from 'primeng/toast';
-import { PreviewRoutingModule } from './preview-routing.module';
-import { PreviewComponent } from './preview.component';
+import { ElabelViewRoutingModule } from './elabel-view-routing.module';
+import { ElabelViewComponent } from './elabel-view.component';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { TranslateModule } from '@ngx-translate/core';
 import { InfobuttonModule } from '../uikit/infobutton/infobutton.module';
 import { FileUploadModule } from 'primeng/fileupload';
 import { CalendarModule } from 'primeng/calendar';
 import { QRCodeModule } from 'angularx-qrcode';
+import { PreviewComponent } from '../preview/preview.component';
+import { TagModule } from 'primeng/tag';
 import { DividerModule } from 'primeng/divider';
-import { ProgressSpinnerModule } from 'primeng/progressspinner';
-
+import { SidebarModule } from 'primeng/sidebar';
+import { DialogModule } from 'primeng/dialog';
+import { RadioButtonModule } from 'primeng/radiobutton';
+import { QrcodedialogComponent } from 'src/app/qrcodedialog/qrcodedialog.component';
+import { PreviewModule } from '../preview/preview.module';
 
 @NgModule({
-  declarations: [PreviewComponent],
+  declarations: [ElabelViewComponent],
   imports: [
     CommonModule,
+    PreviewModule,
     PanelModule,
+    DialogModule,
     QRCodeModule,
+    RadioButtonModule,
     BreadcrumbModule,
+    DialogModule,
     TabViewModule,
     CardModule,
     CalendarModule,
@@ -55,11 +64,10 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
     CheckboxModule,
     InputTextareaModule,
     InputTextModule,
+    ElabelViewRoutingModule,
+    TagModule,
     DividerModule,
-    ProgressSpinnerModule
-  ],
-  exports: [
-    PreviewComponent
+    SidebarModule
   ]
 })
-export class PreviewModule { }
+export class ElabelViewModule { }

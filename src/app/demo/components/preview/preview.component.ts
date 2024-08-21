@@ -1,7 +1,7 @@
 import { Location } from '@angular/common';
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { ConfirmationService, MenuItem, MessageService } from 'primeng/api';
 import { ElabelService } from '../../service/elabel.service';
 import { TranslateService } from '@ngx-translate/core';
@@ -28,8 +28,9 @@ export class PreviewComponent implements OnChanges, OnInit {
   companyLogo
   primary_color
   @Input() geoGraphicalIndication = []
+  urlPath
 
-  constructor(private fb: FormBuilder, public layoutService: LayoutService, private t: TranslateService, private service: ElabelService, private confirmationService: ConfirmationService, private messageService: MessageService, private _location: Location, private route: ActivatedRoute) {
+  constructor(private fb: FormBuilder, public layoutService: LayoutService, private t: TranslateService, private service: ElabelService, private confirmationService: ConfirmationService, private messageService: MessageService, private _location: Location, private route: ActivatedRoute, private router: Router) {
 
     let request = JSON.parse(localStorage.getItem('user'))
     console.log(request)
@@ -37,7 +38,8 @@ export class PreviewComponent implements OnChanges, OnInit {
     this.primary_color=request.primary_color
     this.companyLogo=request.image
     
-
+   this.urlPath = this.router.url.split('/')[1];
+   
 
   }
   ngOnChanges(changes: SimpleChanges): void {
