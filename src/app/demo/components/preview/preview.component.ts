@@ -14,6 +14,7 @@ import { LayoutService } from 'src/app/layout/service/app.layout.service';
 })
 export class PreviewComponent implements OnChanges, OnInit {
   @Input() brand :any
+  @Input() sustainibility_attachments = []
   @Input() form: FormGroup
   @Input() sub_image = ''
   @Input() preview_image = ''

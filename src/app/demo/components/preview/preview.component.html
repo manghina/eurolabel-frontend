@@ -321,6 +321,13 @@
                                         <img src="https://app.eulabel.it/backend/storage/app/{{item.url}}"
                                             class="image-fluid">
                                     </div>
+                                    <p-card *ngFor="let image of sustainibility_attachments" [style]="{height: '240px'}" class="relative">
+                                        <img src="http://app.eulabel.it/backend/storage/app/{{image.url}}" 
+                                        style="width:150px;height:auto">
+                                    <ng-template pTemplate="footer" style="position: absolute;bottom:10px">
+                                        
+                                    </ng-template>
+                                </p-card> 
                                 </div>
                             </div>
 

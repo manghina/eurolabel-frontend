@@ -28,6 +28,7 @@ export class ElabelViewComponent {
   filteredCountries: any[] = [];
   geographical_indication = 0
   options = []
+  sustainibility_attachments = []
   uploadedFiles = []
   type = new FormControl()
   sustainabilityImage = new FormControl()
@@ -348,6 +349,8 @@ export class ElabelViewComponent {
       // brand => brand
       // user => user
 
+
+
       this.brand = response.brand
       this.companyName = response.user.company_name
       this.companyLogo = response.user.company_logo
@@ -362,7 +365,9 @@ export class ElabelViewComponent {
       if (response.data.brand) {
         this.form.get('brand_id').setValue(response.data.brand)
       }
-
+      if (response.data.sustainibility_attachments) {
+        this.sustainibility_attachments = response.data.sustainibility_attachments
+      }
       if (response.data.geographical_indication.length) {
         this.form.get('geographical_indication').setValue(parseInt(response.data.geographical_indication[0].geographical_indication_id))
       }
