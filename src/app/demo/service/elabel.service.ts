@@ -33,8 +33,12 @@ export class ElabelService {
     return this.http.post(baseUrl + 'elabel', request)
   }
 
+  clone(request: any) : any {
+    return this.http.post(baseUrl + 'elabel-clone', request)
+  }
+
   deleteRecord(id: string) {
-    return this.http.delete<any>(baseUrl + 'elabel' + id)
+    return this.http.delete<any>(baseUrl + 'elabel/' + id)
   }
 
   getOptions() {

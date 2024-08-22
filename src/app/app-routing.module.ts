@@ -23,6 +23,7 @@ import { AppLayoutComponent } from './layout/app.layout.component';
                     { path: 'elabel-brand/:brand', loadChildren: () => import('./demo/components/elabel/elabel.module').then(m => m.ElabelModule) },
                 ],
                 canActivate: [AuthGuard]
+                // http://localhost:4200/frontend/#/viewelabel/5
             },
             {
                 path: 'uikit', component: FormLayoutDemoComponent,

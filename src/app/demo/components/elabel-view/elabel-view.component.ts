@@ -7,6 +7,7 @@ import { ElabelService } from '../../service/elabel.service';
 import { TranslateService } from '@ngx-translate/core';
 import { BrandService } from '../../service/brand.service';
 import { of } from 'rxjs';
+import { AuthService } from '../../service/auth.service';
 
 @Component({
   selector: 'app-elabel-view',
@@ -19,6 +20,8 @@ export class ElabelViewComponent {
   qrDialog = false
 
   form: FormGroup
+  logged = false
+  loaded = true
   id = ''
   brand = {}
   preview_image = ''
@@ -56,11 +59,20 @@ export class ElabelViewComponent {
   sidebarVisible: boolean = false;
   loading: boolean = true; // Initialize loading state
 
-  constructor(private fb: FormBuilder, private t: TranslateService, private brandService: BrandService, private service: ElabelService, private confirmationService: ConfirmationService, private messageService: MessageService, private _location: Location, private route: ActivatedRoute) {
+  constructor(private fb: FormBuilder, private auth : AuthService, private t: TranslateService, private brandService: BrandService, private service: ElabelService, private confirmationService: ConfirmationService, private messageService: MessageService, private _location: Location, private route: ActivatedRoute) {
     this. sidebarVisible = false;
-    let request = JSON.parse(localStorage.getItem('user'))
-    this.user_id = request.id
+    try {
+      let request = JSON.parse(localStorage.getItem('user'))
+      this.user_id = request.id
+      this.logged = true
+    } catch(e) {
+      
+    }
 
+   
+   
+
+    
     this.form = this.fb.group({
       id: [null, Validators.required],
       qr: [null, Validators.required],

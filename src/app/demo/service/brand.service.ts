@@ -26,7 +26,7 @@ export class BrandService {
   }
 
   deleteRecord(id: string) {
-    return this.http.delete<any>(baseUrl + 'brand' + id)
+    return this.http.delete<any>(baseUrl + 'brand/' + id)
   }
 
 }
