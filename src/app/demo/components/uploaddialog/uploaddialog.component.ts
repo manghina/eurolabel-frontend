@@ -1,11 +1,13 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { SafeUrl } from '@angular/platform-browser';
 import { FixMeLater, QRCodeElementType, QRCodeErrorCorrectionLevel } from 'angularx-qrcode';
-import { FileUpload } from 'primeng/fileupload';
-import { ImageCroppedEvent, ImageCropperModule, LoadedImage } from 'ngx-image-cropper';
+import { FileUpload, FileUploadModule } from 'primeng/fileupload';
+import { ImageCroppedEvent, ImageCropperComponent, LoadedImage } from 'ngx-image-cropper';
 
 type ListType = { title: string; val: number }[]
 @Component({
+  standalone: true,
+  imports: [ImageCropperComponent, FileUploadModule],
   selector: 'app-uploaddialog',
   templateUrl: './uploaddialog.component.html',
   styleUrls: ['./uploaddialog.component.scss']

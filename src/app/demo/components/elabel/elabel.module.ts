@@ -76,4 +76,5 @@ import { UploadDialogModule } from '../uploaddialog/uploaddialog.module';
     ProgressSpinnerModule
   ]
 })
+
 export class ElabelModule { }

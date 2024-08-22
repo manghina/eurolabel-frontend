@@ -9,6 +9,8 @@ import { BrandService } from '../../service/brand.service';
 import { SettingService } from '../../service/setting.service';
 import { FileUpload } from 'primeng/fileupload';
 
+import { ImageCropperComponent } from 'ngx-image-cropper';
+
 @Component({
   selector: 'app-elabel',
   templateUrl: './elabel.component.html',
