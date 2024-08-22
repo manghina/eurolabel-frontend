@@ -58,8 +58,8 @@ export class ElabelViewComponent {
 
   constructor(private fb: FormBuilder, private t: TranslateService, private brandService: BrandService, private service: ElabelService, private confirmationService: ConfirmationService, private messageService: MessageService, private _location: Location, private route: ActivatedRoute) {
     this. sidebarVisible = false;
-    let request = JSON.parse(localStorage.getItem('user'))
-    this.user_id = request.id
+    //let request = JSON.parse(localStorage.getItem('user'))
+    //this.user_id = request.id
 
     this.form = this.fb.group({
       id: [null, Validators.required],

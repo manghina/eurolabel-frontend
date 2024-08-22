@@ -29,7 +29,7 @@ export class PreviewComponent implements OnChanges, OnInit {
   @Input() companyLogo = ''
   @Input() primary_color = ''
   @Input() geoGraphicalIndication = []
-  urlPath = ''
+  urlPath:any = ''
 
   constructor(private fb: FormBuilder, public layoutService: LayoutService, private t: TranslateService, private service: ElabelService, private confirmationService: ConfirmationService, private messageService: MessageService, private _location: Location, private route: ActivatedRoute, private router: Router) {
     this.urlPath = this.router.url.split('/')[1];
@@ -41,11 +41,6 @@ export class PreviewComponent implements OnChanges, OnInit {
 
   }
 
-getColor() {
-    console.log(this.brand.value)
-    this.primary_color='#00ff00'
-    
-  }
   save() {
     this.service.save(this.form.value).subscribe((response) => {
       this.showBottomCenter()
@@ -156,17 +151,32 @@ getColor() {
     let newString = string?.substring(0, string.indexOf(" -")).trim();
     return newString
   }
-
+brand_name
+brand_image
   getCurrentColor() {
-    
+  if(this.urlPath!='viewelabel'){
     if(this.brand.value) {
+      this.brand_name=this.brand.value?.name
+      this.brand_image=this.brand.value?.image
       return this.brand.value?.color
     }
     if(this.primary_color) {
       return this.primary_color
     }
     return 'black'
+ 
+}else{
+  if(this.brand) {
+    this.brand_name=this.brand?.name
+    this.brand_image=this.brand?.image
+    return this.brand?.color
   }
+  if(this.primary_color) {
+    return this.primary_color
+  }
+  return 'black'
+}
 
+}
   
 }
