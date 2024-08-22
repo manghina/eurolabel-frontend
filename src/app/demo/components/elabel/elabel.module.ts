@@ -32,13 +32,15 @@ import { DialogModule } from 'primeng/dialog';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { PreviewModule } from '../preview/preview.module';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
-import { QrcodedialogModule } from 'src/app/qrcodedialog/qrcodedialog.module';
+import { QrcodedialogModule } from 'src/app/demo/components/qrcodedialog/qrcodedialog.module';
+import { UploadDialogModule } from '../uploaddialog/uploaddialog.module';
 
 @NgModule({
   declarations: [ElabelComponent],
   imports: [
     CommonModule,
     PreviewModule,
+    UploadDialogModule,
     QrcodedialogModule,
     PanelModule,
     DialogModule,

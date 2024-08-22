@@ -1,0 +1,28 @@
+<div class="grid" >
+    <div class="col-12 flex justify-content-center">
+        <div class="grid">
+            <div class="flex text-center col-12 mx-auto justify-content-center align-items-center align-content-center">
+
+                <p-fileUpload #fileUpload name="demo[]" mode="basic" chooseIcon="pi pi-upload"
+                    url="https://app.eulabel.it/backend/upload-single/{{id}}" accept="image/*"
+                    maxFileSize="1000000" [auto]="false" (onSelect)="onFileSelected($event)" (onUpload)="onBasicUpload()"
+                    chooseLabel="Browse" />
+
+                    <image-cropper
+                    [imageFile]="imageFile"
+                    [maintainAspectRatio]="true"
+                    [aspectRatio]="4 / 3"
+                    format="jpeg"
+                    (imageCropped)="imageCropped($event)"
+                    (imageLoaded)="imageLoaded($event)"
+                    (cropperReady)="cropperReady()"
+                    (loadImageFailed)="loadImageFailed()"
+                ></image-cropper>
+            
+                <img [src]="croppedImage" />
+
+            </div>
+        </div>
+    </div>
+
+</div>

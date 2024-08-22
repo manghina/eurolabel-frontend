@@ -6,10 +6,8 @@ import { ConfirmationService, MenuItem, Message, MessageService } from 'primeng/
 import { ElabelService } from '../../service/elabel.service';
 import { TranslateService } from '@ngx-translate/core';
 import { BrandService } from '../../service/brand.service';
-import { of } from 'rxjs';
 import { SettingService } from '../../service/setting.service';
 import { FileUpload } from 'primeng/fileupload';
-import { DropdownFilterOptions } from 'primeng/dropdown';
 
 @Component({
   selector: 'app-elabel',
@@ -20,6 +18,7 @@ export class ElabelComponent {
   @ViewChild('qrcodewrapper', { static: false }) el: ElementRef<HTMLCanvasElement>;
   @ViewChild('previewUpload') fileUpload: FileUpload;
   qrDialog = false
+  uploadDialog = false
 
   form: FormGroup
   settings: FormArray

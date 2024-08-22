@@ -28,7 +28,7 @@ import { ToastModule } from 'primeng/toast';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { PanelModule } from 'primeng/panel';
 import { NgxColorsModule } from 'ngx-colors';
-import { QrcodedialogModule } from 'src/app/qrcodedialog/qrcodedialog.module';
+import { QrcodedialogModule } from 'src/app/demo/components/qrcodedialog/qrcodedialog.module';
 
 @NgModule({
     imports: [
