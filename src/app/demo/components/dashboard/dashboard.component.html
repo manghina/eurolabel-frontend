@@ -98,10 +98,17 @@
                                 href="javascript:void(0)">{{item.name}}</a>
                         </div>
                         <div class="col-6 flex justify-content-end align-content-center align-items-center my-0 py-0">
-                            <p-menu #menu_elabel [model]="items_elabel" [popup]="true" />
-                            <p-button (onClick)="menu_elabel.toggle($event)" icon="pi pi-ellipsis-v"
+
+                                    <p-menu #menu_brand popup="popup" [model]="getMenuItemsForItemBrand(item)"></p-menu>
+                                    <p-button icon="pi pi-ellipsis-v"
+                                    styleClass="p-button-sm p-button-outlined p-button-secondary"
+                                    class="flex md:hidden" (click)="menu_brand.toggle($event)"></p-button>
+
+
+                            <!-- <p-menu #menu_elabel [model]="items_elabel" [popup]="true" />
+                            <p-button (onClick)="menu_elabel.toggle(item.id)" icon="pi pi-ellipsis-v"
                                 styleClass="p-button-sm p-button-outlined p-button-secondary"
-                                class="flex md:hidden" />
+                                class="flex md:hidden" /> -->
 
                             <p-button icon="pi pi-pencil" pTooltip="Modifica Brand" (click)="editBrand(item.id)"
                                 styleClass="p-button-sm p-button-outlined p-button-secondary"
@@ -161,10 +168,17 @@
                                 </div>
                                 <div
                                     class="col-6 flex justify-content-end align-content-center align-items-center">
-                                    <p-menu #menu [model]="items_elabel" [popup]="true" />
+
+
+                                    <p-menu #menu_elabel popup="popup" [model]="getMenuItemsForItemElabel(label)"></p-menu>
+                                    <p-button icon="pi pi-ellipsis-v"
+                                    styleClass="p-button-sm p-button-outlined p-button-secondary"
+                                    class="flex md:hidden" (click)="menu_elabel.toggle($event)"></p-button>
+
+                               <!--      <p-menu #menu [model]="items_elabel" [popup]="true" />
                                     <p-button (onClick)="menu.toggle($event)" icon="pi pi-ellipsis-v"
                                         styleClass="p-button-sm p-button-outlined p-button-secondary"
-                                        class="flex md:hidden" />
+                                        class="flex md:hidden" /> -->
 
                                     <p-button icon="pi pi-pencil" pTooltip="Modifica"
                                         styleClass="p-button-sm p-button-outlined p-button-secondary"

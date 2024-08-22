@@ -61,17 +61,6 @@ export class ElabelViewComponent {
 
   constructor(private fb: FormBuilder, private auth : AuthService, private t: TranslateService, private brandService: BrandService, private service: ElabelService, private confirmationService: ConfirmationService, private messageService: MessageService, private _location: Location, private route: ActivatedRoute) {
     this. sidebarVisible = false;
-    try {
-      let request = JSON.parse(localStorage.getItem('user'))
-      this.user_id = request.id
-      this.logged = true
-    } catch(e) {
-      
-    }
-
-   
-   
-
     
     this.form = this.fb.group({
       id: [null, Validators.required],
@@ -119,6 +108,7 @@ export class ElabelViewComponent {
   ngOnInit() {
     this.route.paramMap.subscribe((params: ParamMap) => {
       const id = params.get('id');
+      console.log(id)
       const brand = params.get('brand');
       if(brand) {
         this.form.get('brand_id').setValue(JSON.parse(brand))
@@ -135,60 +125,6 @@ export class ElabelViewComponent {
         this.types = data.types.map(e => { e.value = e.id; return e })
         this.fullIngredientList = data.ingredients
         let ingredients = data.ingredients.map(e => { e.value = e.id; return e })
-
-        // containers = containers
-        //   .reduce((acc, obj) => {
-        //     const key = obj.group;
-        //     if (!acc[key]) {
-        //       acc[key] = [];
-        //     }
-        //     acc[key].push(obj);
-        //     return acc;
-        //   }, {});
-        // for (let c in containers) {
-        //   const key = c;
-        //   const items = containers[c];
-        //   this.containers.push({
-        //     label: c,
-        //     items: items
-        //   })
-        // }
-
-        // materials = materials
-        //   .reduce((acc, obj) => {
-        //     const key = obj.group;
-        //     if (!acc[key]) {
-        //       acc[key] = [];
-        //     }
-        //     acc[key].push(obj);
-        //     return acc;
-        //   }, {});
-        // for (let c in materials) {
-        //   const key = c;
-        //   const items = materials[c];
-        //   this.materials.push({
-        //     label: c,
-        //     items: items
-        //   })
-        // }
-
-        // ingredients = ingredients
-        //   .reduce((acc, obj) => {
-        //     const key = obj.group;
-        //     if (!acc[key]) {
-        //       acc[key] = [];
-        //     }
-        //     acc[key].push(obj);
-        //     return acc;
-        //   }, {});
-        // for (let c in ingredients) {
-        //   const key = c;
-        //   const items = ingredients[c];
-        //   this.ingredients.push({
-        //     label: c,
-        //     items: items
-        //   })
-        // }
 
         // Group containers, materials, and ingredients by their respective groups
         containers = this.groupBy(containers, 'group');
