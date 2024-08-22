@@ -67,7 +67,7 @@ export class AuthService {
                 } else {
                     x.next(false);
                 }
-            },1000)
+            },2000)
 
         });
     }

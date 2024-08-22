@@ -7,6 +7,7 @@ import { ElabelService } from '../../service/elabel.service';
 import { TranslateService } from '@ngx-translate/core';
 import { BrandService } from '../../service/brand.service';
 import { of } from 'rxjs';
+import { AuthService } from '../../service/auth.service';
 
 @Component({
   selector: 'app-elabel-view',
@@ -19,6 +20,8 @@ export class ElabelViewComponent {
   qrDialog = false
 
   form: FormGroup
+  logged = false
+  loaded = true
   id = ''
   brand = {}
   preview_image = ''
@@ -57,11 +60,9 @@ export class ElabelViewComponent {
   sidebarVisible: boolean = false;
   loading: boolean = true; // Initialize loading state
 
-  constructor(private fb: FormBuilder, private t: TranslateService, private brandService: BrandService, private service: ElabelService, private confirmationService: ConfirmationService, private messageService: MessageService, private _location: Location, private route: ActivatedRoute) {
+  constructor(private fb: FormBuilder, private auth : AuthService, private t: TranslateService, private brandService: BrandService, private service: ElabelService, private confirmationService: ConfirmationService, private messageService: MessageService, private _location: Location, private route: ActivatedRoute) {
     this. sidebarVisible = false;
-    //let request = JSON.parse(localStorage.getItem('user'))
-    //this.user_id = request.id
-
+    
     this.form = this.fb.group({
       id: [null, Validators.required],
       qr: [null, Validators.required],
@@ -125,60 +126,6 @@ export class ElabelViewComponent {
         this.types = data.types.map(e => { e.value = e.id; return e })
         this.fullIngredientList = data.ingredients
         let ingredients = data.ingredients.map(e => { e.value = e.id; return e })
-
-        // containers = containers
-        //   .reduce((acc, obj) => {
-        //     const key = obj.group;
-        //     if (!acc[key]) {
-        //       acc[key] = [];
-        //     }
-        //     acc[key].push(obj);
-        //     return acc;
-        //   }, {});
-        // for (let c in containers) {
-        //   const key = c;
-        //   const items = containers[c];
-        //   this.containers.push({
-        //     label: c,
-        //     items: items
-        //   })
-        // }
-
-        // materials = materials
-        //   .reduce((acc, obj) => {
-        //     const key = obj.group;
-        //     if (!acc[key]) {
-        //       acc[key] = [];
-        //     }
-        //     acc[key].push(obj);
-        //     return acc;
-        //   }, {});
-        // for (let c in materials) {
-        //   const key = c;
-        //   const items = materials[c];
-        //   this.materials.push({
-        //     label: c,
-        //     items: items
-        //   })
-        // }
-
-        // ingredients = ingredients
-        //   .reduce((acc, obj) => {
-        //     const key = obj.group;
-        //     if (!acc[key]) {
-        //       acc[key] = [];
-        //     }
-        //     acc[key].push(obj);
-        //     return acc;
-        //   }, {});
-        // for (let c in ingredients) {
-        //   const key = c;
-        //   const items = ingredients[c];
-        //   this.ingredients.push({
-        //     label: c,
-        //     items: items
-        //   })
-        // }
 
         // Group containers, materials, and ingredients by their respective groups
         containers = this.groupBy(containers, 'group');

@@ -30,15 +30,16 @@ import { DividerModule } from 'primeng/divider';
 import { SidebarModule } from 'primeng/sidebar';
 import { DialogModule } from 'primeng/dialog';
 import { RadioButtonModule } from 'primeng/radiobutton';
-import { QrcodedialogComponent } from 'src/app/qrcodedialog/qrcodedialog.component';
 import { PreviewModule } from '../preview/preview.module';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { QrcodedialogModule } from 'src/app/qrcodedialog/qrcodedialog.module';
 
 @NgModule({
-  declarations: [ElabelComponent, QrcodedialogComponent],
+  declarations: [ElabelComponent],
   imports: [
     CommonModule,
     PreviewModule,
+    QrcodedialogModule,
     PanelModule,
     DialogModule,
     QRCodeModule,

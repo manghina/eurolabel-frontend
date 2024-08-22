@@ -4,7 +4,7 @@ import { Router, RouterLink } from '@angular/router';
 import { LayoutService } from 'src/app/layout/service/app.layout.service';
 import { ElabelService } from '../../service/elabel.service';
 import { UserService } from '../../service/user.service';
-import { MenuItem, MessageService } from 'primeng/api';
+import { ConfirmationService, MenuItem, MessageService } from 'primeng/api';
 import { BrandService } from '../../service/brand.service';
 import { PrimeIcons } from 'primeng/api';
 
@@ -12,6 +12,8 @@ import { PrimeIcons } from 'primeng/api';
     templateUrl: './dashboard.component.html',
 })
 export class DashboardComponent implements OnInit {
+    qrDialog = false
+    qr = ''
     left = PrimeIcons.ARROW_LEFT
     right = PrimeIcons.ARROW_RIGHT
     step = 0
@@ -45,8 +47,9 @@ export class DashboardComponent implements OnInit {
         image: null,
 
     })
+    
 
-    constructor(private router: Router, private fb: FormBuilder, private messageService: MessageService, private brandService: BrandService, private userService: UserService, private service: ElabelService, public layoutService: LayoutService) {
+    constructor(private router: Router, private fb: FormBuilder,private confirmationService : ConfirmationService, private messageService: MessageService, private brandService: BrandService, private userService: UserService, private service: ElabelService, public layoutService: LayoutService) {
 
         let request = JSON.parse(localStorage.getItem('user'))
         this.companyName.setValue(request.company_name)
@@ -75,13 +78,11 @@ export class DashboardComponent implements OnInit {
             { label: 'Duplica', icon: 'pi pi-fw pi-copy' }
         ];
         this.items_brand = [
-            {
-                label: 'Modifica Brand', icon: 'pi pi-fw pi-pencil',
-                command: (e) => {
+            { label: 'Modifica Brand 2', icon: 'pi pi-fw pi-pencil', 
+                command: (e: any) => {
                     debugger
-                    //this.editBrand(29);
-                }
-            },
+                this.editBrand(e.id);
+            }},
             { label: 'Qr Code', icon: 'pi pi-fw pi-qrcode' },
             { label: 'Nuova E-Label', icon: 'pi pi-fw pi-plus' },
         ];
@@ -135,16 +136,7 @@ export class DashboardComponent implements OnInit {
     }
 
     save() {
-        /*
-        this.edit = false
-        let request = JSON.parse(localStorage.getItem('user'))
-        request.company_name = this.companyName.value;
-        this.userService.save(request).subscribe((response)=>{
-            localStorage.setItem('user', JSON.stringify(response))
-            this.user = response
-            this.edit = false;
-        })
-        */
+
     }
 
     saveBrand() {
@@ -198,7 +190,70 @@ export class DashboardComponent implements OnInit {
         })
     }
 
+    showQrElabel(label) {
+        this.qr = label.qr
+        this.qrDialog = true
+    }
 
+    cloneElabel(label) {
+        this.service.clone({id: label.id, userid : this.userid}).subscribe((response: any) => {
+            this.service.all(this.userid).subscribe((response: any) => {
+                this.labelsDraft = response.data.filter((e)=>e.status == 0)
+                this.labelsPublishied = response.data.filter((e)=>e.status == 1)
+                this.labels = response.data
+            })
+        })
+    }
+
+
+    deleteElabel(label: any) {
+        this.confirmationService.confirm({
+          target: event.target as EventTarget,
+          key: 'confirm1',
+          message: 'Confermi di voler eliminare il record?',
+          icon: 'pi pi-exclamation-triangle',
+          accept: () => {
+            this.service.deleteRecord(label.id).subscribe(()=>{
+                this.messageService.add({ key: 'tst', severity: 'success', summary: 'Rimosso', detail: 'Il record è stato eliminato' });
+                this.service.all(this.userid).subscribe((response: any) => {
+                    this.labelsDraft = response.data.filter((e)=>e.status == 0)
+                    this.labelsPublishied = response.data.filter((e)=>e.status == 1)
+                    this.labels = response.data
+                })                
+            })
+
+          },
+          reject: () => {
+          }
+        });
+    }
+
+    editQrBrand(item) {
+        // need qr brand
+        this.qr = 'accipigna'
+        this.qrDialog = true
+    }
+
+    deleteBrand(label: any) {
+        this.confirmationService.confirm({
+          target: event.target as EventTarget,
+          key: 'confirm1',
+          message: 'Confermi di voler eliminare il record?',
+          icon: 'pi pi-exclamation-triangle',
+          accept: () => {
+            this.brandService.deleteRecord(label.id).subscribe(()=>{
+                this.messageService.add({ key: 'tst', severity: 'success', summary: 'Rimosso', detail: 'Il record è stato eliminato' });
+                this.brandService.all(this.userid).subscribe((response: any) => {
+                    this.brands = response.data
+                })                
+            })
+
+          },
+          reject: () => {
+          }
+        });
+    }
+    
 
 
 }

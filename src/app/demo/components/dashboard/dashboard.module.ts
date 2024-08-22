@@ -28,12 +28,14 @@ import { ToastModule } from 'primeng/toast';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { PanelModule } from 'primeng/panel';
 import { NgxColorsModule } from 'ngx-colors';
+import { QrcodedialogModule } from 'src/app/qrcodedialog/qrcodedialog.module';
 
 @NgModule({
     imports: [
         CommonModule,
         NgxColorsModule,
         TranslateModule,
+        QrcodedialogModule,
         ToastModule,
         FormsModule,
         ChartModule,
