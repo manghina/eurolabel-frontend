@@ -42,7 +42,7 @@ export class ElabelViewComponent {
   companyName = ''
   companyLogo = ''
   primary_color = ''
-
+  settingsValue : any[] = []
   brands = []
   countries = [];
   states = [];
@@ -296,8 +296,7 @@ export class ElabelViewComponent {
       // brand => brand
       // user => user
 
-
-
+      this.settingsValue = response.settings
       this.brand = response.brand
       this.companyName = response.user.company_name
       this.companyLogo = response.user.company_logo

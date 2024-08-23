@@ -660,6 +660,7 @@
         </div>
     </div>
         <app-preview 
+        [settings]="settingsValue" 
         [brand]="form.get('brand_id')" 
         [companyName]="companyName" 
         [companyLogo]="companyLogo" 
@@ -680,6 +681,7 @@
 <p-sidebar [(visible)]="sidebarVisible" [fullScreen]="true">
     <app-preview 
     [sustainibility_attachments]="sustainibility_attachments"
+    [settings]="settingsValue" 
     [brand]="form.get('brand_id')" 
     [companyName]="companyName" 
     [companyLogo]="companyLogo" 

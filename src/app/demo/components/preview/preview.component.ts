@@ -15,6 +15,7 @@ import { LayoutService } from 'src/app/layout/service/app.layout.service';
 export class PreviewComponent implements OnChanges, OnInit {
   @Input() brand :any
   @Input() sustainibility_attachments = []
+  @Input() settings: any[] = []
   @Input() form: FormGroup
   @Input() sub_image = ''
   @Input() preview_image = ''
@@ -34,6 +35,7 @@ export class PreviewComponent implements OnChanges, OnInit {
 
   constructor(private fb: FormBuilder, public layoutService: LayoutService, private t: TranslateService, private service: ElabelService, private confirmationService: ConfirmationService, private messageService: MessageService, private _location: Location, private route: ActivatedRoute, private router: Router) {
     this.urlPath = this.router.url.split('/')[1];
+
   }
   ngOnChanges(changes: SimpleChanges): void {
 
@@ -156,28 +158,42 @@ brand_name
 brand_image
   getCurrentColor() {
   if(this.urlPath!='viewelabel'){
-    if(this.brand.value) {
+    if(this.brand.value && this.checkIfValueExists('isBrandColorActive')) {
       this.brand_name=this.brand.value?.name
       this.brand_image=this.brand.value?.image
       return this.brand.value?.color
     }
-    if(this.primary_color) {
+    if(this.primary_color && this.checkIfValueExists('isProfileColorActive')) {
       return this.primary_color
     }
     return 'black'
  
 }else{
-  if(this.brand) {
+  if(this.brand && this.checkIfValueExists('isBrandColorActive')) {
     this.brand_name=this.brand?.name
     this.brand_image=this.brand?.image
     return this.brand?.color
   }
-  if(this.primary_color) {
+  if(this.primary_color && this.checkIfValueExists('isProfileColorActive')) {
     return this.primary_color
   }
   return 'black'
 }
 
 }
-  
+
+checkIfValueExists(value: string): boolean {
+  try {
+    return this.settings.filter(obj => obj.keyV === value)[0]['valueV']
+  } catch (e) {
+    return false
+  }
+}
+
+checkValue() {
+  const valueToCheck = 'value1';
+  const exists = this.checkIfValueExists(valueToCheck);
+  return exists
+}
+
 }

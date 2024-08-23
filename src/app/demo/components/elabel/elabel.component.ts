@@ -21,7 +21,8 @@ export class ElabelComponent {
   uploadDialog = false
 
   form: FormGroup
-  settings: FormArray
+  settings: FormArray = new FormArray([])
+  settingsValue : any[] = []
   id = ''
   brand = {}
   preview_image = ''
@@ -109,9 +110,8 @@ export class ElabelComponent {
     this.route.paramMap.subscribe((params: ParamMap) => {
       
       let id = params.get('id');
-
+      const settings = new FormArray([])
       this.settingService.all({user_id : this.user_id, id : id}).subscribe((response)=>{
-        this.settings = new FormArray([])
         for(let setting of response.data) {
           if(setting.valueV === null)
             setting.valueV = setting.defaultV
@@ -121,6 +121,12 @@ export class ElabelComponent {
             setting.valueV = setting.valueV === "1"
           this.settings.push(this.fb.group(setting))
         }
+        this.settingsValue = [...this.settings.value]
+
+        this.settings.valueChanges.subscribe( () => {
+          this.settingsValue = [...this.settings.value]
+        })
+
       })
 
       const brand = params.get('brand');
