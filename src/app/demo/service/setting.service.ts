@@ -9,8 +9,8 @@ export class SettingService {
 
   constructor(private http: HttpClient) { }
 
-  all(userid : number) {
-    return this.http.get<any>(baseUrl + 'settings/'+ userid)
+  all(request : any) {
+    return this.http.post<any>(baseUrl + 'settings', request)
   }
 
   get(id: number) {
@@ -22,7 +22,7 @@ export class SettingService {
   }
 
   save(request: any) : any {
-    return this.http.post(baseUrl + 'setting', request)
+    return this.http.put(baseUrl + 'setting', request)
   }
 
   deleteRecord(id: string) {

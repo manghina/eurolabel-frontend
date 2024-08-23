@@ -9,8 +9,6 @@ import { BrandService } from '../../service/brand.service';
 import { SettingService } from '../../service/setting.service';
 import { FileUpload } from 'primeng/fileupload';
 
-import { ImageCropperComponent } from 'ngx-image-cropper';
-
 @Component({
   selector: 'app-elabel',
   templateUrl: './elabel.component.html',
@@ -105,26 +103,26 @@ export class ElabelComponent {
       type: [null, Validators.required]
     })
 
-    this.settingService.all(parseInt(this.user_id)).subscribe((response)=>{
-      this.settings = new FormArray([])
-      for(let setting of response.data) {
-        if(setting.valueV === null)
-          setting.valueV = setting.defaultV
-        if(setting.type == "radio" && (setting.valueV == "true" || setting.valueV == "false"))
-          setting.valueV = setting.valueV === "true"
-        if(setting.type == "radio" && (setting.valueV == "1" || setting.valueV == "0"))
-          setting.valueV = setting.valueV === "1"
-        this.settings.push(this.fb.group(setting))
-      }
-    })
-
-
   }
 
   ngOnInit() {
     this.route.paramMap.subscribe((params: ParamMap) => {
       
       let id = params.get('id');
+
+      this.settingService.all({user_id : this.user_id, id : id}).subscribe((response)=>{
+        this.settings = new FormArray([])
+        for(let setting of response.data) {
+          if(setting.valueV === null)
+            setting.valueV = setting.defaultV
+          if(setting.type == "radio" && (setting.valueV == "true" || setting.valueV == "false"))
+            setting.valueV = setting.valueV === "true"
+          if(setting.type == "radio" && (setting.valueV == "1" || setting.valueV == "0"))
+            setting.valueV = setting.valueV === "1"
+          this.settings.push(this.fb.group(setting))
+        }
+      })
+
       const brand = params.get('brand');
       if(brand) {
         const b = JSON.parse(brand)

@@ -1,44 +1,38 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { SafeUrl } from '@angular/platform-browser';
-import { FixMeLater, QRCodeElementType, QRCodeErrorCorrectionLevel } from 'angularx-qrcode';
-import { FileUpload, FileUploadModule } from 'primeng/fileupload';
-import { ImageCroppedEvent, ImageCropperComponent, LoadedImage } from 'ngx-image-cropper';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ImageCroppedEvent } from './image-cropper/image-cropper.component';
 
-type ListType = { title: string; val: number }[]
 @Component({
-  standalone: true,
-  imports: [ImageCropperComponent, FileUploadModule],
   selector: 'app-uploaddialog',
   templateUrl: './uploaddialog.component.html',
   styleUrls: ['./uploaddialog.component.scss']
 })
-export class UploadDialogComponent implements OnInit {
-  @ViewChild('fileUpload') fileUpload: FileUpload;
-  @ViewChild('canvas') canvas: ElementRef<HTMLCanvasElement>; // Reference to canvas element
-  id = 0
+export class UploadDialogComponent {
 
-  public imageFile: any;
-  public croppedImage: any;
+  imageChangedEvent: any = '';
+  croppedImage: any = '';
+  cropperReady = false;
+  uploadedFiles: any[] = [];
 
-  constructor() {
- 
-    let request = JSON.parse(localStorage.getItem('user'))
-   
+
+  fileChangeEvent(event: any): void {
+      this.imageChangedEvent = event;
+  }
+  imageCropped(event: ImageCroppedEvent) {
+    this.croppedImage = event.base64;
+  }
+  imageLoaded() {
+    this.cropperReady = true;
+  }
+  loadImageFailed () {
+    console.log('Load failed');
   }
 
-  ngOnInit(): void {
-  }
+  onUpload(event) {
+        for(let file of event.files) {
+            this.uploadedFiles.push(file);
+        }
+    }
+
+
   
-  onBasicUpload() {
-    debugger
-  }
-  
-  onFileSelected(e: any) {
-    this.imageFile = e.files[0];
-  }
-  
-  imageCropped(e: ImageCroppedEvent) {}
-  imageLoaded(e: LoadedImage) {}
-  cropperReady() {}
-  loadImageFailed() {}
 }
