@@ -45,8 +45,7 @@
             </form>
         </div>
     </div>
-    <div class="col-12">
-        <div class="downloadButton text-center">
+    <div class="col-12 flex justify-content-center">
             <button *ngIf="this.elementType !== 'svg'" pButton pRipple type="button"
             label="{{ 'pages.download_qr' | translate }}"
             class="p-button-prymary"  (click)="saveAsImage(parent)"></button>
@@ -62,6 +61,6 @@
             </button> 
             <a *ngIf="this.elementType === 'svg'" mat-raised-button color="primary" [href]="qrCodeSrc"
                 download="angularx-qrcode">Download QR Code</a>-->
-        </div>
+
     </div>
 </div>

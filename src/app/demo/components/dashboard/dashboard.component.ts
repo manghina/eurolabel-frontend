@@ -47,12 +47,19 @@ export class DashboardComponent implements OnInit {
         image: null,
 
     })
-    
+    address
+    cap
+    locality
+    pr
 
     constructor(private router: Router, private fb: FormBuilder,private confirmationService : ConfirmationService, private messageService: MessageService, private brandService: BrandService, private userService: UserService, private service: ElabelService, public layoutService: LayoutService) {
 
         let request = JSON.parse(localStorage.getItem('user'))
         this.companyName.setValue(request.company_name)
+        this.address=request.address
+        this.cap=request.cap
+        this.locality=request.locality
+        this.pr=request.pr
         this.userid = request.id
         this.user = request
         this.service.all(this.userid).subscribe((response: any) => {

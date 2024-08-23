@@ -5,12 +5,13 @@ import { QrcodedialogComponent } from './qrcodedialog.component';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { QRCodeModule } from 'angularx-qrcode';
 import { TranslateModule } from '@ngx-translate/core';
+import { ButtonModule } from 'primeng/button';
 
 @NgModule({
   declarations: [
     QrcodedialogComponent
   ],
-  imports: [CommonModule, QRCodeModule, FormsModule, RadioButtonModule, TranslateModule],
+  imports: [CommonModule, QRCodeModule, FormsModule, RadioButtonModule, TranslateModule,ButtonModule],
   exports: [QrcodedialogComponent]
 })
 export class QrcodedialogModule { }

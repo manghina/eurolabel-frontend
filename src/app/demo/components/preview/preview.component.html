@@ -49,7 +49,7 @@
                             <div class="col-12  align-items-center justify-content-between text-center text-white">
                                 <p class="mb-0 info mt-2" *ngIf="brand.value" style="color:black">{{brand.value?.name}}
                                 </p>
-                                <p class="mb-0 info mt-2" style="color:black">{{companyName}}</p>
+                                <!-- <p class="mb-0 info mt-2" style="color:black">{{companyName}}</p> -->
                                 <b [ngStyle]="{'color':getCurrentColor()}">{{form.get('product_name').value}}</b><br>
                                 <b *ngIf="form.get('vintage_year').value"
                                     style="color:black">{{form.get('vintage_year').value | date :
@@ -313,7 +313,8 @@
 
                                 </div>
                             </div>
-                            <div class="col-12 mt-0 pt-0 flex align-items-center" *ngIf=" preview_image">
+
+                            <div class="col-12 mt-0 pt-0 flex align-items-center" *ngIf="sustainibility_attachments">
                                 <div class="grid flex">
 
                                     <div class="col-4 mx-auto  text-center info flex justify-content-center align-items-center align-content-center"
@@ -321,13 +322,6 @@
                                         <img src="https://app.eulabel.it/backend/storage/app/{{item.url}}"
                                             class="image-fluid">
                                     </div>
-                                    <p-card *ngFor="let image of sustainibility_attachments" [style]="{height: '240px'}" class="relative">
-                                        <img src="http://app.eulabel.it/backend/storage/app/{{image.url}}" 
-                                        style="width:150px;height:auto">
-                                    <ng-template pTemplate="footer" style="position: absolute;bottom:10px">
-                                        
-                                    </ng-template>
-                                </p-card> 
                                 </div>
                             </div>
 
@@ -382,7 +376,7 @@
                 </div>
                 <p-divider></p-divider>
                 <!--INFO PRODUTTORE-->
-                <div class="grid p-2">
+               <!--  <div class="grid p-2">
                     <div class="col-12 text-center py-0 my-0">
                         <div class="grid">
                             <div class="col-12 mb-0">
@@ -404,7 +398,7 @@
 
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <!--INFO BRAND-->
                 <div class="grid p-2" *ngIf="brand.value">
                     <div class="col-12 text-center py-0 my-0">
@@ -429,16 +423,30 @@
                         </div>
                     </div>
                 </div>
-
+                <p-divider></p-divider>
+                <div class="grid p-2">
+                    <div class="col-12 text-center">
+                        <div class="grid">
+                            <div class="col-12">
+                                <div class="grid">
+                                    <div class="col-12 mb-0 pb-0">
+                                        <p class="mb-0 info mt-2"><b>{{companyName}}</b></p>
+                                    </div>
+                                </div>
+                            </div>
+            
+                        </div>
+                    </div>
+                </div>
                 <p-divider></p-divider>
                 <!--FOOTER-->
                 <div class="grid p-2 p-fluid">
-                    <div class="flex justify-content-center flex-wrap">
-                        <div class="flex align-items-center justify-content-center font-bold border-round m-2"><img
-                                src="assets/layout/images/{{layoutService.config.colorScheme === 'light' ? 'logo-dark' : 'logo-white'}}.svg"
-                                alt="logo" style="width:30%"></div>
+                    <div class="flex col-12 justify-content-center flex-wrap">
+                        <div class="col-12 flex align-items-center justify-content-center font-bold border-round m-2"><a href="https://www.eulabel.it" target="_blank" class="flex justify-content-center"><img
+                                src="https://app.eulabel.it/frontend/assets/layout/images/{{layoutService.config.colorScheme === 'light' ? 'logo-dark' : 'logo-white'}}.svg"
+                                alt="logo" style="width:30%"></a></div>
                     </div>
-
+            
                 </div>
                 <!--END PREVIEW-->
             </div>
@@ -500,7 +508,7 @@
             <div class="grid">
                 <div class="col-12  align-items-center justify-content-between text-center text-white">
                     <p class="mb-0 info mt-2" *ngIf="brand_name" style="color:black">{{brand_name}}</p>
-                    <p class="mb-0 info mt-2" style="color:black">{{companyName}}</p>
+                    <!-- <p class="mb-0 info mt-2" style="color:black">{{companyName}}</p> -->
                     <b [ngStyle]="{'color':getCurrentColor()}">{{form.get('product_name').value}}</b><br>
                     <b *ngIf="form.get('vintage_year').value" style="color:black">{{form.get('vintage_year').value |
                         date :
@@ -526,7 +534,6 @@
 
         </div>
     </div>
-
     <!--INGREDIENTI-->
     <div class="grid p-2 mt-1">
         <div class="col-12 text-center py-0 my-0">
@@ -537,8 +544,8 @@
                         translate }}</p>
 
                     <ng-container *ngIf="form.get('ingredients').value" class="m0 p0">
-                        <p class="info mb-0" *ngFor="let ingredient of xingredients">
-                            {{ingredient.label | translate}} <span *ngIf="ingredient.allergenies">(Allergene:
+                        <p class="info mb-0" *ngFor="let ingredient of ingredients">
+                            {{ingredient.label | translate}} <span *ngIf="ingredient.allergenies">(Contiene:
                                 {{ingredient.allergenies |
                                 translate}})</span>
                         </p>
@@ -783,12 +790,13 @@
 
                     </div>
                 </div>
-                <div class="col-12 mt-0 pt-0 flex align-items-center" *ngIf=" preview_image">
+
+                <div class="col-12 mt-0 pt-0 flex align-items-center" *ngIf="sustainibility_attachments">
                     <div class="grid flex">
 
                         <div class="col-4 mx-auto  text-center info flex justify-content-center align-items-center align-content-center"
-                            *ngFor="let item of preview_image">
-                            <img src="https://app.eulabel.it/backend/storage/app/{{item.url}}" class="image-fluid">
+                            *ngFor="let image of sustainibility_attachments">
+                            <img src="http://app.eulabel.it/backend/storage/app/{{image.url}}" class="image-fluid">
                         </div>
                     </div>
                 </div>
@@ -843,7 +851,7 @@
     </div>
     <p-divider></p-divider>
     <!--INFO PRODUTTORE-->
-    <div class="grid p-2">
+    <!-- <div class="grid p-2">
         <div class="col-12 text-center py-0 my-0">
             <div class="grid">
                 <div class="col-12 mb-0">
@@ -865,7 +873,7 @@
 
             </div>
         </div>
-    </div>
+    </div> -->
     <!--INFO BRAND-->
     <div class="grid p-2" *ngIf="brand_name">
         <div class="col-12 text-center py-0 my-0">
@@ -892,12 +900,27 @@
     </div>
 
     <p-divider></p-divider>
+    <div class="grid p-2">
+        <div class="col-12 text-center">
+            <div class="grid">
+                <div class="col-12">
+                    <div class="grid">
+                        <div class="col-12 mb-0 pb-0">
+                            <p class="mb-0 info mt-2"><b>{{companyName}}</b></p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <p-divider></p-divider>
     <!--FOOTER-->
     <div class="grid p-2 p-fluid">
         <div class="flex col-12 justify-content-center flex-wrap">
-            <div class="col-12 flex align-items-center justify-content-center font-bold border-round m-2"><img
+            <div class="col-12 flex align-items-center justify-content-center font-bold border-round m-2"><a href="https://www.eulabel.it" target="_blank" class="flex justify-content-center"><img
                     src="https://app.eulabel.it/frontend/assets/layout/images/{{layoutService.config.colorScheme === 'light' ? 'logo-dark' : 'logo-white'}}.svg"
-                    alt="logo" style="width:30%"></div>
+                    alt="logo" style="width:30%"></a></div>
         </div>
 
     </div>
