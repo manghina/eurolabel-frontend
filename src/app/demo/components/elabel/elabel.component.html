@@ -593,9 +593,13 @@
                                     <p-card *ngFor="let image of sustainibility_attachments" [style]="{height: '240px'}" class="relative">
                                             <img src="http://app.eulabel.it/backend/storage/app/{{image.url}}" 
                                             style="width:150px;height:auto">
-                                        <ng-template pTemplate="footer" style="position: absolute;bottom:10px">
+                                        <ng-template pTemplate="footer" style="position: absolute;bottom:10px;left:50%;right: 50%;">
                                             <div class="flex gap-3 mt-1">
-                                                <p-button label="Cancel" severity="secondary" class="w-full" styleClass="w-full" (click)="deletePreviewImage(image)"/>
+                                               
+                                                <p-button icon="pi pi-trash" pTooltip="Elimina"
+                                                (click)="deletePreviewImage(image)"
+                                                styleClass="p-button-sm p-button-outlined p-button-secondary"
+                                                class="hidden md:flex"></p-button>
                                             </div>
                                         </ng-template>
                                     </p-card> 
@@ -607,7 +611,10 @@
                                         multiple="multiple"
                                         maxFileSize="1000000"
                                         (onUpload)="onBasicUpload()"
-                                        (onError)="onError($event)">
+                                        (onError)="onError($event)"
+                                        chooseStyleClass="p-button-sm p-button-outlined p-button-secondary my-1"
+                                        uploadStyleClass="p-button-sm p-button-outlined p-button-secondary my-1"
+                                        cancelStyleClass="p-button-sm p-button-outlined p-button-secondary my-1">
                                     </p-fileUpload>
                                 </div>
 

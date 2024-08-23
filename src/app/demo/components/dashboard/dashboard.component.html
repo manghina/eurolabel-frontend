@@ -62,10 +62,14 @@
                     </div>
                 </div>
                 <!--DATI-->
-                <div class="col-12 md:col-7 flex justify-content-center align-items-center text-center">
-                    <span>
-                        <h4>{{ companyName.value }}</h4>
-                    </span>
+                <div class="col-12 md:col-7 flex justify-content-start align-items-center">
+                    <div class="grid">
+                        <div class="col-12"><h4>{{ companyName.value }}</h4>
+                        <p>{{user.address}}<br>{{user.cap}} - {{user.locality}} ({{user.pr}})</p>
+                    <p-divider></p-divider>
+                    <p>Tel: {{user.phone}}<br>Email: {{user.email}}</p>
+                    </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -182,15 +186,15 @@
 
                                     <p-button icon="pi pi-pencil" pTooltip="Modifica"
                                         styleClass="p-button-sm p-button-outlined p-button-secondary"
-                                        [routerLink]="['/elabel/' + label.id]" class="hidden md:flex"></p-button>
+                                        [routerLink]="['/elabel/' + label.id]" class="hidden md:flex mr-2"></p-button>
                                     <p-button icon="pi pi-qrcode" pTooltip="QrCode"
                                         (click)="showQrElabel(label)"
                                         styleClass="p-button-sm p-button-outlined p-button-secondary"
-                                        class="hidden md:flex m-2"></p-button>
+                                        class="hidden md:flex mr-2"></p-button>
                                     <p-button icon="pi pi-copy" pTooltip="Duplica"
                                         (click)="cloneElabel(label)"
                                         styleClass="p-button-sm p-button-outlined p-button-secondary"
-                                        class="hidden md:flex"></p-button>
+                                        class="hidden md:flex mr-2"></p-button>
                                     <p-button icon="pi pi-trash" pTooltip="Elimina"
                                         (click)="deleteElabel(label)"
                                         styleClass="p-button-sm p-button-outlined p-button-secondary"
