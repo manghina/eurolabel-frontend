@@ -200,7 +200,7 @@
 
 
                                 <div class="card" style="border-radius: 0px;">
-                                    <p-button *ngIf="id" label="Il TASTO" (click)="uploadDialog = true" icon="pi pi-clear"
+                                    <p-button label="Il TASTO" (click)="uploadDialog = true" icon="pi pi-clear"
                                     styleClass="p-button-sm p-button-danger"></p-button>
 
                                     <img *ngIf="!sub_image" src="assets/product_image.svg" class="mb-3">
@@ -714,7 +714,7 @@
 <p-dialog header="Codice qr" 
     [(visible)]="uploadDialog" 
     [modal]="true" 
-    showEffect="fade" [style]="{width: '90vw'}" [breakpoints]="{'960px': '75vw'}">
+    showEffect="fade" [style]="{width: '40vw'}" [breakpoints]="{'960px': '75vw'}">
     <div #qrcodewrapper>
         <app-uploaddialog></app-uploaddialog>
     </div>

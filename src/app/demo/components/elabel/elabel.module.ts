@@ -34,13 +34,14 @@ import { PreviewModule } from '../preview/preview.module';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { QrcodedialogModule } from 'src/app/demo/components/qrcodedialog/qrcodedialog.module';
 import { UploadDialogModule } from '../uploaddialog/uploaddialog.module';
+import { UploadDialogComponent } from '../uploaddialog/uploaddialog.component';
 
 @NgModule({
   declarations: [ElabelComponent],
   imports: [
     CommonModule,
     PreviewModule,
-    UploadDialogModule,
+    UploadDialogComponent,
     QrcodedialogModule,
     PanelModule,
     DialogModule,

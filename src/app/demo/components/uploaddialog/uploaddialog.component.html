@@ -1,30 +1,40 @@
+
 <div class="grid" >
+    
     <div class="col-12 flex justify-content-center">
         <div class="grid">
-            <div class="flex flex-col">
+            <div class="flex text-center col-12 mx-auto justify-content-center align-items-center align-content-center">
 
-                <input type="file" (change)="fileChangeEvent($event)" />
+                <p-fileUpload #fileUpload name="demo[]" mode="basic" chooseIcon="pi pi-upload"
+                    url="https://app.eulabel.it/backend/upload-single/{{id}}" accept="image/*"
+                    maxFileSize="1000000" [auto]="false" (onSelect)="onFileSelected($event)" (onUpload)="onBasicUpload()"
+                    chooseLabel="Browse" />
 
-                <div>
-                  <image-cropper
-                      [imageChangedEvent]="imageChangedEvent"
-                      [maintainAspectRatio]="true"
-                      [aspectRatio]="4 / 3"
-                      [resizeToWidth]="128"
-                      [roundCropper]="false"
-                      format="png"
-                      outputType="both"
-                      (imageCropped)="imageCropped($event)"
-                      (imageLoaded)="imageLoaded()"
-                      (loadImageFailed)="loadImageFailed()"
-                      style="max-height: 33vh"
-                      [style.display]="cropperReady ? null : 'none'"
-                  ></image-cropper>
-                </div>
-                <img [src]="croppedImage" />
-
-
+                    <image-cropper
+                    [imageFile]="imageFile"
+                    [maintainAspectRatio]="true"
+                    [aspectRatio]="4 / 3"
+                    format="jpeg"
+                    [transform]="transform"
+                    (imageCropped)="imageCropped($event)"
+                    (imageLoaded)="imageLoaded($event)"
+                    (cropperReady)="cropperReady()"
+                    (loadImageFailed)="loadImageFailed()"
+                ></image-cropper>
+            
+               
+                    <img [src]="croppedImage" />
+                  
             </div>
+       
+            <div class="col-12 flex justify-content-center mt-3" *ngIf="showCropper">
+                <button  type="button" class="p-button p-component p-button-info mr-2" (click)="rotateLeft()">
+                  <span class="p-button-label">Rotate Left</span>
+                </button>
+                <button   type="button" class="p-button p-component p-button-info" (click)="rotateRight()">
+                  <span class="p-button-label">Rotate Right</span>
+                </button>
+              </div>
         </div>
     </div>
 
