@@ -30,7 +30,7 @@ import { DividerModule } from 'primeng/divider';
 import { SidebarModule } from 'primeng/sidebar';
 import { DialogModule } from 'primeng/dialog';
 import { RadioButtonModule } from 'primeng/radiobutton';
-import { QrcodedialogComponent } from 'src/app/qrcodedialog/qrcodedialog.component';
+import { QrcodedialogComponent } from 'src/app/demo/components/qrcodedialog/qrcodedialog.component';
 import { PreviewModule } from '../preview/preview.module';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
