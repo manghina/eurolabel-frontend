@@ -23,10 +23,9 @@ export class PreviewComponent implements OnChanges, OnInit {
   show_portion: boolean = false
   @Input() types = []
   @Input() packages = []
-  @Input() ingredients = []
+  @Input() ingredientsValue = []
   @Input() containers = []
   @Input() materials = []
-  xingredients = []
   @Input() companyName = ''
   @Input() companyLogo = ''
   @Input() primary_color = ''
