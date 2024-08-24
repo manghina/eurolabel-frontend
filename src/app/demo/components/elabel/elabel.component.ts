@@ -149,60 +149,6 @@ export class ElabelComponent {
         this.fullIngredientList = data.ingredients
         let ingredients = data.ingredients.map(e => { e.value = e.id; return e })
 
-        // containers = containers
-        //   .reduce((acc, obj) => {
-        //     const key = obj.group;
-        //     if (!acc[key]) {
-        //       acc[key] = [];
-        //     }
-        //     acc[key].push(obj);
-        //     return acc;
-        //   }, {});
-        // for (let c in containers) {
-        //   const key = c;
-        //   const items = containers[c];
-        //   this.containers.push({
-        //     label: c,
-        //     items: items
-        //   })
-        // }
-
-        // materials = materials
-        //   .reduce((acc, obj) => {
-        //     const key = obj.group;
-        //     if (!acc[key]) {
-        //       acc[key] = [];
-        //     }
-        //     acc[key].push(obj);
-        //     return acc;
-        //   }, {});
-        // for (let c in materials) {
-        //   const key = c;
-        //   const items = materials[c];
-        //   this.materials.push({
-        //     label: c,
-        //     items: items
-        //   })
-        // }
-
-        // ingredients = ingredients
-        //   .reduce((acc, obj) => {
-        //     const key = obj.group;
-        //     if (!acc[key]) {
-        //       acc[key] = [];
-        //     }
-        //     acc[key].push(obj);
-        //     return acc;
-        //   }, {});
-        // for (let c in ingredients) {
-        //   const key = c;
-        //   const items = ingredients[c];
-        //   this.ingredients.push({
-        //     label: c,
-        //     items: items
-        //   })
-        // }
-
         // Group containers, materials, and ingredients by their respective groups
         containers = this.groupBy(containers, 'group');
         materials = this.groupBy(materials, 'group');

@@ -16,6 +16,7 @@ export class PreviewComponent implements OnChanges, OnInit {
   @Input() brand :any
   @Input() sustainibility_attachments = []
   @Input() settings: any[] = []
+  ingredients: any[] = []
   @Input() form: FormGroup
   @Input() sub_image = ''
   @Input() preview_image = ''
@@ -37,10 +38,14 @@ export class PreviewComponent implements OnChanges, OnInit {
 
   }
   ngOnChanges(changes: SimpleChanges): void {
-
+    if(changes['ingredientsValue'] && changes['ingredientsValue'].currentValue.length) {
+      this.ingredients = this.groupBy(changes['ingredientsValue'].currentValue, 'group')
+      debugger
+    }
   }
   ngOnInit(): void {
-
+    this.ingredients = this.groupBy(this.ingredientsValue, 'group')
+    debugger
   }
 
   save() {
@@ -193,6 +198,17 @@ checkValue() {
   const valueToCheck = 'value1';
   const exists = this.checkIfValueExists(valueToCheck);
   return exists
+}
+
+groupBy(array, key) {
+  return array.reduce((acc, obj) => {
+    const groupKey = obj[key];
+    if (!acc[groupKey]) {
+      acc[groupKey] = [];
+    }
+    acc[groupKey].push(obj);
+    return acc;
+  }, {});
 }
 
 }

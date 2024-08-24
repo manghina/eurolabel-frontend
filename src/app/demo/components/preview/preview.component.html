@@ -77,14 +77,14 @@
                                 <p class="titolo mb-2" [ngStyle]="{'color':getCurrentColor()}">{{
                                     'pages.ingredients.title' |
                                     translate }}</p>
-
-                                <ng-container *ngIf="form.get('ingredients').value" class="m0 p0">
-                                    <p class="info mb-0" *ngFor="let ingredient of ingredientsValue">
-                                        {{ingredient.label | translate}} <span
+                                    <div *ngFor="let i of groupBy(ingredientsValue, 'group') | keyvalue">
+                                        <b>Gruppo: {{i.key | translate}}</b>
+                                        <p class="info mb-0" *ngFor="let ingredient of i.value">
+                                            {{ingredient.label | translate}} <span
                                             *ngIf="ingredient.allergenies">(Allergene: {{ingredient.allergenies |
-                                            translate}})</span>
-                                    </p>
-                                </ng-container>
+                                                translate}})</span>
+                                            </p>
+                                        </div>
                                 <p class="info mt-2" *ngIf="form.get('packages').value">
                                     <i>{{getPackages(form.get('packages').value) | translate}}</i>
                                 </p>
@@ -535,14 +535,18 @@
                     <p class="titolo mb-2" [ngStyle]="{'color':getCurrentColor()}">{{
                         'pages.ingredients.title' |
                         translate }}</p>
-
-                    <ng-container *ngIf="form.get('ingredients').value" class="m0 p0">
-                        <p class="info mb-0" *ngFor="let ingredient of ingredients">
-                            {{ingredient.label | translate}} <span *ngIf="ingredient.allergenies">(Contiene:
-                                {{ingredient.allergenies |
-                                translate}})</span>
-                        </p>
-                    </ng-container>
+                        <pre>
+                            {{ingredients | json}}
+                        </pre>
+                        
+                            <div *ngFor="let i of groupBy(ingredientsValue, 'group') | keyvalue">
+                                <b>Gruppo: {{i.key | translate}}</b>
+                                <p class="info mb-0" *ngFor="let ingredient of i.value">
+                                    {{ingredient.label | translate}} <span
+                                    *ngIf="ingredient.allergenies">(Allergene: {{ingredient.allergenies |
+                                        translate}})</span>
+                                    </p>
+                                </div>
                     <p class="info mt-2" *ngIf="form.get('packages').value">
                         <i>{{getPackages(form.get('packages').value) | translate}}</i>
                     </p>
