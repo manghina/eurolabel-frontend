@@ -29,6 +29,7 @@ import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { PanelModule } from 'primeng/panel';
 import { NgxColorsModule } from 'ngx-colors';
 import { QrcodedialogModule } from 'src/app/demo/components/qrcodedialog/qrcodedialog.module';
+import { ImageCropperComponent  } from 'ngx-image-cropper';
 
 @NgModule({
     imports: [
@@ -60,7 +61,8 @@ import { QrcodedialogModule } from 'src/app/demo/components/qrcodedialog/qrcoded
         DividerModule,
         TooltipModule,
         BreadcrumbModule,
-        PanelModule
+        PanelModule,
+        ImageCropperComponent
     ],
     providers: [
         ConfirmationService

@@ -7,6 +7,19 @@ import { UserService } from '../../service/user.service';
 import { ConfirmationService, MenuItem, MessageService } from 'primeng/api';
 import { BrandService } from '../../service/brand.service';
 import { PrimeIcons } from 'primeng/api';
+import { FileSelectEvent } from 'primeng/fileupload';
+import { ImageCroppedEvent } from '../uploaddialog/image-cropper/image-cropper.component';
+import { DomSanitizer } from '@angular/platform-browser';
+
+interface ImageTransform {
+    scale?: number;
+    rotate?: number;
+    flipH?: boolean;
+    flipV?: boolean;
+    translateH?: number;
+    translateV?: number;
+    translateUnit?: '%' | 'px';
+  }
 
 @Component({
     templateUrl: './dashboard.component.html',
@@ -38,7 +51,19 @@ export class DashboardComponent implements OnInit {
     items: MenuItem[];
     items_brand: MenuItem[];
     items_elabel: MenuItem[];
-
+    public imageFile: any;
+    public croppedImage: any;
+    loading: boolean = false;
+    canvasRotation = 0;
+    translateH = 0;
+    translateV = 0;
+    transform: ImageTransform = {
+        scale: 1,
+        rotate: 0,
+        flipH: false,
+        flipV: false,
+        translateUnit: 'px'
+      };
     form = this.fb.group({
         id: 0,
         name: ['', Validators.required],
@@ -52,7 +77,7 @@ export class DashboardComponent implements OnInit {
     locality
     pr
 
-    constructor(private router: Router, private fb: FormBuilder,private confirmationService : ConfirmationService, private messageService: MessageService, private brandService: BrandService, private userService: UserService, private service: ElabelService, public layoutService: LayoutService) {
+    constructor(private router: Router, private fb: FormBuilder,private confirmationService : ConfirmationService, private messageService: MessageService, private brandService: BrandService, private userService: UserService, private service: ElabelService, public layoutService: LayoutService, private sanitizer: DomSanitizer) {
 
         let request = JSON.parse(localStorage.getItem('user'))
         this.companyName.setValue(request.company_name)
@@ -159,11 +184,91 @@ export class DashboardComponent implements OnInit {
         })
     }
 
-    onBasicUploadBrand() {
-        this.brandService.get(this.form.get('id').value).subscribe((response) => {
-            this.form.patchValue(response.data)
-        })
+    onSelect(e: FileSelectEvent) {
+        console.log('FileUploadEvent', e);
+        this.imageFile =e.files[0];
     }
+
+    imageCropped(event: any) {
+        const imageUrl = event.objectUrl || event.base64 || '';
+        this.croppedImage = this.sanitizer.bypassSecurityTrustUrl(imageUrl);
+        if (imageUrl.startsWith('data:')) {
+          const base64Data = imageUrl.split(',')[1];
+          const mimeType = imageUrl.split(';')[0].split(':')[1];
+        //   this.imageBase64 = base64Data;
+        //   this.imageExtension = mimeType.split('/')[1];
+          this.applyTransform();
+        }
+    }
+      rotateLeft() {
+      this.loading = true;
+      setTimeout(() => {
+        this.canvasRotation--;
+        this.flipAfterRotate();
+      });
+    }
+    rotateRight() {
+      this.loading = true;
+      setTimeout(() => {
+        this.canvasRotation++;
+        this.flipAfterRotate();
+      });
+    }
+
+    private flipAfterRotate() {
+        const flippedH = this.transform.flipH;
+        const flippedV = this.transform.flipV;
+        this.transform = {
+          ...this.transform,
+          flipH: flippedV,
+          flipV: flippedH
+        };
+        this.translateH = 0;
+        this.translateV = 0;
+      }
+
+    private applyTransform() {
+        const cropperImageElement = document.querySelector('.cropper-wrapper img') as HTMLElement;
+        const croppedImageElement = document.querySelector('.popup-image') as HTMLElement;
+        const { scale, rotate, flipH, flipV } = this.transform;
+        let transformString = `scale(${scale || 1}) rotate(${rotate || 0}deg)`;
+        if (flipH) {
+          transformString += ' scaleX(-1)';
+        }
+        if (flipV) {
+          transformString += ' scaleY(-1)';
+        }
+        if (cropperImageElement) {
+          cropperImageElement.style.transform = transformString;
+        }
+        if (croppedImageElement) {
+          croppedImageElement.style.transform = transformString;
+        }
+      }
+
+    
+    imageLoaded(e: any) {
+        debugger
+    }
+    cropperReady() {
+        debugger
+    }
+    loadImageFailed() {
+        debugger
+    }
+
+    // onFileUpload(event:any){
+    //     debugger;
+    //     event;
+    // }
+
+    // onBasicUploadBrand() {
+    //     debugger;
+    //     this.brandService.get(this.form.get('id').value).subscribe((response) => {
+    //         debugger;
+    //         this.form.patchValue(response.data)
+    //     })
+    // }
     openBrandModal() {
         this.step = 0;
         this.form.get('id').setValue(null)
