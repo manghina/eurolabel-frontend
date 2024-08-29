@@ -1,4 +1,391 @@
 {
-    "HELLO": "Hello1",
-    "WELCOME": "Welcome to our application!"
+   "global": {
+    "view": "Details",
+    "qr": "QR Code",
+    "add": "Create a new E-Label",
+    "new_brand": "Create New Brand",
+    "edit": "Edit",
+    "demo-message": "1 demo product left",
+    "save": "Save",
+    "send": "Send",
+    "register": {
+      "title": "Registration",
+      "subtitle": "Create your company profile to proceed",
+      "username": "Username",
+      "password": "Password",
+      "company": "Company",
+      "address": "Address",
+      "cap": "Postal Code",
+      "location": "Location",
+      "pr": "Province",
+      "state": "State",
+      "phone": "Phone",
+      "email": "Email",
+      "website": "Website",
+      "piva": "VAT Number",
+      "sdi": "SDI Code",
+      "submit": "Proceed",
+      "text": "To register, click here: ",
+      "button": "Register"
+    },
+    "forgot": {
+      "title": "Reset Password",
+      "subtitle": "Enter your new password in the fields below",
+      "username": "Username",
+      "password": "New Password",
+      "password_check": "Confirm Password",
+      "submit": "Proceed",
+      "text": "Forgot password? Click here ",
+      "button": "Reset Password"
+    }
+  },
+  "categories": {
+    "labels": {
+      "a_main_ingredient": {
+        "a_main_ingredient": "Main Ingredient",
+        "concentrated_grape_must": "Concentrated Grape Must",
+        "distillate_of_agricultural_origin": "Distillate of Agricultural Origin",
+        "dosage_syrup": "Dosage Syrup",
+        "dried_grape_alcohol": "Dried Grape Alcohol",
+        "dried_grape_distillate": "Dried Grape Distillate",
+        "ethyl_alcohol": "Ethyl Alcohol of Agricultural Origin",
+        "grape_marc_spirit": "Grape Marc Spirit",
+        "grape_must": "Grape Must",
+        "grapes": "Grapes",
+        "partially_fermented": "Partially Fermented Grape Must",
+        "rectified_concentrated": "Rectified Concentrated Grape Must",
+        "spirit_drinks_distilled": "Spirit Drinks Distilled from Dried Grapes",
+        "sucrose": "Sucrose",
+        "water": "Water",
+        "wine_alcohol": "Wine Alcohol",
+        "wine_distillate": "Wine Distillate",
+        "wine_spirit": "Wine Spirit"
+      },
+      "acidity_regulator": {
+        "acidity_regulator": "Acidity Regulator",
+        "calcium_sulfate": "Calcium Sulfate",
+        "citric_acid": "Citric Acid",
+        "lactic_acid": "Lactic Acid",
+        "malic_acid": "Malic Acid",
+        "tartaric_acid": "Tartaric Acid"
+      },
+      "clarifying_agent": {
+        "clarifying_agent": "Clarifying Agents",
+        "casein": "Milk Casein",
+        "egg": "Egg",
+        "egg_albumin": "Egg Albumin",
+        "egg_lysozyme": "Egg Lysozyme",
+        "egg_product": "Egg Products",
+        "egg_protein": "Egg Protein",
+        "gelatin": "Food Gelatin",
+        "milk": "Milk",
+        "milk_products": "Milk Derivatives",
+        "milk_protein": "Milk Protein",
+        "pea_protein": "Pea Protein",
+        "potassium_caseinate": "Potassium Caseinate",
+        "potato_protein": "Potato Protein",
+        "wheat_protein": "Wheat Protein"
+      },
+      "expedition_liqueur": {
+        "expedition_liqueur": "Expedition Liqueur",
+        "concentrated": "Concentrated Grape Must",
+        "grape": "Grape Must",
+        "partially": "Partially Fermented Grape Must",
+        "sucrose": "Sucrose",
+        "wine": "Wine",
+        "rectified": "Rectified Concentrated Grape Must"
+      },
+      "preservatives_and_antioxidant": {
+        "preservatives_and_antioxidant": "Preservatives and Antioxidants",
+        "lascorbic": "L-Ascorbic Acid",
+        "dimethyldicarbonate": "Dimethyl Dicarbonate (DMDC)",
+        "lysozyme": "Lysozyme",
+        "potassium_hydrogen": "Potassium Hydrogen Sulfite",
+        "potassium_metabisulphite": "Potassium Metabisulfite",
+        "potassium_sorbate": "Potassium Sorbate",
+        "sulphur_dioxide": "Sulfur Dioxide",
+        "sulphites": "Sulfites",
+        "bisulphite": "Potassium Bisulfite"
+      },
+      "stabilising_agent": {
+        "stabilising_agent": "Stabilizing Agents",
+        "carboxymethylcellulose": "Carboxymethylcellulose",
+        "citric_acid": "Citric Acid",
+        "fumaric_acid": "Fumaric Acid",
+        "gum_arabic": "Gum Arabic",
+        "metatartaric_acid": "Metatartaric Acid",
+        "potassium_polyaspartate": "Potassium Polyaspartate",
+        "potassium_sorbate": "Potassium Sorbate",
+        "yeast_mannoproteins": "Yeast Mannoproteins"
+      },
+      "sweetener": {
+        "sweetener": "Sweetener",
+        "burned": "Burnt Sugar",
+        "syrup": "Carob Syrup",
+        "concentrated": "Concentrated Grape Must",
+        "dextrose": "Dextrose",
+        "extrawhite": "Extra-White Sugar",
+        "fructose": "Fructose",
+        "glucose": "Glucose Syrup",
+        "must": "Grape Must",
+        "honey": "Honey",
+        "invertsugar": "Invert Sugar Solution",
+        "invertsugarsyrup": "Invert Sugar Syrup",
+        "rectified": "Rectified Concentrated Grape Must",
+        "semiwhite": "Semi-White Sugar",
+        "sugar": "Sugar",
+        "sugarsolution": "Sugar Solution",
+        "whitesugar": "White Sugar"
+      },
+      "tirage_liqueur": {
+        "tirage_liqueur": "Tirage Liqueur",
+        "concentrated": "Concentrated Grape Must",
+        "grape": "Grape Must",
+        "partially": "Partially Fermented Grape Must",
+        "rectified": "Rectified Concentrated Grape Must",
+        "sucrose": "Sucrose",
+        "wine": "Wine"
+      },
+      "packaging_gases": {
+        "packaging_gases": "Packaging Gases",
+        "argon": "Argon",
+        "carbon": "Carbon Dioxide",
+        "nitrogen": "Nitrogen"
+      },
+      "allergienies": {
+        "milk": "Milk",
+        "egg": "Egg",
+        "sulphites": "Sulfites"
+      }
+    },
+    "acidity_regulator": "Acidity Regulator",
+    "anti_caking_agent": "Anti-Caking Agent",
+    "anti_foaming_agent": "Anti-Foaming Agent",
+    "antioxidant": "Antioxidant",
+    "bulking_agent": "Bulking Agent",
+    "clarifying_agents": "Clarifying Agents",
+    "colour": "Colorant",
+    "emulsifier": "Emulsifier",
+    "emulsifying_salts": "Emulsifying Salts",
+    "expedition_liqueur": "Expedition Liqueur",
+    "firming_agent": "Firming Agent",
+    "flavour_enhancer": "Flavor Enhancer",
+    "flour_treatment_agent": "Flour Treatment Agent",
+    "foaming_agent": "Foaming Agent",
+    "gelling_agent": "Gelling Agent",
+    "glazing_agent": "Glazing Agent",
+    "humectant": "Humectant",
+    "main_ingredient": "Main Ingredient",
+    "modified_starch": "Modified Starch",
+    "other": "Other",
+    "packaging_gases": "Packaging Gases",
+    "preservatives_and_antioxidants": "Preservatives and Antioxidants",
+    "propellent_gas": "Propellant Gas",
+    "raising_agent": "Raising Agent",
+    "sequestrant": "Sequestrant",
+    "stabilising_agents": "Stabilizing Agents",
+    "sweetener": "Sweetener",
+    "thickener": "Thickener",
+    "tirage_liqueur": "Tirage Liqueur"
+  },
+  "pages": {
+    "download_qr":"Download QR Code",
+    "register": {
+      "title": "Registration",
+      "subtitle": "Create your company profile to proceed",
+      "username": "Username",
+      "password": "Password",
+      "company": "Company",
+      "name": "First Name",
+      "surname": "Last Name",
+      "address": "Address",
+      "cap": "Postal Code",
+      "locality": "Locality",
+      "pr": "Province",
+      "state": "State",
+      "phone": "Phone",
+      "email": "Email",
+      "website": "Website",
+      "piva": "VAT Number",
+      "sdi": "SDI Code",
+      "submit": "Proceed",
+      "save": "Save",
+      "text": "To register, click here: ",
+      "button": "Register"
+    },
+    "profile": {
+      "subscription": {
+        "title": "Subscription",
+        "subtitle": "Manage your subscription",
+        "freeplan": {
+          "title": "Free Plan",
+          "subtitle": "You are currently on a free plan. Upgrade to publish e-Labels and access all features."
+        }
+      }
+    },
+    "brand": {
+      "form": {
+        "name": {
+          "label": "Brand Name"
+        },
+        "image": {
+          "label": "Brand Logo"
+        }
+      }
+    },
+    "dashboard": {
+      "title": "Dashboard",
+      "cards": {
+        "label": "New E-Label",
+        "published": "Published",
+        "draft": "Drafts",
+        "brand": "Brand",
+        "profile": "Company Profile",
+        "elabel": "E-Label",
+        "feedback": {
+          "tab1": "General",
+          "tab2": "Suggestions",
+          "tab3": "Reports",
+          "title": "We value your feedback"
+        }
+      }
+    },
+    "elabel": {
+      "title": "Title",
+      "subtitle": "Subtitle",
+      "cards": {
+        "tab1": "Information",
+        "tab2": "Settings"
+      },
+      "form": {
+        "id": "ID",
+        "productName": "Product Name",
+        "upload": {
+          "label": "Product Image",
+          "helper": ""
+        },
+        "product_name": {
+          "label": "Product Name",
+          "helper": ""
+        },
+        "sku": {
+          "label": "Batch",
+          "helper": ""
+        },
+        "country": {
+          "label": "Country of Production",
+          "helper": ""
+        },
+        "type": {
+          "label": "Wine Type",
+          "helper": ""
+        },
+        "vintage_year": {
+          "label": "Vintage Year",
+          "helper": ""
+        },
+        "product_varieties": {
+          "label": "Grapes",
+          "helper": ""
+        },
+        "geographical_indication": {
+          "label": "Geographical Indication",
+          "helper": ""
+        },
+        "alcohol_content_percentage": {
+          "label": "Alcohol Content Percentage",
+          "helper": ""
+        },
+        "net_content": {
+          "label": "Net Content",
+          "helper": ""
+        },
+        "description": {
+          "label": "Description",
+          "helper": ""
+        },
+        "packages": {
+          "label": "Packaging Gases",
+          "helper": ""
+        },
+        "nutrition": {
+          "label": "Declared Nutrients",
+          "helper": ""
+        },
+        "brand": {
+          "label": "Select the Brand",
+          "helper": ""
+        }
+      }
+    },
+    "ingredients": {
+      "title": "Ingredients",
+      "subtitle": "Add all the ingredients used in the product by selecting them from the list.",
+      "info": "Add the ingredients in the order of their percentage in the product, starting with the highest percentage ingredient.",
+      "note": "Note:"
+    },
+    "info_prodotto": {
+      "title": "Product Information",
+      "subtitle": "",
+      "info": "",
+      "note": "Note:"
+    },
+    "info_produttore": {
+      "title": "Producer Information",
+      "subtitle": "",
+      "info": "",
+      "note": "Note:"
+    },
+    "recycling": {
+      "sub": {
+        "title": "Responsible Consumption",
+        "subtitle": "Educate consumers with symbols for responsible consumption"
+      },
+      "title": "Environmental Label",
+      "title_preview": "Recycling",
+      "description_preview": "Check your local regulations. Separate the components and dispose of them correctly.",
+      "link": "D.lgs 116/2020)",
+      "subtitle": "Environmental labeling for packaging (products sold in Italy must indicate packaging materials and other details according to Italian law",
+      "field": {
+        "addrule": "Add Recycling Rule",
+        "removerule": "Remove Rule",
+        "container": "Container",
+        "material": "Material"
+      }
+    },
+    "sustainability": {
+      "title": "Sustainability",
+      "subtitle": "Sustainability information, as well as other voluntarily provided information, must adhere to the following principles: it should not mislead or confuse consumers, should be based on facts, and should not serve as indirect marketing through catchy but unfounded claims",
+      "form": {
+        "field1": {
+          "label": "Organic Message",
+          "helper": ""
+        },
+        "field2": {
+          "label": "Sustainability Message",
+          "helper": ""
+        },
+        "field3": {
+          "label": "Sustainability Labels",
+          "helper": ""
+        }
+      }
+    },
+    "nutritions": {
+      "title": "Nutritional Declaration",
+      "subtitle": "Enter the average nutritional values per 100 ml and observe the rounding in the preview on the right. The calculator can help you calculate the energy value in kJ and kcal. For more information, read the EU Ingredients Declaration Guide",
+      "button": "Calculate Energy",
+      "info": "EU Ingredients Declaration Guide",
+      "note": "",
+      "table": "Average Values",
+      "energy_kj": "Energy (Kj)",
+      "energy_kcal": "Energy (Kcal)",
+      "fat": "Fats",
+      "fat_sat": "Saturated Fats",
+      "carb": "Carbohydrates",
+      "carb_sugar": "Sugars",
+      "protein": "Proteins",
+      "salt": "Salt"
+    }
   }
+}
