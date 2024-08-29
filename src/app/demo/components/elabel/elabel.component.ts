@@ -452,5 +452,9 @@ saveSetting() {
   )
 }
 
+previewChange(event: any) {
+  console.log(event)
+}
+
 
 }
