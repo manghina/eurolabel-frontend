@@ -41,8 +41,8 @@
   },
   "categories": {
     "labels": {
-      "main_ingredient": {
-        "main_ingredient": "Ingrediente principale",
+      "a_main_ingredient": {
+        "a_main_ingredient": "Ingrediente principale",
         "concentrated_grape_must": "Mosto di uve concentrato",
         "distillate_of_agricultural_origin": "Distillato di origine agricola",
         "dosage_syrup": "Sciroppo di dosaggio",
