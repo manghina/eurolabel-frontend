@@ -453,7 +453,16 @@ saveSetting() {
 }
 
 previewChange(event: any) {
-  console.log(event)
+  console.log("Hi, Dario. This is the binary encording of the JSON data using 'TextEncoder' module.")
+  const jsonObject = event;
+  const jsonString = JSON.stringify(jsonObject);
+  const encoder = new TextEncoder();
+  const binaryData = encoder.encode(jsonString);
+
+  console.log({
+    primaryObjectData: event,
+    currentBinaryData: binaryData,
+  })
 }
 
 
