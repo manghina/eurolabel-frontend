@@ -51,7 +51,7 @@
         "ethyl_alcohol": "Alcol etilico di origine agricola",
         "grape_marc_spirit": "Acquavite di vinaccie",
         "grape_must": "Mosto di uve",
-        "grapes": "Uve",
+        "grapes": "Uva",
         "partially_fermented": "Mosto di uve parzialmente fermentato",
         "rectified_concentrated": "Mosto di uve concentrato rettificato",
         "spirit_drinks_distilled": "Bevande spiritose distillate da uve secche distillate",
@@ -156,7 +156,7 @@
       "allergienies": {
         "milk": "Latte",
         "egg":"Uovo",
-        "sulphites":"Solfiti"
+        "sulphite":"Solfiti"
       }
     },
     "acidity_regulator": "Calcola di acidità",

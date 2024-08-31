@@ -173,7 +173,7 @@
                                                 [label]="'pages.elabel.form.alcohol_content_percentage.helper'"></app-infobutton>
                                             <span style="font-size:0.8rem;margin-left:5px;">(opzionale)</span></label>
                                         <span class="p-input-icon-right"><input
-                                                [formControl]="form.get('alcohol_content_percentage')" type="number"
+                                                [formControl]="form.get('alcohol_content_percentage')" type="text"
                                                 min="0" max="100" pinputtext
                                                 class="p-inputtext p-component p-element"><i
                                                 class="pi pi-percentage"></i></span>
@@ -200,17 +200,16 @@
 
 
                                 <div class="card" style="border-radius: 0px;">
+                                    <p-button label="Il TASTO" (click)="uploadDialog = true" icon="pi pi-clear"
+                                    styleClass="p-button-sm p-button-danger"></p-button>
+
                                     <img *ngIf="!sub_image" src="assets/product_image.svg" class="mb-3">
                                     <img *ngIf="sub_image" src="//{{sub_image}}" class="mb-3">
                                 </div>
                                 <p-fileUpload mode="basic" name="image" chooseIcon="pi pi-upload"
-                                    url="https://app.eulabel.it/backend/api/upload-sub/{{id}}" accept="image/*"
+                                    url="https://app.eulabel.it/backend/upload-sub/{{id}}" accept="image/*"
                                     maxFileSize="1000000" [auto]="true" (onUpload)="onBasicUpload()"
                                     chooseLabel="Browse" />
-
-                                <p-button label="Carica" (click)="uploadDialog = true" icon="pi pi-clear"
-                                    styleClass="p-button-sm p-button-primary"></p-button>
-
                                 <!-- <div class="card" style="border-radius: 0px;">
                                     <label>{{ 'global.qr' | translate }}</label>
                                     <img *ngIf="!form.get('qr').value"
@@ -608,7 +607,7 @@
                                     <p-fileUpload 
                                         #previewUpload
                                         name="files[]"
-                                        url="https://app.eulabel.it/backend/api/upload-preview/{{id}}" 
+                                        url="https://app.eulabel.it/backend/upload-preview/{{id}}" 
                                         multiple="multiple"
                                         maxFileSize="1000000"
                                         (onUpload)="onBasicUpload()"
@@ -719,7 +718,7 @@
     [modal]="true" 
     showEffect="fade" [style]="{width: '40vw'}" [breakpoints]="{'960px': '75vw'}">
     <div #qrcodewrapper>
-        <app-uploaddialog (upload)="previewChange($event)"></app-uploaddialog>
+        <app-uploaddialog></app-uploaddialog>
     </div>
     <ng-template pTemplate="footer">
             <button pButton icon="pi pi-check" (click)="display=false" label="Ok" class="p-button-outlined"></button>
