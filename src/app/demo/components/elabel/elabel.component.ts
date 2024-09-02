@@ -472,15 +472,7 @@ previewChange(event: any) {
 
     }
   })
-  // const jsonObject = event;
-  // const jsonString = JSON.stringify(jsonObject);
-  // const encoder = new TextEncoder();
-  // const binaryData = encoder.encode(jsonString);
 
-  // console.log({
-  //   primaryObjectData: event,
-  //   currentBinaryData: binaryData,
-  // })
 }
 
 

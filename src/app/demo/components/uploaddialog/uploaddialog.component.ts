@@ -44,7 +44,7 @@ export class UploadDialogComponent {
   translateH = 0;
   translateV = 0;
   transform: ImageTransform = {
-      scale: 1,
+      scale: 1.2,
       rotate: 0,
       flipH: false,
       flipV: false,
@@ -63,7 +63,6 @@ export class UploadDialogComponent {
     console.log('Load failed');
   }
   cropperReady() {
-    debugger
   }
   onUpload(event) {
       for(let file of event.files) {
@@ -81,8 +80,6 @@ export class UploadDialogComponent {
       if (imageUrl.startsWith('data:')) {
         const base64Data = imageUrl.split(',')[1];
         const mimeType = imageUrl.split(';')[0].split(':')[1];
-      //   this.imageBase64 = base64Data;
-      //   this.imageExtension = mimeType.split('/')[1];
         this.applyTransform();
       }
       this.upload.emit(event)
