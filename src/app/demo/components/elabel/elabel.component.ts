@@ -2,12 +2,13 @@ import { Location } from '@angular/common';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { ConfirmationService, MenuItem, Message, MessageService } from 'primeng/api';
-import { ElabelService } from '../../service/elabel.service';
 import { TranslateService } from '@ngx-translate/core';
-import { BrandService } from '../../service/brand.service';
-import { SettingService } from '../../service/setting.service';
+import { ConfirmationService, MenuItem, Message, MessageService } from 'primeng/api';
 import { FileUpload } from 'primeng/fileupload';
+import { BrandService } from '../../service/brand.service';
+import { ElabelService } from '../../service/elabel.service';
+import { SettingService } from '../../service/setting.service';
+import { UploadService } from '../../service/upload.service';
 
 @Component({
   selector: 'app-elabel',
@@ -60,7 +61,9 @@ export class ElabelComponent {
   primary_color=''
   companyLogo=''
 
-  constructor(private fb: FormBuilder, private t: TranslateService, private brandService: BrandService, private settingService: SettingService, private service: ElabelService, private confirmationService: ConfirmationService, private messageService: MessageService, private _location: Location, private route: ActivatedRoute) {
+  constructor(private fb: FormBuilder, 
+    private uploadService:UploadService,
+    private t: TranslateService, private brandService: BrandService, private settingService: SettingService, private service: ElabelService, private confirmationService: ConfirmationService, private messageService: MessageService, private _location: Location, private route: ActivatedRoute) {
     this. sidebarVisible = false;
     let request = JSON.parse(localStorage.getItem('user'))
     this.user_id = request.id
@@ -165,6 +168,7 @@ export class ElabelComponent {
       this.brandService.all(parseInt(this.user_id)).subscribe((response)=>{
         this.brands = response.data
         if (id) {
+          console.log('this id',id,this.id)
           this.id = id
           this.get()
         }
@@ -453,7 +457,30 @@ saveSetting() {
 }
 
 previewChange(event: any) {
-  console.log(event)
+  const url="https://app.eulabel.it/backend/api/upload-sub"+this.id;
+  this.uploadService.upload('https://app.eulabel.it/backend/api/upload-sub/'+this.id,event.blob)
+  .subscribe({
+    next:(ok)=>{
+      this.get()
+      
+    },
+    error:(e)=>{
+      console.log('File upload error ',e)
+
+    },
+    complete:()=>{
+
+    }
+  })
+  // const jsonObject = event;
+  // const jsonString = JSON.stringify(jsonObject);
+  // const encoder = new TextEncoder();
+  // const binaryData = encoder.encode(jsonString);
+
+  // console.log({
+  //   primaryObjectData: event,
+  //   currentBinaryData: binaryData,
+  // })
 }
 
 

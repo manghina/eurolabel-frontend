@@ -203,10 +203,6 @@
                                     <img *ngIf="!sub_image" src="assets/product_image.svg" class="mb-3">
                                     <img *ngIf="sub_image" src="//{{sub_image}}" class="mb-3">
                                 </div>
-                                <p-fileUpload mode="basic" name="image" chooseIcon="pi pi-upload"
-                                    url="https://app.eulabel.it/backend/api/upload-sub/{{id}}" accept="image/*"
-                                    maxFileSize="1000000" [auto]="true" (onUpload)="onBasicUpload()"
-                                    chooseLabel="Browse" />
 
                                 <p-button label="Carica" (click)="uploadDialog = true" icon="pi pi-clear"
                                     styleClass="p-button-sm p-button-primary"></p-button>
@@ -714,7 +710,7 @@
     </ng-template>
 </p-dialog>
 
-<p-dialog header="Codice qr" 
+<p-dialog header="Preview" 
     [(visible)]="uploadDialog" 
     [modal]="true" 
     showEffect="fade" [style]="{width: '40vw'}" [breakpoints]="{'960px': '75vw'}">
@@ -722,6 +718,6 @@
         <app-uploaddialog (upload)="previewChange($event)"></app-uploaddialog>
     </div>
     <ng-template pTemplate="footer">
-            <button pButton icon="pi pi-check" (click)="display=false" label="Ok" class="p-button-outlined"></button>
+            <button pButton icon="pi pi-check" (click)="uploadDialog=false" label="Ok" class="p-button-outlined"></button>
     </ng-template>
 </p-dialog>

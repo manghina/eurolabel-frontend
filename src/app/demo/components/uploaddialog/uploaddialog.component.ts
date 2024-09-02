@@ -81,8 +81,6 @@ export class UploadDialogComponent {
       if (imageUrl.startsWith('data:')) {
         const base64Data = imageUrl.split(',')[1];
         const mimeType = imageUrl.split(';')[0].split(':')[1];
-      //   this.imageBase64 = base64Data;
-      //   this.imageExtension = mimeType.split('/')[1];
         this.applyTransform();
       }
       this.upload.emit(event)
