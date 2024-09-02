@@ -6,7 +6,7 @@ import { baseUrl } from "./constant";
 // Auth service
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-    private _loginUrl = baseUrl + "login";
+    private _loginUrl = "https://app.eulabel.it/backend/" + "login";
     private userDetails = null;
     private refreshInterval = null;
     constructor(private http: HttpClient) { }
