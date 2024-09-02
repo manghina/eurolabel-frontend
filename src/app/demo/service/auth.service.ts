@@ -6,13 +6,13 @@ import { baseUrl } from "./constant";
 // Auth service
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-    private _loginUrl = "https://app.eulabel.it/backend/login";
+    private _loginUrl = baseUrl + "login";
     private userDetails = null;
     private refreshInterval = null;
     constructor(private http: HttpClient) { }
 
     register(data:any) {
-        return this.http.post<any>('https://app.eulabel.it/backend/register', data)
+        return this.http.post<any>(baseUrl + 'register', data)
     }
     
     // login method

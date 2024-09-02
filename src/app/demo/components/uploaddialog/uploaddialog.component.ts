@@ -2,17 +2,6 @@ import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '
 import { ImageCroppedEvent } from './image-cropper/image-cropper.component';
 import { FileSelectEvent } from 'primeng/fileupload';
 import { DomSanitizer } from '@angular/platform-browser';
-import { FormBuilder } from '@angular/forms';
-
-interface ImageTransform {
-  scale?: number;
-  rotate?: number;
-  flipH?: boolean;
-  flipV?: boolean;
-  translateH?: number;
-  translateV?: number;
-  translateUnit?: '%' | 'px';
-}
 
 @Component({
   selector: 'app-uploaddialog',
@@ -21,50 +10,35 @@ interface ImageTransform {
 })
 export class UploadDialogComponent {
 
-  constructor(private sanitizer: DomSanitizer, private fb: FormBuilder) {}
-
-  @Output() upload = new EventEmitter<any>();
-
+  constructor(private sanitizer: DomSanitizer) {}
   imageChangedEvent: any = '';
   croppedImage: any = '';
-  name: any = '';
+  cropperReady = false;
   uploadedFiles: any[] = [];
-  form = this.fb.group({
-    id: 0,
-    name: null,
-    user_id: null,
-    color: null,
-    image: null,
-
-})
-  public imageFile: any;
-
-  loading: boolean = false;
-  canvasRotation = 0;
+  imageFile : any = ''
+  @Output() upload = new EventEmitter<Blob>();
+  loading = false
+  canvasRotation = 0
   translateH = 0;
   translateV = 0;
-  transform: ImageTransform = {
-      scale: 1,
-      rotate: 0,
-      flipH: false,
-      flipV: false,
-      translateUnit: 'px'
-    };
-
+  transform = {
+    scale : 0,
+    rotate : 0,
+    flipH : 0,
+    flipV : 0
+  };
 
   fileChangeEvent(event: any): void {
       this.imageChangedEvent = event;
   }
 
-  imageLoaded(event:any) {
-
+  imageLoaded() {
+    this.cropperReady = true;
   }
   loadImageFailed () {
     console.log('Load failed');
   }
-  cropperReady() {
-    debugger
-  }
+
   onUpload(event) {
       for(let file of event.files) {
           this.uploadedFiles.push(file);
