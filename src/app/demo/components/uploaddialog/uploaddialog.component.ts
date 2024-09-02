@@ -2,6 +2,17 @@ import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '
 import { ImageCroppedEvent } from './image-cropper/image-cropper.component';
 import { FileSelectEvent } from 'primeng/fileupload';
 import { DomSanitizer } from '@angular/platform-browser';
+import { FormBuilder } from '@angular/forms';
+
+interface ImageTransform {
+  scale?: number;
+  rotate?: number;
+  flipH?: boolean;
+  flipV?: boolean;
+  translateH?: number;
+  translateV?: number;
+  translateUnit?: '%' | 'px';
+}
 
 @Component({
   selector: 'app-uploaddialog',
@@ -10,35 +21,50 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class UploadDialogComponent {
 
-  constructor(private sanitizer: DomSanitizer) {}
+  constructor(private sanitizer: DomSanitizer, private fb: FormBuilder) {}
+
+  @Output() upload = new EventEmitter<any>();
+
   imageChangedEvent: any = '';
   croppedImage: any = '';
-  cropperReady = false;
+  name: any = '';
   uploadedFiles: any[] = [];
-  imageFile : any = ''
-  @Output() upload = new EventEmitter<Blob>();
-  loading = false
-  canvasRotation = 0
+  form = this.fb.group({
+    id: 0,
+    name: null,
+    user_id: null,
+    color: null,
+    image: null,
+
+})
+  public imageFile: any;
+
+  loading: boolean = false;
+  canvasRotation = 0;
   translateH = 0;
   translateV = 0;
-  transform = {
-    scale : 0,
-    rotate : 0,
-    flipH : 0,
-    flipV : 0
-  };
+  transform: ImageTransform = {
+      scale: 1,
+      rotate: 0,
+      flipH: false,
+      flipV: false,
+      translateUnit: 'px'
+    };
+
 
   fileChangeEvent(event: any): void {
       this.imageChangedEvent = event;
   }
 
-  imageLoaded() {
-    this.cropperReady = true;
+  imageLoaded(event:any) {
+
   }
   loadImageFailed () {
     console.log('Load failed');
   }
-
+  cropperReady() {
+    debugger
+  }
   onUpload(event) {
       for(let file of event.files) {
           this.uploadedFiles.push(file);
@@ -55,6 +81,8 @@ export class UploadDialogComponent {
       if (imageUrl.startsWith('data:')) {
         const base64Data = imageUrl.split(',')[1];
         const mimeType = imageUrl.split(';')[0].split(':')[1];
+      //   this.imageBase64 = base64Data;
+      //   this.imageExtension = mimeType.split('/')[1];
         this.applyTransform();
       }
       this.upload.emit(event)
