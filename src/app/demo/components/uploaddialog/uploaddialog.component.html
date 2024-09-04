@@ -14,21 +14,30 @@
                     style="width:150px;height:auto">
                 <img *ngIf="!croppedImage && form.get('image').value" src="//{{form.get('image').value}}"
                     style="width:150px;height:auto;padding:1rem;border: 2px;border-style: solid;border-color:black">
-                <img *ngIf="croppedImage" [src]="croppedImage" style="width:150px;height:auto"/>
+                <img *ngIf="croppedImage" [src]="croppedImage" style="width:150px;height:auto" />
             </div>
-            <div class="col-12">
+            <div class="col-12 ">
                 <p-fileUpload mode="basic" name="image" chooseIcon="pi pi-upload"
                     url="https://app.eulabel.it/backend/brand-image/{{form.get('id').value}}" accept="image/*"
                     customUpload="true" maxFileSize="1000000" (onSelect)="onSelect($event)" chooseLabel="Browse" />
                 <!-- <input type="file" (change)="onSelect($event)" /> -->
-                <button pButton icon="pi pi-replay" *ngIf="croppedImage" (click)="rotateLeft()"
-                    label="Left" class="p-button-outlined m-2"></button>
-                <button pButton icon="pi pi-refresh" *ngIf="croppedImage" (click)="rotateRight()"
-                    label="Right" class="p-button-outlined m-2"></button>
-                <image-cropper [imageFile]="imageFile" [maintainAspectRatio]="true" 
-                    format="png" [canvasRotation]="canvasRotation" [(transform)]="transform"
-                    (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded($event)"
-                    (cropperReady)="cropperReady()" (loadImageFailed)="loadImageFailed()"></image-cropper>
+                <button pButton icon="pi pi-replay" *ngIf="croppedImage" (click)="rotateLeft()" label="Left"
+                    class="p-button-outlined m-2"></button>
+                <button pButton icon="pi pi-refresh" *ngIf="croppedImage" (click)="rotateRight()" label="Right"
+                    class="p-button-outlined m-2"></button>
+                <div class="grid">
+                    <div class="col-6 mx-auto">
+                        <image-cropper [imageFile]="imageFile" [maintainAspectRatio]="true" format="png"
+                            [canvasRotation]="canvasRotation" [(transform)]="transform" [aspectRatio]="3 / 4"
+                            (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded($event)"
+                            (cropperReady)="cropperReady()" (loadImageFailed)="loadImageFailed()"></image-cropper>
+                    </div>
+                    <div class="col-12 mx-auto">
+                        <label for="zoom-slider">Zoom:</label>
+                        <p-slider id="zoom-slider" [(ngModel)]="scale" [min]="0.5" [max]="3" [step]="0.1"
+                            (onSlideEnd)="zoom($event)"></p-slider>
+                    </div>
+                </div>
             </div>
             <div class="col-12  shadow-1 pb-0">
                 <div class="grid flex p-fluid">

@@ -524,12 +524,7 @@
       "glass": "Vetro"
     },
     "types": {
-      "beer": "Birra",
-      "marketing": "Marketing",
-      "oil": "Olio",
-      "spirits": "Spirito",
-      "vinegard": "Aceto",
-      "wine": "Vino",
+      
       "wine_red": "Vino Rosso",
       "wine_white": "Vino Bianco",
       "wine_rose": "Vino Rosè",

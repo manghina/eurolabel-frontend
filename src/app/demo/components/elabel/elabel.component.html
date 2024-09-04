@@ -214,11 +214,14 @@
 
                                 <div class="card" style="border-radius: 0px;">
                                     <img *ngIf="!sub_image" src="assets/product_image.svg" class="mb-3">
-                                    <img *ngIf="sub_image" src="//{{sub_image}}" class="mb-3">
+                                    <img *ngIf="sub_image" src="//{{sub_image}}" class="mb-3 img-fluid">
                                 </div>
 
                                 <p-button label="Carica" (click)="uploadDialog = true" icon="pi pi-clear"
-                                    styleClass="p-button-sm p-button-primary"></p-button>
+                                styleClass="p-button-sm p-button-primary"></p-button>
+
+                               <!--  <p-button label="Carica" (click)="uploadDialog = true" icon="pi pi-clear"
+                                    styleClass="p-button-sm p-button-primary"></p-button> -->
 
                             </div>
                         </div>
@@ -761,23 +764,7 @@
     [modal]="true" 
     showEffect="fade" [style]="{width: '40vw'}" [breakpoints]="{'960px': '75vw'}">
     <div #qrcodewrapper>
-        <app-uploaddialog (upload)="previewChange($event)"></app-uploaddialog>
-    </div>
-    <ng-template pTemplate="footer">
-            <button pButton icon="pi pi-check" (click)="uploadDialog=false" label="Ok" class="p-button-outlined"></button>
-    </ng-template>
-</p-dialog>
-
-<p-dialog header="Preview" 
-    [(visible)]="calculateDialog" 
-    [modal]="true" 
-    showEffect="fade" [style]="{width: '40vw'}" [breakpoints]="{'960px': '75vw'}">
-    <div>
-        <input pInputText [formControl]="abv" type="text" />
-        <input pInputText [formControl]="sugar" type="text" />
-        <input pInputText [formControl]="acid" type="text" />
-        <input pInputText [formControl]="gli" type="text" />
-        <button pButton icon="pi pi-check" (click)="calculate()" label="Ok" class="p-button-outlined"></button>
+        <app-uploaddialog></app-uploaddialog>
     </div>
     <ng-template pTemplate="footer">
             <button pButton icon="pi pi-check" (click)="uploadDialog=false" label="Ok" class="p-button-outlined"></button>
