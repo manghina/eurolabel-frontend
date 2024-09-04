@@ -295,9 +295,11 @@
                                 <p>{{ 'pages.nutritions.subtitle' | translate }}</p>
                             </div>
                             <div class="col-12">
-                                <button pButton pRipple type="button"
+
+                                <button pButton pRipple type="button" (click)="calculateDialog = true"
                                     label="{{ 'pages.nutritions.button' | translate }}"
                                     class="p-button-secondary"></button>
+
                             </div>
                             <div class="col-12">
                                 <div class="card">
@@ -716,6 +718,22 @@
     showEffect="fade" [style]="{width: '40vw'}" [breakpoints]="{'960px': '75vw'}">
     <div #qrcodewrapper>
         <app-uploaddialog (upload)="previewChange($event)"></app-uploaddialog>
+    </div>
+    <ng-template pTemplate="footer">
+            <button pButton icon="pi pi-check" (click)="uploadDialog=false" label="Ok" class="p-button-outlined"></button>
+    </ng-template>
+</p-dialog>
+
+<p-dialog header="Preview" 
+    [(visible)]="calculateDialog" 
+    [modal]="true" 
+    showEffect="fade" [style]="{width: '40vw'}" [breakpoints]="{'960px': '75vw'}">
+    <div>
+        <input pInputText [formControl]="abv" type="text" />
+        <input pInputText [formControl]="sugar" type="text" />
+        <input pInputText [formControl]="acid" type="text" />
+        <input pInputText [formControl]="gli" type="text" />
+        <button pButton icon="pi pi-check" (click)="calculate()" label="Ok" class="p-button-outlined"></button>
     </div>
     <ng-template pTemplate="footer">
             <button pButton icon="pi pi-check" (click)="uploadDialog=false" label="Ok" class="p-button-outlined"></button>

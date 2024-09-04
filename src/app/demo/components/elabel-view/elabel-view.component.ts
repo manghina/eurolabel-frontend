@@ -7,7 +7,6 @@ import { ElabelService } from '../../service/elabel.service';
 import { TranslateService } from '@ngx-translate/core';
 import { BrandService } from '../../service/brand.service';
 import { of } from 'rxjs';
-import { AuthService } from '../../service/auth.service';
 
 @Component({
   selector: 'app-elabel-view',
@@ -58,9 +57,9 @@ export class ElabelViewComponent {
   msgs: Message[] = [];
   preview:boolean=false
   sidebarVisible: boolean = false;
-  loading: boolean = true; // Initialize loading state
+  loading: boolean = true;
 
-  constructor(private fb: FormBuilder, private auth : AuthService, private t: TranslateService, private brandService: BrandService, private service: ElabelService, private confirmationService: ConfirmationService, private messageService: MessageService, private _location: Location, private route: ActivatedRoute) {
+  constructor(private fb: FormBuilder, private t: TranslateService, private brandService: BrandService, private service: ElabelService, private confirmationService: ConfirmationService, private messageService: MessageService, private _location: Location, private route: ActivatedRoute) {
     this. sidebarVisible = false;
     
     this.form = this.fb.group({
@@ -99,17 +98,13 @@ export class ElabelViewComponent {
       type: [null, Validators.required]
     })
 
-
     this.breadcrumbItems = [];
     this.breadcrumbItems.push({ label: 'E-labels' });
-
-    
   }
 
   ngOnInit() {
     this.route.paramMap.subscribe((params: ParamMap) => {
       const id = params.get('id');
-      console.log(id)
       const brand = params.get('brand');
       if(brand) {
         this.form.get('brand_id').setValue(JSON.parse(brand))
@@ -140,13 +135,10 @@ export class ElabelViewComponent {
         // Data has been fully loaded, so we can hide the spinner and show the dropdowns
         this.loading = false;
       })
-      this.brandService.all(parseInt(this.user_id)).subscribe((response)=>{
-        this.brands = response.data
-        if (id) {
-          this.id = id
-          this.get()
-        }
-      })   
+      if (id) {
+        this.id = id
+        this.get()
+      }
     });
   }
   // Utility function to group items by a specific key
@@ -236,8 +228,6 @@ export class ElabelViewComponent {
     return this.rules.controls.filter((e)=>e.get('id').value ==id).length != 0
   }
   
-
-
   searchCountry(event: any) {
     const filtered: any[] = [];
     const query = event.query;
@@ -292,9 +282,6 @@ export class ElabelViewComponent {
   }
   get() {
     this.service.getByToken(this.id).subscribe((response) => {
-      // data => elabel
-      // brand => brand
-      // user => user
 
       this.settingsValue = response.settings
       this.brand = response.brand

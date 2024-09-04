@@ -41,6 +41,11 @@ export class ElabelComponent {
   ingredient = new FormControl()
   tmp = new FormControl()
 
+  abv = new FormControl(10)
+  sugar = new FormControl(2)
+  acid = new FormControl(3)
+  gli = new FormControl(4)
+
   brands = []
   countries = [];
   states = [];
@@ -56,6 +61,7 @@ export class ElabelComponent {
   msgs: Message[] = [];
   preview:boolean=false
   sidebarVisible: boolean = false;
+  calculateDialog: boolean = false;
   loading: boolean = true;
   companyName=''
   primary_color=''
@@ -168,7 +174,6 @@ export class ElabelComponent {
       this.brandService.all(parseInt(this.user_id)).subscribe((response)=>{
         this.brands = response.data
         if (id) {
-          console.log('this id',id,this.id)
           this.id = id
           this.get()
         }
@@ -474,6 +479,36 @@ previewChange(event: any) {
   })
 
 }
+calculate() {
+  // 10 alchol per volume
+  debugger
+  const volume = 150
+  const abv = this.abv.value
+  const densita = 0.789
 
+  // Alcol (grammi) = Volume del vino (ml) × ( 100% ABV​ ) × 0.789g/ml
+  // 2 g/L
+  const sugar = this.sugar.value
+  // 3 g/L
+  const acid = this.acid.value
+  // 4 g/L
+  const gli = this.gli.value
+  this.calculateDialog = false
+
+  //1) Calcolo delle calorie dall'alcol:
+  const galchol = this.galchol(volume, abv, densita)
+  //2) Calorie dall'alcol:
+  const calAlchol = 7 * galchol
+  const gSugar = volume * (sugar / 100)
+  const calSugar = gSugar * 4
+
+  const calTot = calAlchol * calSugar
+  const kJTot = calTot * 4.184
+  console.log("kJTot", kJTot)
+}
+
+galchol(volume:number, abv:number, densita:number) {
+  return volume * (abv / 100) * 0.789
+}
 
 }
