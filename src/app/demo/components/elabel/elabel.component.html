@@ -200,15 +200,17 @@
 
 
                                 <div class="card" style="border-radius: 0px;">
-                                    <p-button label="Il TASTO" (click)="uploadDialog = true" icon="pi pi-clear"
-                                    styleClass="p-button-sm p-button-danger"></p-button>
+                                   
 
                                     <img *ngIf="!sub_image" src="assets/product_image.svg" class="mb-3">
-                                    <img *ngIf="sub_image" src="//{{sub_image}}" class="mb-3">
+                                    <img *ngIf="sub_image" src="//{{sub_image}}" class="mb-3 img-fluid">
                                 </div>
 
                                 <p-button label="Carica" (click)="uploadDialog = true" icon="pi pi-clear"
-                                    styleClass="p-button-sm p-button-primary"></p-button>
+                                styleClass="p-button-sm p-button-primary"></p-button>
+
+                               <!--  <p-button label="Carica" (click)="uploadDialog = true" icon="pi pi-clear"
+                                    styleClass="p-button-sm p-button-primary"></p-button> -->
 
                                 <!-- <div class="card" style="border-radius: 0px;">
                                     <label>{{ 'global.qr' | translate }}</label>
@@ -718,7 +720,7 @@
     [modal]="true" 
     showEffect="fade" [style]="{width: '40vw'}" [breakpoints]="{'960px': '75vw'}">
     <div #qrcodewrapper>
-        <app-uploaddialog></app-uploaddialog>
+        <app-uploaddialog (upload)='previewChange($event)'></app-uploaddialog>
     </div>
     <ng-template pTemplate="footer">
             <button pButton icon="pi pi-check" (click)="uploadDialog=false" label="Ok" class="p-button-outlined"></button>
