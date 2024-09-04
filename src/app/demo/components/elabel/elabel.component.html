@@ -200,8 +200,6 @@
 
 
                                 <div class="card" style="border-radius: 0px;">
-                                   
-
                                     <img *ngIf="!sub_image" src="assets/product_image.svg" class="mb-3">
                                     <img *ngIf="sub_image" src="//{{sub_image}}" class="mb-3 img-fluid">
                                 </div>
@@ -300,9 +298,11 @@
                                 <p>{{ 'pages.nutritions.subtitle' | translate }}</p>
                             </div>
                             <div class="col-12">
-                                <button pButton pRipple type="button"
+
+                                <button pButton pRipple type="button" (click)="calculateDialog = true"
                                     label="{{ 'pages.nutritions.button' | translate }}"
                                     class="p-button-secondary"></button>
+
                             </div>
                             <div class="col-12">
                                 <div class="card">
@@ -720,7 +720,7 @@
     [modal]="true" 
     showEffect="fade" [style]="{width: '40vw'}" [breakpoints]="{'960px': '75vw'}">
     <div #qrcodewrapper>
-        <app-uploaddialog (upload)='previewChange($event)'></app-uploaddialog>
+        <app-uploaddialog></app-uploaddialog>
     </div>
     <ng-template pTemplate="footer">
             <button pButton icon="pi pi-check" (click)="uploadDialog=false" label="Ok" class="p-button-outlined"></button>

@@ -16,6 +16,10 @@ $gutter: 1rem; //for primeflex grid system
 @import "assets/demo/styles/badges.scss";
 @import "assets/demo/styles/code.scss";
 
+.ngx-ic-cropper {
+    margin-left: 0 !important;
+}
+
 .th-autocomplete {
     display: flex;
     flex-direction: column;

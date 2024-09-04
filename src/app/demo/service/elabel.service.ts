@@ -22,7 +22,7 @@ export class ElabelService {
   }
 
   getByToken(token: string) {
-    return this.http.get<any>(baseUrl + 'elabel/' + token)
+    return this.http.get<any>( "https://app.eulabel.it/backend/" + 'elabel/' + token)
   }
 
   create(request: any) : any {
@@ -42,7 +42,7 @@ export class ElabelService {
   }
 
   getOptions() {
-    return this.http.get<any>(baseUrl + 'options')  
+    return this.http.get<any>("https://app.eulabel.it/backend/options")  
   }
 
   deletePreviewImage(image:any) {

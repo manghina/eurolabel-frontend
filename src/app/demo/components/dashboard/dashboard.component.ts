@@ -112,7 +112,6 @@ export class DashboardComponent implements OnInit {
         this.items_brand = [
             { label: 'Modifica Brand 2', icon: 'pi pi-fw pi-pencil', 
                 command: (e: any) => {
-                    debugger
                 this.editBrand(e.id);
             }},
             { label: 'Qr Code', icon: 'pi pi-fw pi-qrcode' },
@@ -122,7 +121,6 @@ export class DashboardComponent implements OnInit {
             {
                 label: 'Modifica Brand', icon: 'pi pi-fw pi-pencil',
                 command: (e) => {
-                    debugger
                     //this.editBrand(29);
                 }
             },
@@ -248,24 +246,18 @@ export class DashboardComponent implements OnInit {
 
     
     imageLoaded(e: any) {
-        debugger
     }
     cropperReady() {
-        debugger
     }
     loadImageFailed() {
-        debugger
     }
 
     // onFileUpload(event:any){
-    //     debugger;
     //     event;
     // }
 
     // onBasicUploadBrand() {
-    //     debugger;
     //     this.brandService.get(this.form.get('id').value).subscribe((response) => {
-    //         debugger;
     //         this.form.patchValue(response.data)
     //     })
     // }

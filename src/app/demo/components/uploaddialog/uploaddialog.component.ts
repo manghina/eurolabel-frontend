@@ -64,7 +64,6 @@ export class UploadDialogComponent {
     console.log('Load failed');
   }
   cropperReady() {
-    debugger
   }
   onUpload(event) {
     for (let file of event.files) {
