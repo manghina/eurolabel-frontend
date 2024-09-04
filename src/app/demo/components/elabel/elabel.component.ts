@@ -41,6 +41,12 @@ export class ElabelComponent {
   ingredient = new FormControl()
   tmp = new FormControl()
 
+  filterIngredient = ''
+  filterMaterial = ''
+  filterContainer = ''
+  filterBrand = ''
+  filterState = ''
+
   abv = new FormControl(10)
   sugar = new FormControl(2)
   acid = new FormControl(3)
@@ -147,16 +153,25 @@ export class ElabelComponent {
       }
       this.service.getOptions().subscribe((response) => {
         const data = response.data
-        this.consumption = data.consumption.map(e => { e.value = e.id; return e })
-        let containers = data.containers.map(e => { e.value = e.id; return e })
-        this.geographical_indication = data.countries.map(e => { e.value = e.id; return e })
-        let materials = data.materials.map(e => { e.value = e.id; return e })
-        this.states = data.states.map(e => { e.value = e.nome_stati; return e })
-        this.packages = data.packages.map(e => { e.value = e.id; return e })
-        this.productType = data.productType.map(e => { e.value = e.id; return e })
-        this.types = data.types.map(e => { e.value = e.id; return e })
+
+        this.consumption = data.consumption.map(e => { 
+          e.value = e.id;
+          e.name = this.t.instant(e.label); 
+          return e 
+        })
+        let containers = data.containers.map(e => { 
+          e.value = e.id;
+          e.name = this.t.instant(e.label); 
+          return e 
+        })
+        this.geographical_indication = data.countries.map(e => { e.value = e.id;e.name = this.t.instant(e.label); return e })
+        let materials = data.materials.map(e => { e.value = e.id;e.name = this.t.instant(e.label); return e })
+        this.states = data.states.map(e => { e.value = e.nome_stati;e.name = e.nome_stati; return e })
+        this.packages = data.packages.map(e => { e.value = e.id;e.name = this.t.instant(e.label); return e })
+        this.productType = data.productType.map(e => { e.value = e.id;e.name = this.t.instant(e.type); return e })
+        this.types = data.types.map(e => { e.value = e.id;e.name = this.t.instant(e.label); return e })
         this.fullIngredientList = data.ingredients
-        let ingredients = data.ingredients.map(e => { e.value = e.id; return e })
+        let ingredients = data.ingredients.map(e => { e.value = e.id;e.name = this.t.instant(e.label); return e })
 
         // Group containers, materials, and ingredients by their respective groups
         containers = this.groupBy(containers, 'group');
@@ -477,11 +492,10 @@ previewChange(event: any) {
 
     }
   })
-
 }
+
 calculate() {
   // 10 alchol per volume
-  debugger
   const volume = 150
   const abv = this.abv.value
   const densita = 0.789
@@ -509,6 +523,32 @@ calculate() {
 
 galchol(volume:number, abv:number, densita:number) {
   return volume * (abv / 100) * 0.789
+}
+
+filterByName(options: any[], value:string) {
+  if(!value)
+    return options
+  return  options.filter((e)=>e.name.toLowerCase().includes(value.toLowerCase()))
+}
+
+filterGroupByName(options: any[], value:string) {
+  if(!value)
+    return options
+  const copy = [...options]
+  const results = []
+  const resultsNotEmpty = []
+  for(let o of copy) {
+    const i = {...o}
+    i.items = i.items.filter((e)=>e.name.toLowerCase().includes(value.toLowerCase()))
+    results.push(i)
+  }
+
+  for(let o of results) {
+    if(o.items.length)
+      resultsNotEmpty.push(o)
+  }
+
+  return resultsNotEmpty
 }
 
 }

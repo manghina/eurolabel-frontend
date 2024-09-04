@@ -64,14 +64,16 @@
                                                 <app-infobutton
                                                 [label]="'Brand'"></app-infobutton>
                                                 🇪🇺</label>
-                                                <p-dropdown [options]="brands" [formControl]="form.get('brand_id')"
-                                                [showClear]="true" placeholder="Seleziona">
+                                                <p-dropdown 
+                                                [filter]="true" [options]="filterBrand ? filterByName(brands, filterBrand) : brands" 
+                                                [formControl]="form.get('brand_id')"
+                                                 placeholder="Seleziona">
 
                                                 <ng-template pTemplate="filter" let-options="brands">
                                                     <div class="flex p-3">
                                                         <div class="p-inputgroup" (click)="$event.stopPropagation()">
                                                             <span class="p-inputgroup-addon"><i class="pi pi-search"></i></span>
-                                                            <input type="text" pInputText placeholder="Filter" [(ngModel)]="filterValue" (keyup)="options.filter($event)">
+                                                            <input type="text" pInputText placeholder="Filter" [(ngModel)]="filterBrand" (keyup)="options.filter($event)">
                                                         </div>
                                                         <button pButton icon="pi pi-times" class="ml-3" ></button>
                                                     </div>
@@ -108,9 +110,22 @@
                                     <app-infobutton
                                     [label]="'pages.elabel.form.country.helper'"></app-infobutton>
                                     🇪🇺</label>
-                            <p-dropdown [options]="states" [formControl]="form.get('country')"
-                            [showClear]="true" [filter]="true" filterBy="nome_stati" placeholder="Seleziona">
-                            <ng-template let-option pTemplate="selectedItem">
+                            <p-dropdown 
+                            [filter]="true" [options]="filterState ? filterByName(states, filterState) : states" 
+                            [options]="states" [formControl]="form.get('country')"
+                             [filter]="true" filterBy="nome_stati" placeholder="Seleziona">
+
+                             <ng-template pTemplate="filter" let-options="states">
+                                <div class="flex p-3">
+                                    <div class="p-inputgroup" (click)="$event.stopPropagation()">
+                                        <span class="p-inputgroup-addon"><i class="pi pi-search"></i></span>
+                                        <input type="text" pInputText placeholder="Filter" [(ngModel)]="filterState">
+                                    </div>
+                                    <button pButton icon="pi pi-times" class="ml-3" ></button>
+                                </div>
+                            </ng-template>
+
+                             <ng-template let-option pTemplate="selectedItem">
                                 <span>{{option.nome_stati | translate}}</span>
                             </ng-template>
                             <ng-template let-option pTemplate="item">
@@ -123,7 +138,7 @@
                                         <label>{{ 'pages.elabel.form.type.label' | translate }} <app-infobutton
                                                 [label]="'pages.elabel.form.type.helper'"></app-infobutton> 🇪🇺</label>
                                         <p-dropdown [options]="types" [formControl]="form.get('type')"
-                                            [showClear]="true" placeholder="Seleziona">
+                                             placeholder="Seleziona">
                                             <ng-template let-option pTemplate="selectedItem">
                                                 <span>{{option.label | translate}}</span>
                                             </ng-template>
@@ -156,7 +171,7 @@
                                             <span style="font-size:0.8rem;margin-left:5px;">(opzionale)</span></label>
 
                                         <p-dropdown [options]="geographical_indication"
-                                            [formControl]="form.get('geographical_indication')" [showClear]="true"
+                                            [formControl]="form.get('geographical_indication')" 
                                             placeholder="Seleziona">
                                             <ng-template let-option pTemplate="selectedItem">
                                                 <span>{{option.label | translate}}</span>
@@ -197,8 +212,6 @@
                                         [label]="'pages.elabel.form.upload.helper'"></app-infobutton> <span
                                         style="font-size:0.8rem;margin-left:5px;">(opzionale)</span></label>
 
-
-
                                 <div class="card" style="border-radius: 0px;">
                                     <img *ngIf="!sub_image" src="assets/product_image.svg" class="mb-3">
                                     <img *ngIf="sub_image" src="//{{sub_image}}" class="mb-3">
@@ -206,15 +219,6 @@
 
                                 <p-button label="Carica" (click)="uploadDialog = true" icon="pi pi-clear"
                                     styleClass="p-button-sm p-button-primary"></p-button>
-
-                                <!-- <div class="card" style="border-radius: 0px;">
-                                    <label>{{ 'global.qr' | translate }}</label>
-                                    <img *ngIf="!form.get('qr').value"
-                                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRixw6KcZuLECch8GPKfYHgUYXPJqXElFou1w&s">
-                                    <qrcode *ngIf="form.get('qr').value" [qrdata]="form.get('qr').value"
-                                        [errorCorrectionLevel]="'M'"></qrcode>
-                                </div> -->
-
 
                             </div>
                         </div>
@@ -239,8 +243,21 @@
 
                             </div>
                             <div class="col-12">
-                                <p-dropdown [options]="ingredients" [filter]="true" filterBy="label" (onChange)="onChangeIngredient($event)"
-                                    [group]="true" [showClear]="true"  placeholder="Seleziona">
+                                <p-dropdown  
+                                [options]="filterIngredient ? filterGroupByName(ingredients, filterIngredient) : ingredients" [filter]="true"
+                                 [filter]="true" filterBy="label" (onChange)="onChangeIngredient($event)"
+                                    [group]="true"   placeholder="Seleziona">
+                                    
+                                    <ng-template pTemplate="filter" let-options="brands">
+                                        <div class="flex p-3">
+                                            <div class="p-inputgroup" (click)="$event.stopPropagation()">
+                                                <span class="p-inputgroup-addon"><i class="pi pi-search"></i></span>
+                                                <input type="text" pInputText placeholder="Filter" [(ngModel)]="filterIngredient">
+                                            </div>
+                                            <button pButton icon="pi pi-times" class="ml-3" ></button>
+                                        </div>
+                                    </ng-template>
+
                                     <ng-template let-option pTemplate="selectedItem">
                                         <span>{{option.label | translate}}</span>
                                     </ng-template>
@@ -276,7 +293,7 @@
                                 <label>{{ 'pages.elabel.form.packages.label' | translate }} <app-infobutton
                                         [label]="'pages.elabel.form.packages.helper'"></app-infobutton> <span
                                         style="font-size:0.8rem;margin-left:5px;">(opzionale)</span></label>
-                                <p-dropdown [options]="packages" [formControl]="form.get('packages')" [showClear]="true"
+                                <p-dropdown [options]="packages" [formControl]="form.get('packages')" 
                                     placeholder="Seleziona">
                                     <ng-template let-option pTemplate="selectedItem">
                                         <span>{{option.label | translate}}</span>
@@ -458,8 +475,21 @@
                                                     <label>{{ 'pages.recycling.field.container' | translate }}</label>
                                                     <p-dropdown
                                                         [formControl]="rules.at(i).get('recycling_rule_containers_id')"
-                                                        [options]="containers" [group]="true" [showClear]="true"
+                                                        [options]="filterContainer ? filterGroupByName(containers, filterContainer) : containers"
+                                                        [group]="true" 
+                                                        [filter]="true"
                                                         placeholder="Seleziona">
+
+                                                        <ng-template pTemplate="filter" let-options="brands">
+                                                            <div class="flex p-3">
+                                                                <div class="p-inputgroup" (click)="$event.stopPropagation()">
+                                                                    <span class="p-inputgroup-addon"><i class="pi pi-search"></i></span>
+                                                                    <input type="text" pInputText placeholder="Filter" [(ngModel)]="filterContainer">
+                                                                </div>
+                                                                <button pButton icon="pi pi-times" class="ml-3" ></button>
+                                                            </div>
+                                                        </ng-template>
+
                                                         <ng-template let-option pTemplate="selectedItem">
                                                             <span>{{option.label | translate}}</span>
                                                         </ng-template>
@@ -480,9 +510,23 @@
                                                         <app-infobutton
                                                             [label]="'pages.elabel.form.material.helper'"></app-infobutton></label>
                                                   
-                                                            <p-dropdown [options]="materials" [group]="true"
+                                                            <p-dropdown 
+                                                            [options]="materials" 
+                                                            [options]="filterMaterial ? filterGroupByName(materials, filterMaterial) : materials"
+                                                            [group]="true"
+                                                            [filter]="true"
+
                                                         [formControl]="rules.at(i).get('recycling_rule_materials_id')"
-                                                        [showClear]="true" placeholder="Seleziona">
+                                                         placeholder="Seleziona">
+                                                        <ng-template pTemplate="filter" let-options="brands">
+                                                            <div class="flex p-3">
+                                                                <div class="p-inputgroup" (click)="$event.stopPropagation()">
+                                                                    <span class="p-inputgroup-addon"><i class="pi pi-search"></i></span>
+                                                                    <input type="text" pInputText placeholder="Filter" [(ngModel)]="filterMaterial">
+                                                                </div>
+                                                                <button pButton icon="pi pi-times" class="ml-3" ></button>
+                                                            </div>
+                                                        </ng-template>
                                                         <ng-template let-option pTemplate="selectedItem">
                                                             <span>{{option.label | translate}}</span>
                                                         </ng-template>
