@@ -1,8 +1,9 @@
-import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { ImageCroppedEvent } from './image-cropper/image-cropper.component';
 import { FileSelectEvent } from 'primeng/fileupload';
 import { DomSanitizer } from '@angular/platform-browser';
 import { FormBuilder } from '@angular/forms';
+import { ImageCropperComponent } from 'ngx-image-cropper';
 
 interface ImageTransform {
   scale?: number;
@@ -23,8 +24,10 @@ interface ImageTransform {
 export class UploadDialogComponent {
 
   constructor(private sanitizer: DomSanitizer, private fb: FormBuilder) { }
-
+ 
   @Output() upload = new EventEmitter<any>();
+  @Input() ratio = 3 / 4
+  @Input() uploadUrl =''
 
   imageChangedEvent: any = '';
   croppedImage: any = '';
@@ -38,6 +41,7 @@ export class UploadDialogComponent {
     image: null,
 
   })
+  @ViewChild(ImageCropperComponent) imageCropperEl: ImageCropperComponent
   public imageFile: any;
   scale = 1;
   loading: boolean = false;
@@ -51,6 +55,7 @@ export class UploadDialogComponent {
     flipV: false,
     translateUnit: 'px'
   };
+  lastEvent = null
 
 
   fileChangeEvent(event: any): void {
@@ -79,13 +84,9 @@ export class UploadDialogComponent {
     const imageUrl = event.objectUrl || event.base64 || '';
     this.croppedImage = this.sanitizer.bypassSecurityTrustUrl(imageUrl);
     if (imageUrl.startsWith('data:')) {
-      const base64Data = imageUrl.split(',')[1];
-      const mimeType = imageUrl.split(';')[0].split(':')[1];
-      //   this.imageBase64 = base64Data;
-      //   this.imageExtension = mimeType.split('/')[1];
       this.applyTransform();
     }
-    this.upload.emit(event)
+    this.lastEvent = event
   }
 
   rotateLeft() {
@@ -113,6 +114,11 @@ export class UploadDialogComponent {
       };
     });
 
+  }
+
+  emit() {
+    this.imageCropperEl.crop()
+    this.upload.emit(this.lastEvent)
   }
 
 

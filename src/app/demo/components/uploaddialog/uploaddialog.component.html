@@ -1,8 +1,4 @@
 <div class="grid flex flex-wrap justify-content-center">
-    <div class="col-12 md:col-12 flex flex-wrap justify-content-center">
-        <label for="prodotto">{{ 'pages.brand.form.name.label' | translate }}</label>
-        <input pInputText [formControl]="name" />
-    </div>
 
     <div class="col-12 mt-3 md:col-12 flex flex-wrap justify-content-center">
         <div class="grid">
@@ -17,8 +13,8 @@
                 <img *ngIf="croppedImage" [src]="croppedImage" style="width:150px;height:auto" />
             </div>
             <div class="col-12 ">
-                <p-fileUpload mode="basic" name="image" chooseIcon="pi pi-upload"
-                    url="https://app.eulabel.it/backend/brand-image/{{form.get('id').value}}" accept="image/*"
+                <p-fileUpload [auto]="true" name="image" chooseIcon="pi pi-upload"
+                    url="{{uploadUrl}}" accept="image/*"
                     customUpload="true" maxFileSize="1000000" (onSelect)="onSelect($event)" chooseLabel="Browse" />
                 <!-- <input type="file" (change)="onSelect($event)" /> -->
                 <button pButton icon="pi pi-replay" *ngIf="croppedImage" (click)="rotateLeft()" label="Left"
@@ -28,7 +24,7 @@
                 <div class="grid">
                     <div class="col-6 mx-auto">
                         <image-cropper [imageFile]="imageFile" [maintainAspectRatio]="true" format="png"
-                            [canvasRotation]="canvasRotation" [(transform)]="transform" [aspectRatio]="3 / 4"
+                            [canvasRotation]="canvasRotation" [(transform)]="transform" [aspectRatio]="ratio"
                             (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded($event)"
                             (cropperReady)="cropperReady()" (loadImageFailed)="loadImageFailed()"></image-cropper>
                     </div>

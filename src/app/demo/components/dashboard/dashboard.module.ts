@@ -30,11 +30,13 @@ import { PanelModule } from 'primeng/panel';
 import { NgxColorsModule } from 'ngx-colors';
 import { QrcodedialogModule } from 'src/app/demo/components/qrcodedialog/qrcodedialog.module';
 import { ImageCropperComponent  } from 'ngx-image-cropper';
+import { UploadDialogModule } from '../uploaddialog/uploaddialog.module';
 
 @NgModule({
     imports: [
         CommonModule,
         NgxColorsModule,
+        UploadDialogModule,
         TranslateModule,
         QrcodedialogModule,
         ToastModule,

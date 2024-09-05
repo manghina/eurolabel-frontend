@@ -40,6 +40,7 @@ export class PreviewComponent implements OnChanges, OnInit {
   ngOnChanges(changes: SimpleChanges): void {
     if(changes['ingredientsValue'] && changes['ingredientsValue'].currentValue.length) {
       this.ingredients = this.groupBy(changes['ingredientsValue'].currentValue, 'group')
+      console.log(this.ingredients)
     }
   }
   ngOnInit(): void {

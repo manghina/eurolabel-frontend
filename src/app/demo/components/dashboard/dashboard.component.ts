@@ -10,6 +10,7 @@ import { PrimeIcons } from 'primeng/api';
 import { FileSelectEvent } from 'primeng/fileupload';
 import { ImageCroppedEvent } from '../uploaddialog/image-cropper/image-cropper.component';
 import { DomSanitizer } from '@angular/platform-browser';
+import { UploadService } from '../../service/upload.service';
 
 interface ImageTransform {
     scale?: number;
@@ -25,6 +26,8 @@ interface ImageTransform {
     templateUrl: './dashboard.component.html',
 })
 export class DashboardComponent implements OnInit {
+    
+    uploadUrl = ''
     qrDialog = false
     qr = ''
     left = PrimeIcons.ARROW_LEFT
@@ -77,7 +80,7 @@ export class DashboardComponent implements OnInit {
     locality
     pr
 
-    constructor(private router: Router, private fb: FormBuilder,private confirmationService : ConfirmationService, private messageService: MessageService, private brandService: BrandService, private userService: UserService, private service: ElabelService, public layoutService: LayoutService, private sanitizer: DomSanitizer) {
+    constructor(private router: Router, private uploadService:UploadService,  private fb: FormBuilder,private confirmationService : ConfirmationService, private messageService: MessageService, private brandService: BrandService, private userService: UserService, private service: ElabelService, public layoutService: LayoutService, private sanitizer: DomSanitizer) {
 
         let request = JSON.parse(localStorage.getItem('user'))
         this.companyName.setValue(request.company_name)
@@ -128,7 +131,7 @@ export class DashboardComponent implements OnInit {
             { label: 'Duplica', icon: 'pi pi-fw pi-copy' },
         ];
 
-
+        
 
     }
 
@@ -143,6 +146,7 @@ export class DashboardComponent implements OnInit {
             this.router.navigateByUrl('/elabel/' + response.id);
         })
     }
+
     getMenuItemsForItemBrand(item: MenuItem): MenuItem[] {
         const context = item;
         return [
@@ -151,6 +155,7 @@ export class DashboardComponent implements OnInit {
             { label: 'Nuova E-Label', icon: 'pi pi-fw pi-plus' },
         ]
     }
+
     getMenuItemsForItemElabel(item: MenuItem): MenuItem[] {
         const context = item;
         return [
@@ -193,18 +198,18 @@ export class DashboardComponent implements OnInit {
         if (imageUrl.startsWith('data:')) {
           const base64Data = imageUrl.split(',')[1];
           const mimeType = imageUrl.split(';')[0].split(':')[1];
-        //   this.imageBase64 = base64Data;
-        //   this.imageExtension = mimeType.split('/')[1];
           this.applyTransform();
         }
     }
-      rotateLeft() {
+
+    rotateLeft() {
       this.loading = true;
       setTimeout(() => {
         this.canvasRotation--;
         this.flipAfterRotate();
       });
     }
+
     rotateRight() {
       this.loading = true;
       setTimeout(() => {
@@ -252,15 +257,6 @@ export class DashboardComponent implements OnInit {
     loadImageFailed() {
     }
 
-    // onFileUpload(event:any){
-    //     event;
-    // }
-
-    // onBasicUploadBrand() {
-    //     this.brandService.get(this.form.get('id').value).subscribe((response) => {
-    //         this.form.patchValue(response.data)
-    //     })
-    // }
     openBrandModal() {
         this.step = 0;
         this.form.get('id').setValue(null)
@@ -269,7 +265,9 @@ export class DashboardComponent implements OnInit {
         this.form.get('image').setValue('')
         this.brandService.create({ name: '' + Date.now(), user_id: this.userid }).subscribe((response) => {
             this.form.get('id').setValue(response.id)
+            this.uploadUrl = 'https://app.eulabel.it/backend/api/brand-image/' + response.id
             this.brandModal = true
+
         })
     }
 
@@ -358,6 +356,21 @@ export class DashboardComponent implements OnInit {
         });
     }
     
+    previewChange(event: any) {
 
+        this.uploadService.upload(this.uploadUrl,event.blob)
+        .subscribe({
+          next:(ok)=>{
+            
+          },
+          error:(e)=>{
+            console.log('File upload error ',e)
+      
+          },
+          complete:()=>{
+      
+          }
+        })
+      }
 
 }

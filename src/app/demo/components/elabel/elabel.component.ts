@@ -9,6 +9,7 @@ import { BrandService } from '../../service/brand.service';
 import { ElabelService } from '../../service/elabel.service';
 import { SettingService } from '../../service/setting.service';
 import { UploadService } from '../../service/upload.service';
+import { UploadDialogComponent } from '../uploaddialog/uploaddialog.component';
 
 @Component({
   selector: 'app-elabel',
@@ -18,6 +19,7 @@ import { UploadService } from '../../service/upload.service';
 export class ElabelComponent {
   @ViewChild('qrcodewrapper', { static: false }) el: ElementRef<HTMLCanvasElement>;
   @ViewChild('previewUpload') fileUpload: FileUpload;
+  @ViewChild(UploadDialogComponent) uploadDialogComponent: UploadDialogComponent;
   qrDialog = false
   uploadDialog = false
 
@@ -40,7 +42,7 @@ export class ElabelComponent {
   previewImage = new FormControl()
   ingredient = new FormControl()
   tmp = new FormControl()
-
+  uploadUrl = ''
   filterIngredient = ''
   filterMaterial = ''
   filterContainer = ''
@@ -125,6 +127,8 @@ export class ElabelComponent {
     this.route.paramMap.subscribe((params: ParamMap) => {
       
       let id = params.get('id');
+      this.uploadUrl = 'https://app.eulabel.it/backend/api/upload-sub/' + id
+      
       const settings = new FormArray([])
       this.settingService.all({user_id : this.user_id, id : id}).subscribe((response)=>{
         for(let setting of response.data) {
@@ -335,6 +339,7 @@ export class ElabelComponent {
     this.get()
   }
   get() {
+    this.ingredientPicked = []
     this.service.get(this.id).subscribe((response) => {
       this.form.patchValue(response.data)
       if (response.data.vintage_year) {
@@ -477,8 +482,7 @@ saveSetting() {
 }
 
 previewChange(event: any) {
-  const url="https://app.eulabel.it/backend/api/upload-sub"+this.id;
-  this.uploadService.upload('https://app.eulabel.it/backend/api/upload-sub/'+this.id,event.blob)
+  this.uploadService.upload(this.uploadUrl,event.blob)
   .subscribe({
     next:(ok)=>{
       this.get()
@@ -549,6 +553,11 @@ filterGroupByName(options: any[], value:string) {
   }
 
   return resultsNotEmpty
+}
+
+closeUploadDialog() {
+  this.uploadDialogComponent.emit()
+  this.uploadDialog=false
 }
 
 }
